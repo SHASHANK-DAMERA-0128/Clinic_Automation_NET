@@ -15,14 +15,14 @@ namespace Clinic_Automation.Controllers
         [Authorize(Roles = "ADMIN")]
         public ActionResult Index()
         {
-            return View();
+            return View(_db.Physicians.ToList());
         }
         public ActionResult AddNewPhysician()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult AddNewPhysician(Models.Physician physician)
+        public ActionResult AddNewPhysician(Physician physician)
         {
             if (ModelState.IsValid)
             {

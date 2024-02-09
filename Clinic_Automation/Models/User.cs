@@ -20,6 +20,7 @@ namespace Clinic_Automation.Models
         public string Role { get; set; }
         public Nullable<int> Reference_ID { get; set; }
     
+        public virtual Patient Patient { get; set; }
         public virtual Physician Physician { get; set; }
     }
 }

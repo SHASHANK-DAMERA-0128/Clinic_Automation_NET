@@ -25,7 +25,8 @@ namespace Clinic_Automation.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Physician> Physicians { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

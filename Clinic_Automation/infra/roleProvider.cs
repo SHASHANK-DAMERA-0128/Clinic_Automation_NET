@@ -38,9 +38,9 @@ namespace Clinic_Automation.infra
         public override string[] GetRolesForUser(string username)
         {
             
-            using (Models.userEntities1 _db = new Models.userEntities1())
+            using (Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities())
             {
-                return new string[] { _db.userTables.SingleOrDefault(u => u.User_Name == username).Role};
+                return new string[] { _db.Users.SingleOrDefault(u => u.User_Name == username).Role};
             }
         }
 

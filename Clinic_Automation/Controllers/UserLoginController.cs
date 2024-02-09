@@ -17,12 +17,12 @@ namespace Clinic_Automation.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(userTable user)
+        public ActionResult Login(User user)
         {
             if(ModelState.IsValid)
             {
-                Models.userEntities1 _db = new Models.userEntities1();
-                userTable usr = _db.userTables.SingleOrDefault(dbusr => dbusr.User_Name.ToLower() == user.User_Name.ToLower()
+                Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities();
+                User usr = _db.Users.SingleOrDefault(dbusr => dbusr.User_Name.ToLower() == user.User_Name.ToLower()
                 && dbusr.Password.ToLower() == user.Password.ToLower());    
 
                 if (usr != null)

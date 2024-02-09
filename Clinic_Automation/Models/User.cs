@@ -12,12 +12,14 @@ namespace Clinic_Automation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class userTable
+    public partial class User
     {
         public int User_ID { get; set; }
         public string User_Name { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
         public Nullable<int> Reference_ID { get; set; }
+    
+        public virtual Physician Physician { get; set; }
     }
 }

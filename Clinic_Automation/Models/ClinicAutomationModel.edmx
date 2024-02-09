@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClinicAutomationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Physician">
+          <Key>
+            <PropertyRef Name="Physician_ID" />
+          </Key>
+          <Property Name="Physician_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Physician_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Specialization" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Contact_Number" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Reference_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Physician_Physician">
+          <End Role="Physician" Type="Self.Physician" Multiplicity="1" />
+          <End Role="Physician1" Type="Self.Physician" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Physician">
+              <PropertyRef Name="Physician_ID" />
+            </Principal>
+            <Dependent Role="Physician1">
+              <PropertyRef Name="Physician_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Physician">
+          <End Role="Physician" Type="Self.Physician" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Physician">
+              <PropertyRef Name="Physician_ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Reference_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicAutomationModelStoreContainer">
+          <EntitySet Name="Physician" EntityType="Self.Physician" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Physician_Physician" Association="Self.FK_Physician_Physician">
+            <End Role="Physician" EntitySet="Physician" />
+            <End Role="Physician1" EntitySet="Physician" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Physician" Association="Self.FK_User_Physician">
+            <End Role="Physician" EntitySet="Physician" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClinicAutomationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ClinicAutomationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="ClinicAutomationModel.User" />
+          <EntitySet Name="Physicians" EntityType="ClinicAutomationModel.Physician" />
+          <AssociationSet Name="FK_Physician_Physician" Association="ClinicAutomationModel.FK_Physician_Physician">
+            <End Role="Physician" EntitySet="Physicians" />
+            <End Role="Physician1" EntitySet="Physicians" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Physician" Association="ClinicAutomationModel.FK_User_Physician">
+            <End Role="Physician" EntitySet="Physicians" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reference_ID" Type="Int32" />
+          <NavigationProperty Name="Physician" Relationship="ClinicAutomationModel.FK_User_Physician" FromRole="User" ToRole="Physician" />
+        </EntityType>
+        <EntityType Name="Physician">
+          <Key>
+            <PropertyRef Name="Physician_ID" />
+          </Key>
+          <Property Name="Physician_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Physician_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Specialization" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Number" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Physician1" Relationship="ClinicAutomationModel.FK_Physician_Physician" FromRole="Physician" ToRole="Physician1" />
+          <NavigationProperty Name="Physician2" Relationship="ClinicAutomationModel.FK_Physician_Physician" FromRole="Physician1" ToRole="Physician" />
+          <NavigationProperty Name="Users" Relationship="ClinicAutomationModel.FK_User_Physician" FromRole="Physician" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Physician_Physician">
+          <End Type="ClinicAutomationModel.Physician" Role="Physician" Multiplicity="1" />
+          <End Type="ClinicAutomationModel.Physician" Role="Physician1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Physician">
+              <PropertyRef Name="Physician_ID" />
+            </Principal>
+            <Dependent Role="Physician1">
+              <PropertyRef Name="Physician_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Physician">
+          <End Type="ClinicAutomationModel.Physician" Role="Physician" Multiplicity="0..1" />
+          <End Type="ClinicAutomationModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Physician">
+              <PropertyRef Name="Physician_ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Reference_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClinicAutomationModelStoreContainer" CdmEntityContainer="ClinicAutomationEntities">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ClinicAutomationModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Reference_ID" ColumnName="Reference_ID" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Physicians">
+            <EntityTypeMapping TypeName="ClinicAutomationModel.Physician">
+              <MappingFragment StoreEntitySet="Physician">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Physician_Name" ColumnName="Physician_Name" />
+                <ScalarProperty Name="Physician_ID" ColumnName="Physician_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

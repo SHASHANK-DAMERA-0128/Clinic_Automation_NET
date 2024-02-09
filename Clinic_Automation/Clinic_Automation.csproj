@@ -138,24 +138,27 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="infra\roleProvider.cs" />
+    <Compile Include="Models\ClinicAutomationModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClinicAutomationModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClinicAutomationModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClinicAutomationModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\LoginExtend.cs" />
-    <Compile Include="Models\userTable.cs">
-      <DependentUpon>UserTableModel.tt</DependentUpon>
+    <Compile Include="Models\Physician.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserTableModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserTableModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserTableModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserTableModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserTableModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserTableModel.edmx</DependentUpon>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -179,15 +182,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\UserTableModel.Context.tt">
+    <Content Include="Models\ClinicAutomationModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserTableModel.edmx</DependentUpon>
-      <LastGenOutput>UserTableModel.Context.cs</LastGenOutput>
+      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
+      <LastGenOutput>ClinicAutomationModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\UserTableModel.tt">
+    <Content Include="Models\ClinicAutomationModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserTableModel.edmx</DependentUpon>
-      <LastGenOutput>UserTableModel.cs</LastGenOutput>
+      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
+      <LastGenOutput>ClinicAutomationModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -195,12 +198,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\UserTableModel.edmx">
+    <EntityDeploy Include="Models\ClinicAutomationModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UserTableModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ClinicAutomationModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\UserTableModel.edmx.diagram">
-      <DependentUpon>UserTableModel.edmx</DependentUpon>
+    <Content Include="Models\ClinicAutomationModel.edmx.diagram">
+      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -231,6 +234,7 @@
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\UserLogin\Login.cshtml" />
     <Content Include="Views\Physician\Index.cshtml" />
+    <Content Include="Views\Admin\AddNewPhysician.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,10 +13,10 @@ namespace Clinic_Automation.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class userEntities1 : DbContext
+    public partial class ClinicAutomationEntities : DbContext
     {
-        public userEntities1()
-            : base("name=userEntities1")
+        public ClinicAutomationEntities()
+            : base("name=ClinicAutomationEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace Clinic_Automation.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<userTable> userTables { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Physician> Physicians { get; set; }
     }
 }

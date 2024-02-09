@@ -22,12 +22,12 @@ namespace Clinic_Automation.Controllers
             if(ModelState.IsValid)
             {
                 Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities();
-                User usr = _db.Users.SingleOrDefault(dbusr => dbusr.User_Name.ToLower() == user.User_Name.ToLower()
+                User usr = _db.Users.SingleOrDefault(dbusr => dbusr.UserName.ToLower() == user.UserName.ToLower()
                 && dbusr.Password.ToLower() == user.Password.ToLower());    
 
                 if (usr != null)
                 {
-                    FormsAuthentication.SetAuthCookie(usr.User_Name, false);
+                    FormsAuthentication.SetAuthCookie(usr.UserName, false);
                     return RedirectToAction("Index",usr.Role);
                 }
 

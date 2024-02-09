@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Clinic_Automation.Models.Physician>
+
+<p>
+    @Html.ActionLink("Create New", "CreateAdminPhysician")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicianName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicianAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicianNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicianEmailID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Specialization)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicianSummary)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicianName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicianAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicianNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicianEmailID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specialization)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicianSummary)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditAdminPhysician", new { id = item.PhysicianID }) |
+                @Html.ActionLink("Delete", "DeleteAdminPhysician", new { id = item.PhysicianID })
+            </td>
+        </tr>
+    }
+
+</table>
+

@@ -12,27 +12,26 @@ namespace Clinic_Automation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Patient
+    public partial class Appointment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Patient()
+        public Appointment()
         {
-            this.Appointments = new HashSet<Appointment>();
-            this.Users = new HashSet<User>();
+            this.Schedules = new HashSet<Schedule>();
         }
     
+        public int AppointmentID { get; set; }
         public int PatientID { get; set; }
-        public string PatientName { get; set; }
-        public System.DateTime DOB { get; set; }
-        public string PatientNumber { get; set; }
-        public string PatientEmail { get; set; }
-        public string PatientAddress { get; set; }
-        public string Gender { get; set; }
-        public string PatientSummary { get; set; }
+        public int PhysicianID { get; set; }
+        public System.DateTime AppointmentDateTime { get; set; }
+        public string Criticality { get; set; }
+        public string Reason { get; set; }
+        public string Note { get; set; }
+        public string ScheduleStatus { get; set; }
     
+        public virtual Patient Patient { get; set; }
+        public virtual Physician Physician { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointment> Appointments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

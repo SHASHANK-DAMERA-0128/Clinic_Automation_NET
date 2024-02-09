@@ -12,29 +12,24 @@ namespace Clinic_Automation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Physician
+    public partial class Schedule
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Physician()
+        public Schedule()
         {
-            this.Appointments = new HashSet<Appointment>();
-            this.DrugRequests = new HashSet<DrugRequest>();
-            this.Users = new HashSet<User>();
+            this.DoctorPrescriptions = new HashSet<DoctorPrescription>();
+            this.PhysicianAdvices = new HashSet<PhysicianAdvice>();
         }
     
-        public int PhysicianID { get; set; }
-        public string PhysicianName { get; set; }
-        public string PhysicianAddress { get; set; }
-        public string PhysicianNumber { get; set; }
-        public string PhysicianEmailID { get; set; }
-        public string Specialization { get; set; }
-        public string PhysicianSummary { get; set; }
+        public int ScheduleID { get; set; }
+        public int AppointmentID { get; set; }
+        public System.DateTime ScheduleDate { get; set; }
+        public string ScheduleStatus { get; set; }
     
+        public virtual Appointment Appointment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<DoctorPrescription> DoctorPrescriptions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DrugRequest> DrugRequests { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<PhysicianAdvice> PhysicianAdvices { get; set; }
     }
 }

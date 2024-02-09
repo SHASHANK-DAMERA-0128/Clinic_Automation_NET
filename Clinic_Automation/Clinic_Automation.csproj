@@ -138,6 +138,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="infra\roleProvider.cs" />
+    <Compile Include="Models\Appointment.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Chemist.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClinicAutomationModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,11 +159,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DoctorPrescription.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Drug.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DrugRequest.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LoginExtend.cs" />
     <Compile Include="Models\Patient.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Physician.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhysicianAdvice.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurchaseOrderHeader.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurchaseProductLine.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Schedule.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Supplier.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
@@ -236,9 +266,15 @@
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\UserLogin\Login.cshtml" />
     <Content Include="Views\Physician\Index.cshtml" />
-    <Content Include="Views\Admin\AddNewPhysician.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Admin\CreateAdminPhysician.cshtml" />
+    <Content Include="Views\Admin\DeleteAdminPhysician.cshtml" />
+    <Content Include="Views\Admin\EditAdminPhysician.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\DisplayAdminPhysician.cshtml" />
+    <Content Include="Views\Admin\DisplayAdminPatient.cshtml" />
+    <Content Include="Views\Admin\CreateAdminPatient.cshtml" />
+    <Content Include="Views\Admin\EditAdminPatient.cshtml" />
+    <Content Include="Views\Admin\DeleteAdminPatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

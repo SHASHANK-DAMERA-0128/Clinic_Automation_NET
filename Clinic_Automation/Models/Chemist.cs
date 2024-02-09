@@ -12,26 +12,23 @@ namespace Clinic_Automation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Patient
+    public partial class Chemist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Patient()
+        public Chemist()
         {
-            this.Appointments = new HashSet<Appointment>();
             this.Users = new HashSet<User>();
         }
     
-        public int PatientID { get; set; }
-        public string PatientName { get; set; }
-        public System.DateTime DOB { get; set; }
-        public string PatientNumber { get; set; }
-        public string PatientEmail { get; set; }
-        public string PatientAddress { get; set; }
-        public string Gender { get; set; }
-        public string PatientSummary { get; set; }
+        public int ChemistID { get; set; }
+        public string ChemistName { get; set; }
+        public string ChemistAddress { get; set; }
+        public string ChemistNumber { get; set; }
+        public string ChemistEmailID { get; set; }
+        public string ChemistSummary { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual Chemist Chemist1 { get; set; }
+        public virtual Chemist Chemist2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
     }

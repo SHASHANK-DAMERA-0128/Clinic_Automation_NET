@@ -12,28 +12,23 @@ namespace Clinic_Automation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Physician
+    public partial class Supplier
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Physician()
+        public Supplier()
         {
-            this.Appointments = new HashSet<Appointment>();
-            this.DrugRequests = new HashSet<DrugRequest>();
+            this.PurchaseOrderHeaders = new HashSet<PurchaseOrderHeader>();
             this.Users = new HashSet<User>();
         }
     
-        public int PhysicianID { get; set; }
-        public string PhysicianName { get; set; }
-        public string PhysicianAddress { get; set; }
-        public string PhysicianNumber { get; set; }
-        public string PhysicianEmailID { get; set; }
-        public string Specialization { get; set; }
-        public string PhysicianSummary { get; set; }
+        public int SupplierID { get; set; }
+        public string SupplierName { get; set; }
+        public string SupplierAddress { get; set; }
+        public string SupplierNumber { get; set; }
+        public string SupplierEmailID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointment> Appointments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DrugRequest> DrugRequests { get; set; }
+        public virtual ICollection<PurchaseOrderHeader> PurchaseOrderHeaders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
     }

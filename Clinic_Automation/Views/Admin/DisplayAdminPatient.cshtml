@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Clinic_Automation.Models.Patient>
+
+<p>
+    @Html.ActionLink("Create New", "CreateAdminPatient")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PatientSummary)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DOB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientSummary)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditAdminPatient", new { id=item.PatientID }) |
+            @Html.ActionLink("Delete", "DeleteAdminPatient", new { id=item.PatientID })
+        </td>
+    </tr>
+}
+
+</table>

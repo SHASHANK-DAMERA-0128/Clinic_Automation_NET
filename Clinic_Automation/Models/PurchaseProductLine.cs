@@ -12,17 +12,14 @@ namespace Clinic_Automation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class PurchaseProductLine
     {
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
-        public Nullable<int> ReferenceToID { get; set; }
+        public int PurchaseOrderID { get; set; }
+        public int DrugId { get; set; }
+        public int SlNo { get; set; }
+        public int Quantity { get; set; }
+        public string Note { get; set; }
     
-        public virtual Chemist Chemist { get; set; }
-        public virtual Patient Patient { get; set; }
-        public virtual Physician Physician { get; set; }
-        public virtual Supplier Supplier { get; set; }
+        public virtual PurchaseOrderHeader PurchaseOrderHeader { get; set; }
     }
 }

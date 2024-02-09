@@ -40,7 +40,7 @@ namespace Clinic_Automation.infra
             
             using (Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities())
             {
-                return new string[] { _db.Users.SingleOrDefault(u => u.User_Name == username).Role};
+                return new string[] { _db.Users.SingleOrDefault(u => u.UserName == username).Role};
             }
         }
 

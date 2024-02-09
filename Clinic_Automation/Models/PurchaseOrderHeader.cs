@@ -12,27 +12,20 @@ namespace Clinic_Automation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Patient
+    public partial class PurchaseOrderHeader
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Patient()
+        public PurchaseOrderHeader()
         {
-            this.Appointments = new HashSet<Appointment>();
-            this.Users = new HashSet<User>();
+            this.PurchaseProductLines = new HashSet<PurchaseProductLine>();
         }
     
-        public int PatientID { get; set; }
-        public string PatientName { get; set; }
-        public System.DateTime DOB { get; set; }
-        public string PatientNumber { get; set; }
-        public string PatientEmail { get; set; }
-        public string PatientAddress { get; set; }
-        public string Gender { get; set; }
-        public string PatientSummary { get; set; }
+        public int PurchaseOrderID { get; set; }
+        public System.DateTime PurchaseOrderDate { get; set; }
+        public int SupplierID { get; set; }
     
+        public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointment> Appointments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<PurchaseProductLine> PurchaseProductLines { get; set; }
     }
 }

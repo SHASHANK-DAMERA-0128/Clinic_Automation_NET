@@ -5,33 +5,34 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="19f49279d78841b9b7dfa099891fcc80" Name="Diagram1">
-        <EntityTypeShape EntityType="ClinicAutomationModel.Appointment" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.Chemist" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.DoctorPrescription" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.Drug" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.DrugRequest" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.Patient" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.Physician" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.PhysicianAdvice" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.PurchaseOrderHeader" Width="1.5" PointX="6" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.PurchaseProductLine" Width="1.5" PointX="8.25" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.Schedule" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.Supplier" Width="1.5" PointX="3.75" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicAutomationModel.User" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_Appointment_Patient" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_Appointment_Physician" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_Schedule_Appointment" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_Chemist_Chemist" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_User_Chemist" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_DoctorPrescription_Drug" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_DoctorPrescription_Schedule" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_DrugRequest_Physician" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_User_Patient" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_User_Physician" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianAdvice_Schedule" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_PurchaseOrderHeader_Supplier" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_PurchaseProductLine_PurchaseOrderHeader" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicAutomationModel.FK_User_Supplier" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Appointment" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Chemist" Width="1.5" PointX="3.75" PointY="1.5" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Drug" Width="1.5" PointX="7.5" PointY="13.125" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.DrugRequest" Width="1.5" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Patient" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Physician" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PhysicianAdvice" Width="1.5" PointX="7.5" PointY="9" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PhysicianPrescription" Width="1.5" PointX="9.75" PointY="9" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PurchaseOrderHeader" Width="1.5" PointX="6" PointY="16.75" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PurchaseProductLine" Width="1.5" PointX="8.25" PointY="16.75" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Schedule" Width="1.5" PointX="5.25" PointY="9" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Supplier" Width="1.5" PointX="3.75" PointY="15.625" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.User" Width="1.5" PointX="6" PointY="4.875" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_Appointment_Patient" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_Appointment_Physician" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_Schedule_Appointment" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Chemist" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianPrescription_Drug" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_DrugRequest_Physician" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Patient" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Physician" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianAdvice_PhysicianAdvice" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianAdvice_Schedule" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianPrescription_PhysicianAdvice" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianPrescription_Schedule" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PurchaseOrderHeader_Supplier" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PurchaseProductLine_PurchaseOrderHeader" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Supplier" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

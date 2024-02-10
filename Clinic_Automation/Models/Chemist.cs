@@ -27,8 +27,6 @@ namespace Clinic_Automation.Models
         public string ChemistEmailID { get; set; }
         public string ChemistSummary { get; set; }
     
-        public virtual Chemist Chemist1 { get; set; }
-        public virtual Chemist Chemist2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
     }

@@ -27,12 +27,12 @@ namespace Clinic_Automation.Models
     
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Chemist> Chemists { get; set; }
-        public virtual DbSet<DoctorPrescription> DoctorPrescriptions { get; set; }
         public virtual DbSet<Drug> Drugs { get; set; }
         public virtual DbSet<DrugRequest> DrugRequests { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Physician> Physicians { get; set; }
         public virtual DbSet<PhysicianAdvice> PhysicianAdvices { get; set; }
+        public virtual DbSet<PhysicianPrescription> PhysicianPrescriptions { get; set; }
         public virtual DbSet<PurchaseOrderHeader> PurchaseOrderHeaders { get; set; }
         public virtual DbSet<PurchaseProductLine> PurchaseProductLines { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }

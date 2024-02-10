@@ -159,9 +159,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DoctorPrescription.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Drug.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
@@ -176,6 +173,9 @@
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhysicianAdvice.cs">
+      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhysicianPrescription.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PurchaseOrderHeader.cs">

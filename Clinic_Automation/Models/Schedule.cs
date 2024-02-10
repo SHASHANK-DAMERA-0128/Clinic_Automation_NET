@@ -17,8 +17,8 @@ namespace Clinic_Automation.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Schedule()
         {
-            this.DoctorPrescriptions = new HashSet<DoctorPrescription>();
             this.PhysicianAdvices = new HashSet<PhysicianAdvice>();
+            this.PhysicianPrescriptions = new HashSet<PhysicianPrescription>();
         }
     
         public int ScheduleID { get; set; }
@@ -28,8 +28,8 @@ namespace Clinic_Automation.Models
     
         public virtual Appointment Appointment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DoctorPrescription> DoctorPrescriptions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhysicianAdvice> PhysicianAdvices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhysicianPrescription> PhysicianPrescriptions { get; set; }
     }
 }

@@ -1,0 +1,44 @@
+﻿@model Clinic_Automation.Models.Supplier
+
+<div>
+    <h4>Supplier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplierEmailID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplierEmailID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditAdminSupplier", new { id = Model.SupplierID }) |
+    @Html.ActionLink("Back to List", "DisplayAdminSupplier")
+</p>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Clinic_Automation.Models.Chemist>
+<p>
+    ~~@Html.ActionLink("Home", "Index", "Admin", new { area = "" })~~
+</p>
+<p>
+    @Html.ActionLink("Create New", "CreateAdminChemist")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ChemistName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.ChemistNumber)
+        </th>
+       
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChemistName)
+            </td>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.ChemistNumber)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Edit", "EditAdminChemist", new { id = item.ChemistID }) | |
+                @Html.ActionLink("Details", "DetailsAdminChemist", new { id = item.ChemistID }) | |
+                @Html.ActionLink("Delete", "DeleteAdminChemist", new { id = item.ChemistID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

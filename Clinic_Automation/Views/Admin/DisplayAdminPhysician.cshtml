@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Physician>
 
+
+<p>
+    ~~@Html.ActionLink("Home", "Index", "Admin", new { area = "" })~~
+</p>
 <p>
     @Html.ActionLink("Create New", "CreateAdminPhysician")
 </p>
@@ -9,19 +13,10 @@
             @Html.DisplayNameFor(model => model.PhysicianName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhysicianAddress)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PhysicianNumber)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhysicianEmailID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Specialization)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhysicianSummary)
         </th>
         <th></th>
     </tr>
@@ -33,26 +28,23 @@
                 @Html.DisplayFor(modelItem => item.PhysicianName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhysicianAddress)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.PhysicianNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhysicianEmailID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Specialization)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhysicianSummary)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditAdminPhysician", new { id = item.PhysicianID }) |
+                @Html.ActionLink("Edit", "EditAdminPhysician", new { id = item.PhysicianID }) | |
+                @Html.ActionLink("Details", "DetailsAdminPhysician", new { id = item.PhysicianID }) | |
                 @Html.ActionLink("Delete", "DeleteAdminPhysician", new { id = item.PhysicianID })
             </td>
         </tr>
     }
 
 </table>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 

@@ -35,5 +35,13 @@ namespace Clinic_Automation.Controllers
             ModelState.AddModelError("", "invalid Username or Password");
             return View();
         }
+
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();                            
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

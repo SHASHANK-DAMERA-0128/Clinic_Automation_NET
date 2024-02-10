@@ -1,0 +1,58 @@
+﻿@model Clinic_Automation.Models.Chemist
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Chemist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistEmailID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistEmailID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistSummary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistSummary)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "DisplayAdminChemist")
+        </div>
+    }
+</div>

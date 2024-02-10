@@ -20,9 +20,35 @@ namespace Clinic_Automation.Controllers
             return View();
         }
 
+
+
+
+
+
+
+
+
+
+        //--------------------------PHYSICIAN CRUD OPERATIONS---------
+
         public ActionResult DisplayAdminPhysician()
         {
             return View(_db.Physicians.ToList());
+        }
+
+
+        public ActionResult DetailsAdminPhysician(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Physician physician = _db.Physicians.Find(id);
+            if (physician == null)
+            {
+                return HttpNotFound();
+            }
+            return View(physician);
         }
 
         public ActionResult CreateAdminPhysician()
@@ -130,13 +156,28 @@ namespace Clinic_Automation.Controllers
 
 
 
-        //--------------------------PATIENT---------
+        //--------------------------PATIENT CRUD OPERATIONS---------
 
 
         public ActionResult DisplayAdminPatient()
         {
             return View(_db.Patients.ToList());
         }
+
+        public ActionResult DetailsAdminPatient(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient patient = _db.Patients.Find(id);
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(patient);
+        }
+
 
         public ActionResult CreateAdminPatient()
         {
@@ -155,7 +196,7 @@ namespace Clinic_Automation.Controllers
                 User usr = new User();
                 usr.ReferenceToID = patient.PatientID;
                 usr.UserName = patient.PatientName + rnd.Next(1000, 10000);
-                usr.Password = patient.PatientName + rnd.Next(1000, 10000) + "@" + "A" + "1";
+                usr.Password = patient.PatientName + rnd.Next(1000, 10000) + "@" + "B" + "2";
                 usr.Role = "PATIENT";
 
                 _db.Users.Add(usr);
@@ -219,6 +260,273 @@ namespace Clinic_Automation.Controllers
             _db.SaveChanges();
             return RedirectToAction("DisplayAdminPatient");
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //--------------------------CHEMIST CRUD OPERATIONS---------
+
+        public ActionResult DisplayAdminChemist()
+        {
+            return View(_db.Chemists.ToList());
+        }
+
+        public ActionResult DetailsAdminChemist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Chemist chemist = _db.Chemists.Find(id);
+            if (chemist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(chemist);
+        }
+        public ActionResult CreateAdminChemist()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdminChemist([Bind(Include = "ChemistID,ChemistName,ChemistAddress,ChemistNumber,ChemistEmailID,ChemistSummary")] Chemist chemist)
+        {
+            if (ModelState.IsValid)
+            {
+                Random rnd = new Random();
+                _db.Chemists.Add(chemist);
+                _db.SaveChanges();
+
+                User usr = new User();
+                usr.ReferenceToID = chemist.ChemistID;
+                usr.UserName = chemist.ChemistName + rnd.Next(1000, 10000);
+                usr.Password = chemist.ChemistID + rnd.Next(1000, 10000) + "@" + "C" + "3";
+                usr.Role = "CHEMIST";
+
+                _db.Users.Add(usr);
+                _db.SaveChanges();
+                return RedirectToAction("DisplayAdminChemist");
+            }
+
+            return View(chemist);
+        }
+
+
+        public ActionResult EditAdminChemist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Chemist chemist = _db.Chemists.Find(id);
+            if (chemist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(chemist);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAdminChemist([Bind(Include = "ChemistID,ChemistName,ChemistAddress,ChemistNumber,ChemistEmailID,ChemistSummary")] Chemist chemist)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Entry(chemist).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("DisplayAdminChemist");
+            }
+            return View(chemist);
+        }
+
+
+        public ActionResult DeleteAdminChemist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Chemist chemist = _db.Chemists.Find(id);
+            if (chemist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(chemist);
+        }
+
+        [HttpPost, ActionName("DeleteAdminChemist")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmedAdminChemist(int id)
+        {
+            Chemist chemist = _db.Chemists.Find(id);
+            _db.Chemists.Remove(chemist);
+            _db.SaveChanges();
+            return RedirectToAction("DisplayAdminChemist");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //--------------------------SUPPLIER CRUD OPERATIONS---------
+
+
+        public ActionResult DisplayAdminSupplier()
+        {
+            return View(_db.Suppliers.ToList());
+        }
+
+        public ActionResult DetailsAdminSupplier(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Supplier supplier = _db.Suppliers.Find(id);
+            if (supplier == null)
+            {
+                return HttpNotFound();
+            }
+            return View(supplier);
+        }
+
+        public ActionResult CreateAdminSupplier()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdminSupplier([Bind(Include = "SupplierID,SupplierName,SupplierAddress,SupplierNumber,SupplierEmailID")] Supplier supplier)
+        {
+            if (ModelState.IsValid)
+            {
+                Random rnd = new Random();
+                _db.Suppliers.Add(supplier);
+                _db.SaveChanges();
+                User usr = new User();
+                usr.ReferenceToID = supplier.SupplierID;
+                usr.UserName = supplier.SupplierName + rnd.Next(1000, 10000);
+                usr.Password = supplier.SupplierName+ rnd.Next(1000, 10000) + "@" + "D" + "4";
+                usr.Role = "SUPPLIER";
+
+                _db.Users.Add(usr);
+                _db.SaveChanges();
+                return RedirectToAction("DisplayAdminSupplier");
+            }
+
+            return View(supplier);
+        }
+
+
+        public ActionResult EditAdminSupplier(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Supplier supplier = _db.Suppliers.Find(id);
+            if (supplier == null)
+            {
+                return HttpNotFound();
+            }
+            return View(supplier);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAdminSupplier([Bind(Include = "SupplierID,SupplierName,SupplierAddress,SupplierNumber,SupplierEmailID")] Supplier supplier)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Entry(supplier).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("DisplayAdminSupplier");
+            }
+            return View(supplier);
+        }
+
+
+        public ActionResult DeleteAdminSupplier(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Supplier supplier = _db.Suppliers.Find(id);
+            if (supplier == null)
+            {
+                return HttpNotFound();
+            }
+            return View(supplier);
+        }
+
+        [HttpPost, ActionName("DeleteAdminSupplier")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmedAdminSupplier(int id)
+        {
+            Supplier supplier = _db.Suppliers.Find(id);
+            _db.Suppliers.Remove(supplier);
+            _db.SaveChanges();
+            return RedirectToAction("DisplayAdminSupplier");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

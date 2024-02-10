@@ -130,9 +130,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ChemistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PhysicianController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -275,6 +277,20 @@
     <Content Include="Views\Admin\CreateAdminPatient.cshtml" />
     <Content Include="Views\Admin\EditAdminPatient.cshtml" />
     <Content Include="Views\Admin\DeleteAdminPatient.cshtml" />
+    <Content Include="Views\Chemist\Index.cshtml" />
+    <Content Include="Views\Admin\DisplayAdminChemist.cshtml" />
+    <Content Include="Views\Admin\CreateAdminChemist.cshtml" />
+    <Content Include="Views\Admin\EditAdminChemist.cshtml" />
+    <Content Include="Views\Admin\DeleteAdminChemist.cshtml" />
+    <Content Include="Views\Admin\DisplayAdminSupplier.cshtml" />
+    <Content Include="Views\Admin\CreateAdminSupplier.cshtml" />
+    <Content Include="Views\Admin\EditAdminSupplier.cshtml" />
+    <Content Include="Views\Admin\DeleteAdminSupplier.cshtml" />
+    <Content Include="Views\Admin\DetailsAdminPhysician.cshtml" />
+    <Content Include="Views\Supplier\Index.cshtml" />
+    <Content Include="Views\Admin\DetailsAdminSupplier.cshtml" />
+    <Content Include="Views\Admin\DetailsAdminChemist.cshtml" />
+    <Content Include="Views\Admin\DetailsAdminPatient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

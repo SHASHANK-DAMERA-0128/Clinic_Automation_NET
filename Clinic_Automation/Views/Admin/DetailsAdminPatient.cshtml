@@ -1,0 +1,68 @@
+﻿@model Clinic_Automation.Models.Patient
+
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PatientSummary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientSummary)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditAdminPatient", new { id = Model.PatientID }) |
+    @Html.ActionLink("Back to List", "DisplayAdminPatient")
+</p>

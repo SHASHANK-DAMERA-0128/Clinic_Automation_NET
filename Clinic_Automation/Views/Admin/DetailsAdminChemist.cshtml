@@ -1,0 +1,52 @@
+﻿@model Clinic_Automation.Models.Chemist
+
+<div>
+    <h4>Chemist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistEmailID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistEmailID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChemistSummary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChemistSummary)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditAdminChemist", new { id = Model.ChemistID }) |
+    @Html.ActionLink("Back to List", "DisplayAdminChemist")
+</p>

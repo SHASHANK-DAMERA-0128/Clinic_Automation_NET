@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Clinic_Automation.Models.Supplier>
+
+<p>
+    ~~@Html.ActionLink("Home", "Index", "Admin", new { area = "" })~~
+</p>
+
+<p>
+    @Html.ActionLink("Create New", "CreateAdminSupplier")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierEmailID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierEmailID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditAdminSupplier", new { id = item.SupplierID }) | |
+                @Html.ActionLink("Details", "DetailsAdminSupplier", new { id = item.SupplierID }) | |
+                @Html.ActionLink("Delete", "DeleteAdminSupplier", new { id = item.SupplierID })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

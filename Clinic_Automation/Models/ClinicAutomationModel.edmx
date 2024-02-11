@@ -117,7 +117,7 @@
           <Property Name="ScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppointmentID" Type="int" Nullable="false" />
           <Property Name="ScheduleDate" Type="datetime" Nullable="false" />
-          <Property Name="ScheduleStatus" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ScheduleStatus" Type="nvarchar" MaxLength="15" Nullable="false" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -606,7 +606,7 @@
           <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppointmentID" Type="Int32" Nullable="false" />
           <Property Name="ScheduleDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ScheduleStatus" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ScheduleStatus" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Appointment" Relationship="ClinicAutomationModel.FK_Schedule_Appointment" FromRole="Schedule" ToRole="Appointment" />
           <NavigationProperty Name="PhysicianAdvices" Relationship="ClinicAutomationModel.FK_PhysicianAdvice_Schedule" FromRole="Schedule" ToRole="PhysicianAdvice" />
           <NavigationProperty Name="PhysicianPrescriptions" Relationship="ClinicAutomationModel.FK_PhysicianPrescription_Schedule" FromRole="Schedule" ToRole="PhysicianPrescription" />
@@ -817,7 +817,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

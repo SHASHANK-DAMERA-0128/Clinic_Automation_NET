@@ -516,22 +516,55 @@ namespace Clinic_Automation.Controllers
 
 
 
+        //------------------------------Schedule Appointment-----------------------------------------
 
+        public ActionResult DisplayAdminAppointment()
+        {
+            var appointments = _db.Appointments.Include(a => a.Patient).Include(a => a.Physician);
+            return View(appointments.ToList());
+        }
+        public ActionResult EditAdminAppointment(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Appointment appointment = _db.Appointments.Find(id);
+            if (appointment == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PatientID = new SelectList(_db.Patients, "PatientID", "PatientName", appointment.PatientID);
+            ViewBag.PhysicianID = new SelectList(_db.Physicians, "PhysicianID", "PhysicianName", appointment.PhysicianID);
+            return View(appointment);
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAdminAppointment([Bind(Include = "AppointmentID,PatientID,PhysicianID,AppointmentDateTime,Criticality,Reason,Note,ScheduleStatus")] Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Entry(appointment).State = EntityState.Modified;
+                _db.SaveChanges();
+                if(appointment.ScheduleStatus == "APPROVED")
+                {
+                    Schedule schedule = new Schedule();
+                    schedule.AppointmentID = appointment.AppointmentID;
+                    schedule.ScheduleDate = appointment.AppointmentDateTime;
+                    schedule.ScheduleStatus = "APPROVED";
 
+                    _db.Schedules.Add(schedule);
+                    _db.SaveChanges();
+                }
+                return RedirectToAction("DisplayAdminAppointment");
 
-
-
-
-
-
-
-
-
-
-
-
-
+            }
+            ViewBag.PatientID = new SelectList(_db.Patients, "PatientID", "PatientName", appointment.PatientID);
+            ViewBag.PhysicianID = new SelectList(_db.Physicians, "PhysicianID", "PhysicianName", appointment.PhysicianID);
+            return View(appointment);
+        }
+       
 
         protected override void Dispose(bool disposing)
         {

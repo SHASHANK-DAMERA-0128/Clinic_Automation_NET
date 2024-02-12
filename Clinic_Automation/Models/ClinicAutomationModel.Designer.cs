@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\ShashankDamera\source\repos\Clinic_Automation\Clinic_Automation\Models\ClinicAutomationModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Programming\Training\projects\clincAutomation\Clinic_Automation_NET\Clinic_Automation\Models\ClinicAutomationModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

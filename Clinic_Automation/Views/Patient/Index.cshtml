@@ -69,8 +69,12 @@
     }
 
 </table>
-
 @section Update
     {
     <li>@Html.ActionLink("View Profile", "ViewProfile", "Patient", new { area = "" }, new { @class = "nav-link" })</li>
+}
+
+@section Logout
+    {
+    @Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link" })
 }

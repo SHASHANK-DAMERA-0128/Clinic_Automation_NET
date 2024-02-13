@@ -30,6 +30,7 @@ namespace Clinic_Automation.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.CurrentUserName = curr_usr.UserName;
             return View(appointments);
 
 
@@ -41,12 +42,13 @@ namespace Clinic_Automation.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAppointment([Bind(Include = "AppointmentID,PhysicianID,AppointmentDateTime,Criticality,Reason,Note,ScheduleStatus")] Appointment appointment)
+        public ActionResult CreateAppointment([Bind(Include = "AppointmentID,PhysicianID,AppointmentDateTime,Criticality,Reason,Note")] Appointment appointment)
         {
             if (ModelState.IsValid)
             {
                 var curr_usr = Session["CurrentUser"] as CurrentUser;
                 appointment.PatientID = (int)curr_usr.ReferenceToID;
+                appointment.ScheduleStatus = "PENDING";
                 db.Appointments.Add(appointment);
                 db.SaveChanges();
                 return RedirectToAction("Index");

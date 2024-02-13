@@ -20,8 +20,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Login", "Login", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
-                    @RenderSection("Update",required: false)
+                    @RenderSection("Update", required: false)
+                    @if (IsSectionDefined("Logout"))
+                    {
+                        @RenderSection("Logout")
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
         </div>

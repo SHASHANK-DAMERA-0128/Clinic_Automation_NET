@@ -15,9 +15,9 @@ namespace Clinic_Automation.Models
     public partial class PhysicianPrescription
     {
         public int PhysicianPrescriptionID { get; set; }
-        public int PhysicianAdviceID { get; set; }
         public int ScheduleID { get; set; }
         public int DrugID { get; set; }
+        public int PhysicianAdviceID { get; set; }
         public string Description { get; set; }
     
         public virtual Drug Drug { get; set; }

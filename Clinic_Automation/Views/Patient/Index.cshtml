@@ -1,14 +1,76 @@
-﻿
-<!DOCTYPE html>
+﻿@model IEnumerable<Clinic_Automation.Models.Appointment>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        PATIENT
-    </div>
-</body>
-</html>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Schedule Appointment", "CreateAppointment")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Criticality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.PatientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Physician.PhysicianName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Criticality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.AppointmentID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.AppointmentID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentID })
+                </td>*@
+        </tr>
+    }
+
+</table>
+
+@section Update
+    {
+    <li>@Html.ActionLink("View Profile", "ViewProfile", "Patient", new { area = "" }, new { @class = "nav-link" })</li>
+}

@@ -21,13 +21,20 @@ namespace Clinic_Automation.Controllers
         {
             if(ModelState.IsValid)
             {
-                Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities();
+                Models.ClinicAutomationEntities1 _db = new Models.ClinicAutomationEntities1();
                 User usr = _db.Users.SingleOrDefault(dbusr => dbusr.UserName.ToLower() == user.UserName.ToLower()
                 && dbusr.Password.ToLower() == user.Password.ToLower());    
 
                 if (usr != null)
                 {
                     FormsAuthentication.SetAuthCookie(usr.UserName, false);
+                    CurrentUser currentUser = new CurrentUser();
+                    currentUser.UserName = usr.UserName;
+                    currentUser.ReferenceToID = usr.ReferenceToID;
+                    currentUser.UserID = usr.UserID;
+                    currentUser.Role = usr.Role;
+
+                    Session["CurrentUser"] = currentUser;
                     return RedirectToAction("Index",usr.Role);
                 }
 
@@ -41,6 +48,12 @@ namespace Clinic_Automation.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();                            
             return RedirectToAction("Index", "Home");
+        }
+
+
+        public ActionResult SignUp()
+        {
+            return View();
         }
 
     }

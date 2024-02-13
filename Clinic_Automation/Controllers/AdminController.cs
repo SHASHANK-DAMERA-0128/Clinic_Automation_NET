@@ -12,7 +12,7 @@ namespace Clinic_Automation.Controllers
 {
     public class AdminController : Controller
     {
-        private ClinicAutomationEntities _db = new ClinicAutomationEntities();
+        private ClinicAutomationEntities1 _db = new ClinicAutomationEntities1();
         [Authorize(Roles = "ADMIN")]
        
         public ActionResult Index()

@@ -24,8 +24,6 @@ namespace Clinic_Automation.Models
         public int ScheduleID { get; set; }
         public string Advise { get; set; }
     
-        public virtual PhysicianAdvice PhysicianAdvice1 { get; set; }
-        public virtual PhysicianAdvice PhysicianAdvice2 { get; set; }
         public virtual Schedule Schedule { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhysicianPrescription> PhysicianPrescriptions { get; set; }

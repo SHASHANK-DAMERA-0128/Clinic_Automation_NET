@@ -13,10 +13,10 @@ namespace Clinic_Automation.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ClinicAutomationEntities : DbContext
+    public partial class ClinicAutomationEntities1 : DbContext
     {
-        public ClinicAutomationEntities()
-            : base("name=ClinicAutomationEntities")
+        public ClinicAutomationEntities1()
+            : base("name=ClinicAutomationEntities1")
         {
         }
     

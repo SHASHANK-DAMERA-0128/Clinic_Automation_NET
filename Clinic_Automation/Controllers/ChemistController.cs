@@ -14,5 +14,10 @@ namespace Clinic_Automation.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewMedicine()
+        {
+            return View();
+        }
     }
 }

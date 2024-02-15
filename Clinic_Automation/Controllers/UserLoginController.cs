@@ -21,7 +21,7 @@ namespace Clinic_Automation.Controllers
         {
             if(ModelState.IsValid)
             {
-                Models.ClinicAutomationEntities1 _db = new Models.ClinicAutomationEntities1();
+                Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities();
                 User usr = _db.Users.SingleOrDefault(dbusr => dbusr.UserName.ToLower() == user.UserName.ToLower()
                 && dbusr.Password.ToLower() == user.Password.ToLower());    
 

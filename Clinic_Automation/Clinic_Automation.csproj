@@ -295,6 +295,10 @@
     <Content Include="Views\Patient\EditProfile.cshtml" />
     <Content Include="Views\Patient\ViewProfile.cshtml" />
     <Content Include="Views\Chemist\ViewMedicine.cshtml" />
+    <Content Include="Views\Physician\DisplayPhysicianPrescription.cshtml" />
+    <Content Include="Views\Physician\EditPhysicianPrescription.cshtml" />
+    <Content Include="Views\Physician\CreatePhysicianPrescription.cshtml" />
+    <Content Include="Views\Patient\DisplayPatientPrescription.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

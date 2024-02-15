@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Clinic_Automation.Models.PhysicianPrescription>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayName("Description")
+        </th>
+        <th>
+            @Html.DisplayName("Drug Name")
+        </th>
+        <th>
+            @Html.DisplayName("Physician Advice")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drug.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
+            </td>
+        </tr>
+    }
+
+</table>
+<p>@Html.ActionLink("Back to List", "Index")</p>

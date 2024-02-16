@@ -29,6 +29,13 @@ namespace Clinic_Automation.Controllers
                 if (usr != null)
                 {
                     FormsAuthentication.SetAuthCookie(usr.UserName, false);
+                    CurrentUser currentUser = new CurrentUser();
+                    currentUser.UserName = usr.UserName;
+                    currentUser.ReferenceToID = usr.ReferenceToID;
+                    currentUser.UserID = usr.UserID;
+                    currentUser.Role = usr.Role;
+
+                    Session["CurrentUser"] = currentUser;
                     return RedirectToAction("Index",usr.Role);
                 }
 
@@ -62,6 +69,5 @@ namespace Clinic_Automation.Controllers
             Session.Abandon();                            
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

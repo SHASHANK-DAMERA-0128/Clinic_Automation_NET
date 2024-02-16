@@ -212,6 +212,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\styles\Chemist.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -231,6 +232,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="libman.json" />
     <EntityDeploy Include="Models\ClinicAutomationModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClinicAutomationModel.Designer.cs</LastGenOutput>
@@ -275,7 +277,6 @@
     <Content Include="Views\Admin\CreateAdminPatient.cshtml" />
     <Content Include="Views\Admin\EditAdminPatient.cshtml" />
     <Content Include="Views\Admin\DeleteAdminPatient.cshtml" />
-    <Content Include="Views\Chemist\Index.cshtml" />
     <Content Include="Views\Admin\DisplayAdminChemist.cshtml" />
     <Content Include="Views\Admin\CreateAdminChemist.cshtml" />
     <Content Include="Views\Admin\EditAdminChemist.cshtml" />
@@ -291,8 +292,12 @@
     <Content Include="Views\Admin\DetailsAdminPatient.cshtml" />
     <Content Include="Views\Admin\EditAdminAppointment.cshtml" />
     <Content Include="Views\Admin\DisplayAdminAppointment.cshtml" />
+    <Content Include="Views\Patient\CreateAppointment.cshtml" />
+    <Content Include="Views\Patient\EditProfile.cshtml" />
+    <Content Include="Views\Patient\ViewProfile.cshtml" />
     <Content Include="Views\Chemist\ViewMedicine.cshtml" />
     <Content Include="Views\UserLogin\SignUp.cshtml" />
+    <Content Include="Views\Chemist\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

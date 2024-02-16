@@ -10,4 +10,6 @@
 
 <li>@Html.ActionLink("Appointment", "DisplayAdminAppointment", "Admin", new { area = "" })</li>
 
-<li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" })</li>
+@section Logout{
+    @Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link" })
+}

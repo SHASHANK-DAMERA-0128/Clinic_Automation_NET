@@ -8,7 +8,7 @@ namespace Clinic_Automation.Models
 {
     public class LoginExtend
     {
-        [Display(Name ="User Name")]
+        [Display(Name = "User Name")]
         //[RegularExpression("/^(?=.*\\d)(?=.*[a-zA-Z]{4}).{6,15}$",
         //    ErrorMessage = "User Name should not contain special Character, be longer than 2 charaters and be less than 15 Character.")]
         [Required]
@@ -25,6 +25,15 @@ namespace Clinic_Automation.Models
     [MetadataType(typeof(LoginExtend))]
     public partial class User
     {
+        
+    }
 
+    public class CurrentUser
+    {
+        public int UserID { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public Nullable<int> ReferenceToID { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace Clinic_Automation.Models
         public int DrugID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public System.DateTime ExpiryDate { get; set; }
+        public Nullable<System.DateTime> ExpiryDate { get; set; }
         public string Dosage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

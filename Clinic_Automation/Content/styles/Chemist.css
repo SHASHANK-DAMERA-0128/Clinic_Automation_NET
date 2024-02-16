@@ -1,0 +1,29 @@
+﻿.button-design-1 {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.button-design-2 {
+    font-size: 10px;
+    font-weight: 600;
+    background-color: #ffd800;
+    border: 12px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 8px;
+    padding: 7px 10px;
+    text-decoration: none;
+    color: #000;    
+}

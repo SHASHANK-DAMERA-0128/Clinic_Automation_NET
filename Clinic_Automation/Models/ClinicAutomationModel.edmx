@@ -36,7 +36,7 @@
           <Property Name="DrugID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+          <Property Name="ExpiryDate" Type="date" />
           <Property Name="Dosage" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="DrugRequest">
@@ -418,7 +418,7 @@
           <Property Name="DrugID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
           <Property Name="Dosage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PhysicianPrescriptions" Relationship="Self.FK_PhysicianPrescription_Drug" FromRole="Drug" ToRole="PhysicianPrescription" />
         </EntityType>

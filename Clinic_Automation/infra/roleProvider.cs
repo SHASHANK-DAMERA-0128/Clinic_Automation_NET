@@ -9,7 +9,7 @@ namespace Clinic_Automation.infra
     public class roleProvider : RoleProvider
     {
         public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+        
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             throw new NotImplementedException();
@@ -40,7 +40,11 @@ namespace Clinic_Automation.infra
             
             using (Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities())
             {
-                return new string[] { _db.Users.SingleOrDefault(u => u.UserName == username).Role};
+
+
+                string[] strings = new string[] { _db.Users.SingleOrDefault(u => u.UserName == username).Role };
+
+                return  strings;
             }
         }
 

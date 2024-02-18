@@ -11,7 +11,15 @@
 </head>
 
 <div>
-    <h5>Requested Drugs</h5>
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>Requested Drugs</h5>
+
+        <div class="ml-3">
+            <a href="@Url.Action("Index", "Drugs")" class="btn btn-outline-primary">
+                View Drugs
+            </a>
+        </div>
+    </div>
 
     <div style="min-height: 260px">
         <table class="table">
@@ -51,7 +59,7 @@
                         else
                         {
                             <a href="@Url.Action("ToggleStatus", new { id = item.DrugRequestID })" class="button-design-2">
-                                Un-Noted
+                                Un-note
                             </a>
                         }
                     </td>

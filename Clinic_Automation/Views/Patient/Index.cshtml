@@ -1,14 +1,7 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Appointment>
 
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Schedule Appointment", "CreateAppointment")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -36,45 +29,35 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Criticality)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScheduleStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patient.PatientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
-            </td>
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.AppointmentID }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.AppointmentID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentID })
-                </td>*@
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppointmentDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Criticality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScheduleStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.PatientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AppointmentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AppointmentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentID })
+        </td>
+    </tr>
+}
 
 </table>
-@section Update
-    {
-    <li>@Html.ActionLink("View Profile", "ViewProfile", "Patient", new { area = "" }, new { @class = "nav-link" })</li>
-}
-
-@section Logout
-    {
-    @Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link" })
-}

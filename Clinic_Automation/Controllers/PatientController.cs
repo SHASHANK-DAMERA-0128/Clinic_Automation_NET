@@ -25,19 +25,23 @@ namespace Clinic_Automation.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<Appointment> appointments = db.Appointments.Where(a => a.PatientID == curr_usr.ReferenceToID).ToList();
-            if (appointments.Count == 0)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CurrentUserName = curr_usr.UserName;
-            return View(appointments);
+            List<Appointment> appointment = db.Appointments.Where(a => a.PatientID == curr_usr.ReferenceToID).ToList();
+            //List<Schedule> schedules = db.Schedules
+            //                .Where(a => appointmentid.Contains(a.AppointmentID))
+            //                .ToList();
+            //if (schedules.Count == 0)
+            //{
+            //    return View(schedules);
+            //}
+            //ViewBag.CurrentUserName = curr_usr.UserName;
+            return View(appointment);
 
 
         }
 
         public ActionResult CreateAppointment()
         {
+            ViewBag.PhysicianID = new SelectList(db.Physicians, "PhysicianID", "PhysicianName");
             return View();
         }
         [HttpPost]
@@ -97,6 +101,20 @@ namespace Clinic_Automation.Controllers
             return View(patient);
         }
 
+        public ActionResult DisplayPatientPrescription(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            List<PhysicianPrescription> physicianPrescription = db.PhysicianPrescriptions.Where(a => a.ScheduleID == id).ToList();
+            if (physicianPrescription == null)
+            {
+                return View(physicianPrescription);
+            }
+            return View(physicianPrescription);
+        }
 
         protected override void Dispose(bool disposing)
         {

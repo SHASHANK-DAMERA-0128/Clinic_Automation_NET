@@ -1,0 +1,90 @@
+﻿.drug-table-header {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.drug-table-text {
+    font-size: 14px;
+}
+
+.next-button-valid {
+    color: #000000;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.next-button-invalid {
+    color: #808080;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    cursor: not-allowed;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    padding: 0px;
+    background: #FFFFFF;
+}
+
+.capsule-box {
+    width: 200px;
+    height: 100px;
+    position: relative;
+}
+
+.capsule {
+    margin: 30px auto;
+    position: relative;
+    z-index: 2;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+    .capsule::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        z-index: 6;
+        width: 120px;
+        height: 30px;
+        background-image: linear-gradient(180deg, #bebab9 0%, #e8e8e7 50%, #bdb9ba 75%, #a59f9f 85%, #7f7f7f 100%), linear-gradient(180deg, #fbbaa9 0%, #d8370b 60%, #bc320e 75%, #ab4225 85%, #ab4225 100%);
+        background-size: 50% 100%;
+        background-position: left top, right top;
+        background-repeat: no-repeat;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(56, 56, 56, .5) inset, 0 0 3px rgba(23, 23, 23, .3) inset, 0 -5px 3px rgba(23, 23, 23, .3) inset, 0 8px 8px rgba(0, 0, 0, .2), 0 5px 5px rgba(0, 0, 0, .2), 0 6px 5px rgba(0, 0, 0, .2), 0 10px 8px rgba(0, 0, 0, .2), 1px 0 1px rgba(0, 0, 0, .3) inset, -1px 0 1px rgba(0, 0, 0, .3) inset;
+    }
+
+    .capsule::after {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 8;
+        top: 10px;
+        left: 0;
+        right: 0;
+        width: 80%;
+        height: 30px;
+        margin: auto;
+        border-radius: 20px;
+        background-image: linear-gradient(0deg, rgba(255, 255, 255, .3) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.8) 100%);
+        box-shadow: 0 3px 3px rgba(255, 255, 255, .1), 0 5px 3px rgba(255, 255, 255, .1), 0 0 3px rgba(255, 255, 255, .1), 0 -2px 2px rgba(255, 255, 255, .4);
+    }
+
+.drug-titles {
+    font-size: 1rem;
+    font-weight: 400;
+margin-bottom: 0;
+}
+
+.drug-text {
+    font-size: .875rem;
+    font-weight: 300;
+    margin-bottom: 0;
+}

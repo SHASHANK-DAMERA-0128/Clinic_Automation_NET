@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Clinic_Automation.Models.PhysicianPrescription>
+
+
+
+<p>
+        @Html.ActionLink("Create New", "CreatePhysicianPrescription")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Drug.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicianAdvice.Advise)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drug.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditPhysicianPrescription", new { id = item.PhysicianPrescriptionID }) |
+                @*@Html.ActionLink("Details", "DetailsPhysicianPrescription", new { id = item.PhysicianPrescriptionID }) |
+                @Html.ActionLink("Delete", "DeletePhysicianPrescription", new { id = item.PhysicianPrescriptionID })
+            </td>*@
+        </tr>
+    }
+
+</table>
+<p>@Html.ActionLink("Back to List", "Index")</p>

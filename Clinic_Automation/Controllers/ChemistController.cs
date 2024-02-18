@@ -12,7 +12,9 @@ namespace Clinic_Automation.Controllers
     {
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
         // GET: Chemist
-        [Authorize(Roles = "Chemist, CHEMIST")]
+        [Authorize(Roles = "Chemist")]
+        // Index method begins here
+        // ----------------------------------------------
         public ActionResult Index(int? page, string filter, int pageSize = 5)
         {
             if (filter == null)
@@ -61,6 +63,19 @@ namespace Clinic_Automation.Controllers
             ViewBag.Filter = filter;
 
             return RedirectToAction("Index", new { filter });
+        }
+
+        // ----------------------------------------------
+
+        public ActionResult PlacePurchaseOrder()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PlacePurchaseOrder(string s)
+        {
+            return View();
         }
     }
 }

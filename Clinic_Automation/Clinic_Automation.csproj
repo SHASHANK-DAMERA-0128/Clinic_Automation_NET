@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChemistController.cs" />
+    <Compile Include="Controllers\DrugsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PhysicianController.cs" />
@@ -213,6 +214,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\styles\Chemist.css" />
+    <Content Include="Content\styles\CommonClasses.css" />
+    <Content Include="Content\styles\Drug.css" />
+    <Content Include="Content\styles\Home.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -296,8 +300,18 @@
     <Content Include="Views\Patient\EditProfile.cshtml" />
     <Content Include="Views\Patient\ViewProfile.cshtml" />
     <Content Include="Views\Chemist\ViewMedicine.cshtml" />
-    <Content Include="Views\UserLogin\SignUp.cshtml" />
+    <Content Include="Views\Physician\DisplayPhysicianPrescription.cshtml" />
+    <Content Include="Views\Physician\EditPhysicianPrescription.cshtml" />
+    <Content Include="Views\Physician\CreatePhysicianPrescription.cshtml" />
+    <Content Include="Views\Patient\DisplayPatientPrescription.cshtml" />
     <Content Include="Views\Chemist\Index.cshtml" />
+    <Content Include="Views\Chemist\PlaceOrder.cshtml" />
+    <Content Include="Views\Chemist\PlacePurchaseOrder.cshtml" />
+    <Content Include="Views\Drugs\Create.cshtml" />
+    <Content Include="Views\Drugs\Delete.cshtml" />
+    <Content Include="Views\Drugs\Details.cshtml" />
+    <Content Include="Views\Drugs\Edit.cshtml" />
+    <Content Include="Views\Drugs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

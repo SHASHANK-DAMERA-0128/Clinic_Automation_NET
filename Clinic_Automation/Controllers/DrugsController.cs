@@ -70,6 +70,11 @@ namespace Clinic_Automation.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DrugID,Title,Description,ExpiryDate,Dosage")] Drug drug)
         {
+            if (string.IsNullOrWhiteSpace(drug.Title) || string.IsNullOrWhiteSpace(drug.Description) || drug.ExpiryDate == null || string.IsNullOrWhiteSpace(drug.Dosage))
+            {
+                ModelState.AddModelError("", "Please fill in all the required fields.");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Drugs.Add(drug);

@@ -10,8 +10,18 @@
 
 
 <div style="min-height: 40vw;">
-    <h4 style="">Drug Details</h4>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 style="">Drug Details</h4>
+
+
+        <a href="@Url.Action("Index", "Drugs")"
+           class="btn btn-outline-secondary"
+           style="padding: 6px 10px; font-size: 12px; margin-left: 6px;">
+            Back to List
+        </a>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
 
         <div class="d-flex justify-content-start align-items-center" style="margin: 1rem 0;">
             <div class="capsule-box">
@@ -23,17 +33,11 @@
             </h4>
         </div>
 
-        <div class="d-flex justify-content-center align-items-center">
+        <div>
             <a href="@Url.Action("Edit", "Drugs", new { id = Model.DrugID })"
-               class="btn btn-outline-info"
-               style="padding: 6px 10px; font-size: 12px; margin-right: 6px;">
+               class="btn btn-info"
+               style="padding: 6px 10px; margin-right: 6px;">
                 Edit
-            </a>
-
-            <a href="@Url.Action("Index", "Drugs")"
-               class="btn btn-outline-secondary"
-               style="padding: 6px 10px; font-size: 12px; margin-left: 6px;">
-                Back to List
             </a>
         </div>
     </div>

@@ -15,20 +15,17 @@ namespace Clinic_Automation.Controllers
         [Authorize(Roles = "Chemist")]
         // Index method begins here
         // ----------------------------------------------
-        public ActionResult Index(int? page, string filter, int pageSize = 5)
+        public ActionResult Index(int? page, string filter = "Not", int pageSize = 5)
         {
-            if (filter == null)
-                filter = "Noted";
-
             int pageNumber = (page ?? 1);
 
-            int totalItems =
-                db.DrugRequests
-                .Where(d => d.RequestStatus == filter)
-                .Count();
+            IQueryable<DrugRequest> query;
+            if (filter == "All") query = db.DrugRequests;
+            else query = db.DrugRequests.Where(d => d.RequestStatus == filter);
 
-            var drugRequests = db.DrugRequests
-                .Where(d => d.RequestStatus == filter)
+            int totalItems = query.Count();
+
+            var drugRequests = query
                 .OrderByDescending(d => d.RequestedDate)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -58,10 +55,8 @@ namespace Clinic_Automation.Controllers
 
         public ActionResult ToggleFilter(string currentFilter)
         {
-            string filter = currentFilter == "Not" ? "Noted" : "Not";
-
+            string filter = currentFilter == "Not" ? "All" : "Not";
             ViewBag.Filter = filter;
-
             return RedirectToAction("Index", new { filter });
         }
 

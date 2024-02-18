@@ -1,63 +1,69 @@
 ﻿@model Clinic_Automation.Models.Drug
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Add a new drug";
 }
 
-<h2>Create</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Drug</h4>
-        <hr />
+        <h4>Enter Drug Details</h4>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="d-flex align-items-center mb-2">
+            <label class="control-label col-md-2" style="font-weight: 500;">
+                Drug Name<span class="text-danger">*</span>
+            </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="d-flex align-items-center mb-2">
+            <label class="control-label col-md-2" style="font-weight: 500;">
+                Drug Description<span class="text-danger">*</span>
+            </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="d-flex align-items-center mb-2">
+            <label class="control-label col-md-2" style="font-weight: 500;">
+                Drug Expiry Date<span class="text-danger">*</span>
+            </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Dosage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="d-flex align-items-center mb-2">
+            <label class="control-label col-md-2" style="font-weight: 500;">
+                Drug Dosage<span class="text-danger">*</span>
+            </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Dosage, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Dosage, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="d-flex justify-content-start" style="margin: 1rem 0 0 0;">
+            <div style="margin-right: .8rem">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
+            <a href="@Url.Action("Index", "Drugs")" class="btn btn-outline-dark">
+                Back to List
+            </a>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

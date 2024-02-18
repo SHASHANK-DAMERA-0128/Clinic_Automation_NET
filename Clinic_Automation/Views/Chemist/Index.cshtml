@@ -1,23 +1,36 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.DrugRequest>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "View Requested Drugs";
 }
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/Content/styles/Chemist.css" rel="stylesheet" />
+    <link href="~/Content/styles/Drug.css" rel="stylesheet" />
 </head>
 
 <div>
     <div class="d-flex justify-content-between align-items-center">
-        <h5>Requested Drugs</h5>
+        <h5>Drugs Requests</h5>
 
-        <div class="ml-3">
-            <a href="@Url.Action("Index", "Drugs")" class="btn btn-outline-primary">
-                View Drugs
-            </a>
+        <div class="d-flex">
+            <div style="margin-right: 10px;">
+                @if (ViewBag.Filter == "Not")
+                {
+                    <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View All</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View Un-noted Drugs</a>
+                }
+            </div>
+            <div class="ml-3">
+                <a href="@Url.Action("Index", "Drugs")" class="btn btn-outline-primary">
+                    View Drugs
+                </a>
+            </div>
         </div>
     </div>
 
@@ -25,7 +38,7 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayName("Id")
+                    @Html.DisplayName("Request Note")
                 </th>
                 <th>
                     @Html.DisplayName("Request Date")
@@ -34,14 +47,13 @@
                     @Html.DisplayName("Physician")
                 </th>
                 <th>
-                    @Html.DisplayName("Action")
                 </th>
             </tr>
             @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DrugRequestID)
+                        @Html.DisplayFor(modelItem => item.DrugInfoText)
                     </td>
                     <td>
                         @item.RequestedDate.ToString("dd' 'MMM' 'yyyy")
@@ -50,16 +62,16 @@
                         @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
                     </td>
                     <td>
-                        @if (ViewBag.Filter == "Not")
+                        @if (item.RequestStatus == "Not")
                         {
                             <a href="@Url.Action("ToggleStatus", new { id = item.DrugRequestID })" class="button-design-2">
-                                Noted
+                                Mark as Noted
                             </a>
                         }
                         else
                         {
                             <a href="@Url.Action("ToggleStatus", new { id = item.DrugRequestID })" class="button-design-2">
-                                Un-note
+                                Un-Note Status
                             </a>
                         }
                     </td>
@@ -73,17 +85,13 @@
     <div style="margin-right: 1rem;">
         @if (ViewBag.PageNumber > 1)
         {
-            <button type="button" class="button-design-1" style="color: white; text-decoration: none;">
-                @Html.ActionLink("<<", "Index",
-                new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
-                new { style = "color: white; text-decoration: none;" })
-            </button>
+            @Html.ActionLink("<<", "Index",
+            new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
+            new { @class = "next-button-valid" })
         }
         else
         {
-            <button disabled type="button" class="button-design-1" style="color: white; text-decoration: none; cursor: not-allowed;">
-                &lt;&lt;
-            </button>
+            <button disabled type="button" class="next-button-invalid">&lt;&lt;</button>
         }
     </div>
 
@@ -92,30 +100,16 @@
     <div style="margin-left: 1rem;">
         @if (ViewBag.PageNumber < ViewBag.TotalPages)
         {
-            <button type="button" class="button-design-1" style="color: white; text-decoration: none;">
-                @Html.ActionLink(
-                ">>", "Index",
-                new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
-                new { style = "color: white; text-decoration: none;" }
-               )
-            </button>
+            @Html.ActionLink(
+            ">>", "Index",
+            new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
+            new { @class = "next-button-valid" }
+           )
         }
         else
         {
-            <button disabled type="button" class="button-design-1" style="color: white; text-decoration: none; cursor: not-allowed;">
-                &gt;&gt;
-            </button>
+            <button disabled type="button" class="next-button-invalid">&gt;&gt;</button>
         }
     </div>
-</div>
-<div class="text-center mt-3">
-    @if (ViewBag.Filter == "Not")
-    {
-        <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">Toggle Filter</a>
-    }
-    else
-    {
-        <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">Toggle Filter</a>
-    }
 </div>
 

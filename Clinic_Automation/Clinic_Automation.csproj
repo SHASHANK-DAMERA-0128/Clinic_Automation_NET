@@ -263,7 +263,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\UserLogin\Login.cshtml" />
     <Content Include="Views\Physician\Index.cshtml" />
     <Content Include="Views\Admin\CreateAdminPhysician.cshtml" />
@@ -299,6 +298,7 @@
     <Content Include="Views\Physician\EditPhysicianPrescription.cshtml" />
     <Content Include="Views\Physician\CreatePhysicianPrescription.cshtml" />
     <Content Include="Views\Patient\DisplayPatientPrescription.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

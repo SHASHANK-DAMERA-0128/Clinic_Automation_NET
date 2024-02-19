@@ -22,13 +22,6 @@ namespace Clinic_Automation.Controllers
 
 
 
-
-
-
-
-
-
-
         //--------------------------PHYSICIAN CRUD OPERATIONS---------
 
         public ActionResult DisplayAdminPhysician()

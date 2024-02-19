@@ -26,14 +26,6 @@ namespace Clinic_Automation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             List<Appointment> appointment = db.Appointments.Where(a => a.PatientID == curr_usr.ReferenceToID).ToList();
-            //List<Schedule> schedules = db.Schedules
-            //                .Where(a => appointmentid.Contains(a.AppointmentID))
-            //                .ToList();
-            //if (schedules.Count == 0)
-            //{
-            //    return View(schedules);
-            //}
-            //ViewBag.CurrentUserName = curr_usr.UserName;
             return View(appointment);
 
 

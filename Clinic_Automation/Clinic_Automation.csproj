@@ -135,6 +135,7 @@
     <Compile Include="Controllers\PhysicianController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
+    <Compile Include="crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,12 +189,14 @@
     <Compile Include="Models\Schedule.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\signinExtent.cs" />
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\userExtend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +315,10 @@
     <Content Include="Views\Drugs\Details.cshtml" />
     <Content Include="Views\Drugs\Edit.cshtml" />
     <Content Include="Views\Drugs\Index.cshtml" />
+    <Content Include="Views\UserLogin\SignUp.cshtml" />
+    <Content Include="Views\UserLogin\PatientLoginSetup.cshtml" />
+    <Content Include="Views\UserLogin\ForgotPassword.cshtml" />
+    <Content Include="Views\UserLogin\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

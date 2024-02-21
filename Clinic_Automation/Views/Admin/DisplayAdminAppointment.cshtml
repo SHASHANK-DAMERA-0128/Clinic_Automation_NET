@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Appointment>
+     @*@model Clinic_Automation.Models.Appointment*@
 
 @*<p>
     @Html.ActionLink("Create New", "Create")
@@ -18,13 +19,13 @@
             @Html.DisplayNameFor(model => model.Note)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ScheduleStatus)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Patient.PatientName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Physician.PhysicianName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ScheduleStatus)
         </th>
         <th></th>
     </tr>
@@ -44,18 +45,16 @@
             @Html.DisplayFor(modelItem => item.Note)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ScheduleStatus)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Patient.PatientName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditAdminAppointment", new { id=item.AppointmentID }) 
-            @*@Html.ActionLink("Details", "Details", new { id=item.AppointmentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentID })*@
+            @Html.DisplayFor(modelItem => item.ScheduleStatus)
+        </td>
+        <td>
+            @Html.ActionLink("change Status", "EditAdminAppointment", new { id = item.AppointmentID }) 
         </td>
     </tr>
 }

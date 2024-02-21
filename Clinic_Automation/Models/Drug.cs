@@ -18,6 +18,7 @@ namespace Clinic_Automation.Models
         public Drug()
         {
             this.PhysicianPrescriptions = new HashSet<PhysicianPrescription>();
+            this.PurchaseProductLines = new HashSet<PurchaseProductLine>();
         }
     
         public int DrugID { get; set; }
@@ -28,5 +29,7 @@ namespace Clinic_Automation.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhysicianPrescription> PhysicianPrescriptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PurchaseProductLine> PurchaseProductLines { get; set; }
     }
 }

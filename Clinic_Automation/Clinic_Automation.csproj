@@ -139,6 +139,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="infra\roleProvider.cs" />
+    <Compile Include="Models\AdvicePrescriptionModel.cs" />
     <Compile Include="Models\Appointment.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
@@ -179,6 +180,7 @@
     <Compile Include="Models\PhysicianPrescription.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\POViewModel.cs" />
     <Compile Include="Models\PurchaseOrderHeader.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
@@ -213,6 +215,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\doctor.svg" />
+    <Content Include="Content\img\logo.png" />
     <Content Include="Content\styles\Chemist.css" />
     <Content Include="Content\styles\CommonClasses.css" />
     <Content Include="Content\styles\Drug.css" />
@@ -244,6 +248,7 @@
     <Content Include="Models\ClinicAutomationModel.edmx.diagram">
       <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\ClinicAutomation20240219161031 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -255,6 +260,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="temporary.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

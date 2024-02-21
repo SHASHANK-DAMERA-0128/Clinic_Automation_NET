@@ -1,0 +1,57 @@
+﻿@model Clinic_Automation.Models.Drug
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h5 style="margin-bottom: .75rem">Are you sure you want to <span class="text-danger">DELETE</span> this Drug?</h5>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpiryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpiryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dosage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dosage)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="d-flex justify-content-start" style="margin: 1rem 0 0 0;">
+            <div style="margin-right: .8rem">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+            <a href="@Url.Action("Index", "Drugs")" class="btn btn-outline-dark">
+                Back to List
+            </a>
+        </div>
+    }
+</div>

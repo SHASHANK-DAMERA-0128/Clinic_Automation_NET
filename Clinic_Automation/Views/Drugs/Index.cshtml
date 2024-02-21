@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Clinic_Automation.Models.Drug>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="~/Content/styles/Drug.css" rel="stylesheet" />
+    <link href="~/Content/styles/Chemist.css" rel="stylesheet" />
+</head>
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <h4 style="">Available Drugs in Inventory</h4>
+
+    <a href="@Url.Action("Create", "Drugs")" class="btn btn-outline-primary">
+        Add Drug
+    </a>
+</div>
+
+@* Search functionality *@
+<div class="d-flex justify-content-between align-items-center" style="margin: 10px 0;">
+    <form class="d-flex w-100" action="/Drugs/Index">
+        <input type="text"
+               class="form-control"
+               id="search"
+               placeholder="Search for a Drug"
+               name="search"
+               value="@ViewBag.search"
+               style="width: 100%; margin-right: 10px;" />
+        <button type="submit"
+                id="searchButton"
+                class="btn btn-outline-primary">
+            Search
+        </button>
+    </form>
+
+    <div class="d-flex">
+        <a href="@Url.Action("Index", "Drugs")" class="btn btn-warning">
+            Reset
+        </a>
+    </div>
+</div>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table" style="min-height: 500px; max-height: 250px">
+    <tr>
+        <th class="drug-table-header">Drug Name</th>
+        <th class="drug-table-header">Used For</th>
+        <th class="drug-table-header">Expiry Date</th>
+        <th class="drug-table-header">Dosage</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="drug-table-text">
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td class="drug-table-text">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="drug-table-text">
+                @(item.ExpiryDate.HasValue ? item.ExpiryDate.Value.ToString("dd' 'MMM' 'yyyy") : "N/A")
+            </td>
+            <td class="drug-table-text">
+                @Html.DisplayFor(modelItem => item.Dosage)
+            </td>
+            <td>
+
+                <a href="@Url.Action("Details", "Drugs", new { id = item.DrugID })"
+                   class="btn btn-outline-success text-decoration-none"
+                   role="button"
+                   style="padding: 6px 10px; font-size: 12px; margin-right: 6px;">
+                    Details
+                </a>
+
+                <a href="@Url.Action("Edit", "Drugs", new { id = item.DrugID })"
+                   class="btn btn-outline-info text-decoration-none"
+                   role="button"
+                   style="padding: 6px 10px; font-size: 12px; margin-right: 6px;">
+                    Edit
+                </a>
+
+                <a href="@Url.Action("Delete", "Drugs", new { id = item.DrugID })"
+                   class="btn btn-danger text-decoration-none"
+                   role="button"
+                   style="padding: 6px 10px; font-size: 12px;">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div style="margin-right: 1rem;">
+        @if (ViewBag.PageNumber > 1)
+        {
+            @Html.ActionLink("<<", "Index",
+            new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter, search = ViewBag.search },
+            new { @class = "next-button-valid" })
+        }
+        else
+        {
+            <button disabled type="button" class="next-button-invalid">&lt;&lt;</button>
+        }
+    </div>
+
+    Page @(ViewBag.PageNumber ?? 1) of @(ViewBag.TotalPages ?? 1)
+
+    <div style="margin-left: 1rem;">
+        @if (ViewBag.PageNumber < ViewBag.TotalPages)
+        {
+            @Html.ActionLink(
+            ">>", "Index",
+            new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter, search = ViewBag.search },
+            new { @class = "next-button-valid" }
+           )
+        }
+        else
+        {
+            <button disabled type="button" class="next-button-invalid">&gt;&gt;</button>
+        }
+    </div>
+</div>

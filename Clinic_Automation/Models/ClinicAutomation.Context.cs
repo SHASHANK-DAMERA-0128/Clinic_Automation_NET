@@ -27,7 +27,6 @@ namespace Clinic_Automation.Models
     
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Chemist> Chemists { get; set; }
-        public virtual DbSet<Drug> Drugs { get; set; }
         public virtual DbSet<DrugRequest> DrugRequests { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Physician> Physicians { get; set; }
@@ -38,5 +37,6 @@ namespace Clinic_Automation.Models
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Drug> Drugs { get; set; }
     }
 }

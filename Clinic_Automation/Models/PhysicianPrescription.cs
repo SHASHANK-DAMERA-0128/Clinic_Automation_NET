@@ -20,8 +20,8 @@ namespace Clinic_Automation.Models
         public int PhysicianAdviceID { get; set; }
         public string Description { get; set; }
     
-        public virtual Drug Drug { get; set; }
         public virtual PhysicianAdvice PhysicianAdvice { get; set; }
         public virtual Schedule Schedule { get; set; }
+        public virtual Drug Drug { get; set; }
     }
 }

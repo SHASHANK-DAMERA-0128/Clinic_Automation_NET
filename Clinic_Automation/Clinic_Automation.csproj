@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChemistController.cs" />
+    <Compile Include="Controllers\DrugsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PhysicianController.cs" />
@@ -139,59 +140,59 @@
     </Compile>
     <Compile Include="infra\roleProvider.cs" />
     <Compile Include="Models\Appointment.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Chemist.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClinicAutomationModel.Context.cs">
+    <Compile Include="Models\ClinicAutomation.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ClinicAutomationModel.Context.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClinicAutomationModel.cs">
+    <Compile Include="Models\ClinicAutomation.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ClinicAutomationModel.Designer.cs">
+    <Compile Include="Models\ClinicAutomation.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
+      <DependentUpon>ClinicAutomation.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Drug.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DrugRequest.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginExtend.cs" />
     <Compile Include="Models\Patient.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Physician.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhysicianAdvice.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhysicianPrescription.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PurchaseOrderHeader.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PurchaseProductLine.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Schedule.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
+      <DependentUpon>ClinicAutomation.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -212,18 +213,22 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\styles\Chemist.css" />
+    <Content Include="Content\styles\CommonClasses.css" />
+    <Content Include="Content\styles\Drug.css" />
+    <Content Include="Content\styles\Home.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\ClinicAutomationModel.Context.tt">
+    <Content Include="Models\ClinicAutomation.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
-      <LastGenOutput>ClinicAutomationModel.Context.cs</LastGenOutput>
+      <DependentUpon>ClinicAutomation.edmx</DependentUpon>
+      <LastGenOutput>ClinicAutomation.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ClinicAutomationModel.tt">
+    <Content Include="Models\ClinicAutomation.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
-      <LastGenOutput>ClinicAutomationModel.cs</LastGenOutput>
+      <DependentUpon>ClinicAutomation.edmx</DependentUpon>
+      <LastGenOutput>ClinicAutomation.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -231,12 +236,13 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\ClinicAutomationModel.edmx">
+    <Content Include="libman.json" />
+    <EntityDeploy Include="Models\ClinicAutomation.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ClinicAutomationModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ClinicAutomation.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ClinicAutomationModel.edmx.diagram">
-      <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
+    <Content Include="Models\ClinicAutomation.edmx.diagram">
+      <DependentUpon>ClinicAutomation.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -274,7 +280,6 @@
     <Content Include="Views\Admin\CreateAdminPatient.cshtml" />
     <Content Include="Views\Admin\EditAdminPatient.cshtml" />
     <Content Include="Views\Admin\DeleteAdminPatient.cshtml" />
-    <Content Include="Views\Chemist\Index.cshtml" />
     <Content Include="Views\Admin\DisplayAdminChemist.cshtml" />
     <Content Include="Views\Admin\CreateAdminChemist.cshtml" />
     <Content Include="Views\Admin\EditAdminChemist.cshtml" />
@@ -298,7 +303,19 @@
     <Content Include="Views\Physician\EditPhysicianPrescription.cshtml" />
     <Content Include="Views\Physician\CreatePhysicianPrescription.cshtml" />
     <Content Include="Views\Patient\DisplayPatientPrescription.cshtml" />
+    <Content Include="Views\Chemist\Index.cshtml" />
+    <Content Include="Views\Chemist\PlaceOrder.cshtml" />
+    <Content Include="Views\Chemist\PlacePurchaseOrder.cshtml" />
+    <Content Include="Views\Drugs\Create.cshtml" />
+    <Content Include="Views\Drugs\Delete.cshtml" />
+    <Content Include="Views\Drugs\Details.cshtml" />
+    <Content Include="Views\Drugs\Edit.cshtml" />
+    <Content Include="Views\Drugs\Index.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Supplier\DisplayAdminSupplier.cshtml" />
+    <Content Include="Views\Supplier\EditAdminSupplier.cshtml" />
+    <Content Include="Views\Supplier\DisplayProductLine.cshtml" />
+    <Content Include="Views\UserLogin\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

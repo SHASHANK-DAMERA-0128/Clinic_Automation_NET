@@ -1,0 +1,93 @@
+﻿@model Clinic_Automation.Models.Drug
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<head>
+    <link href="~/Content/styles/Drug.css" rel="stylesheet" type="text/css" />
+</head>
+
+
+<div style="min-height: 40vw;">
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 style="">Drug Details</h4>
+
+
+        <a href="@Url.Action("Index", "Drugs")"
+           class="btn btn-outline-secondary"
+           style="padding: 6px 10px; font-size: 12px; margin-left: 6px;">
+            Back to List
+        </a>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <div class="d-flex justify-content-start align-items-center" style="margin: 1rem 0;">
+            <div class="capsule-box">
+                <div class="capsule"></div>
+            </div>
+
+            <h4 style="font-size: 1.2rem; font-weight: 300; margin: 10px 0 0 0;">
+                @Model.Title
+            </h4>
+        </div>
+
+        <div>
+            <a href="@Url.Action("Edit", "Drugs", new { id = Model.DrugID })"
+               class="btn btn-info"
+               style="padding: 6px 10px; margin-right: 6px;">
+                Edit
+            </a>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-start align-items-center" style="margin: 1rem 0;">
+        @if (Model.ExpiryDate != null && Model.ExpiryDate > DateTime.Now)
+        {
+            <p style="color: green; margin: 0;">
+                @(Model.ExpiryDate.HasValue ? Model.ExpiryDate.Value.ToString("dd' 'MMM' 'yyyy") : "N/A")
+                <span style="margin-left: 2px">
+                    | Expiring in @(((Model.ExpiryDate.Value - DateTime.Now).Days).ToString()) days
+                </span>
+            </p>
+
+        @*<p style="color: green; margin: 0;">
+            @if (Model.ExpiryDate != null)
+            {
+                <text>@Model.ExpiryDate.Value.ToString("dd MMM yyyy")</text>
+                <span style="margin-left: 2px">
+                    | Expiring in @((Model.ExpiryDate.Value - DateTime.Now).Days) days
+                </span>
+            }
+            else
+            {
+                <text>N/A</text>
+            }*@
+        @*</p>*@
+        }
+        else if (Model.ExpiryDate == null)
+        {
+            <p style="color: yellow;">Expiration Unavailable</p>
+        }
+        else
+        {
+            <p style="color: red;">Oops!!!😬 Looks like the medicine has expired. It's expiry date was @(Model.ExpiryDate.HasValue ? Model.ExpiryDate.Value.ToString("dd' 'MMM' 'yyyy") : "N/A")</p>
+        }
+    </div>
+
+
+    <div class="d-flex align-items-center text-center" style="margin-bottom: 1rem;">
+        <h4 class="drug-titles">About the drug :</h4>
+        <p class="drug-text">
+            &nbsp;@Model.Description
+        </p>
+    </div>
+
+    <div class="d-flex align-items-center text-center" style="margin-bottom: 1rem;">
+        <h4 class="drug-titles">Dosage :</h4>
+        <p class="drug-text">
+            &nbsp;@Model.Dosage
+        </p>
+    </div>
+</div>

@@ -21,5 +21,6 @@ namespace Clinic_Automation.Models
         public string Note { get; set; }
     
         public virtual PurchaseOrderHeader PurchaseOrderHeader { get; set; }
+        public virtual Drug Drug { get; set; }
     }
 }

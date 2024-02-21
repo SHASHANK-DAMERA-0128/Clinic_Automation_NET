@@ -16,6 +16,7 @@ namespace Clinic_Automation.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Login(User user)
         {
@@ -39,22 +40,34 @@ namespace Clinic_Automation.Controllers
                 }
 
             }
+
             ModelState.AddModelError("", "invalid Username or Password");
             return View();
         }
-
-        public ActionResult LogOut()
-        {
-            FormsAuthentication.SignOut();
-            Session.Abandon();                            
-            return RedirectToAction("Index", "Home");
-        }
-
 
         public ActionResult SignUp()
         {
             return View();
         }
 
+        [HttpPost]
+        public ActionResult SignUp(User user)
+        {
+            Models.ClinicAutomationEntities _db = new Models.ClinicAutomationEntities();
+
+
+            if (ModelState.IsValid)
+            {
+            }
+            return View();
+        }
+
+        // User: Logout
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();                            
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

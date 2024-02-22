@@ -44,6 +44,7 @@ namespace Clinic_Automation.Controllers
             return View(drugRequests);
         }
 
+     //    [HttpPatch]
         public ActionResult ToggleStatus(int id)
         {
             var drugRequest = db.DrugRequests.Find(id);

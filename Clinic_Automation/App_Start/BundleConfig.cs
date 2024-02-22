@@ -24,7 +24,9 @@ namespace Clinic_Automation
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/styles/CommonClasses.css",
                       "~/Content/site.css"));
+
         }
     }
 }

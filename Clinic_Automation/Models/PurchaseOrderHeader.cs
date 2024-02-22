@@ -23,6 +23,8 @@ namespace Clinic_Automation.Models
         public int PurchaseOrderID { get; set; }
         public System.DateTime PurchaseOrderDate { get; set; }
         public int SupplierID { get; set; }
+        public string Note { get; set; }
+        public string PurchaseOrderStatus { get; set; }
     
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

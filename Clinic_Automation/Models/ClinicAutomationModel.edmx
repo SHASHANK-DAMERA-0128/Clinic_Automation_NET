@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClinicAutomationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ibm_project_grp3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="AppointmentID" />
@@ -99,6 +99,8 @@
           <Property Name="PurchaseOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PurchaseOrderDate" Type="date" Nullable="false" />
           <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="200" />
+          <Property Name="PurchaseOrderStatus" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PurchaseProductLine">
           <Key>
@@ -235,6 +237,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PurchaseProductLine_Drug">
+          <End Role="Drug" Type="Self.Drug" Multiplicity="1" />
+          <End Role="PurchaseProductLine" Type="Self.PurchaseProductLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drug">
+              <PropertyRef Name="DrugID" />
+            </Principal>
+            <Dependent Role="PurchaseProductLine">
+              <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PurchaseProductLine_PurchaseOrderHeader">
           <End Role="PurchaseOrderHeader" Type="Self.PurchaseOrderHeader" Multiplicity="1" />
           <End Role="PurchaseProductLine" Type="Self.PurchaseProductLine" Multiplicity="*" />
@@ -307,7 +321,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClinicAutomationModelStoreContainer">
+        <EntityContainer Name="ibm_project_grp3ModelStoreContainer">
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Chemist" EntityType="Self.Chemist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drug" EntityType="Self.Drug" Schema="dbo" store:Type="Tables" />
@@ -353,6 +367,10 @@
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="PurchaseOrderHeader" EntitySet="PurchaseOrderHeader" />
           </AssociationSet>
+          <AssociationSet Name="FK_PurchaseProductLine_Drug" Association="Self.FK_PurchaseProductLine_Drug">
+            <End Role="Drug" EntitySet="Drug" />
+            <End Role="PurchaseProductLine" EntitySet="PurchaseProductLine" />
+          </AssociationSet>
           <AssociationSet Name="FK_PurchaseProductLine_PurchaseOrderHeader" Association="Self.FK_PurchaseProductLine_PurchaseOrderHeader">
             <End Role="PurchaseOrderHeader" EntitySet="PurchaseOrderHeader" />
             <End Role="PurchaseProductLine" EntitySet="PurchaseProductLine" />
@@ -382,7 +400,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ClinicAutomationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ibm_project_grp3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="AppointmentID" />
@@ -421,6 +439,7 @@
           <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
           <Property Name="Dosage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="PhysicianPrescriptions" Relationship="Self.FK_PhysicianPrescription_Drug" FromRole="Drug" ToRole="PhysicianPrescription" />
+          <NavigationProperty Name="PurchaseProductLines" Relationship="Self.FK_PurchaseProductLine_Drug" FromRole="Drug" ToRole="PurchaseProductLine" />
         </EntityType>
         <EntityType Name="DrugRequest">
           <Key>
@@ -493,6 +512,8 @@
           <Property Name="PurchaseOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PurchaseOrderDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PurchaseOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_PurchaseOrderHeader_Supplier" FromRole="PurchaseOrderHeader" ToRole="Supplier" />
           <NavigationProperty Name="PurchaseProductLines" Relationship="Self.FK_PurchaseProductLine_PurchaseOrderHeader" FromRole="PurchaseOrderHeader" ToRole="PurchaseProductLine" />
         </EntityType>
@@ -505,6 +526,7 @@
           <Property Name="SlNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Drug" Relationship="Self.FK_PurchaseProductLine_Drug" FromRole="PurchaseProductLine" ToRole="Drug" />
           <NavigationProperty Name="PurchaseOrderHeader" Relationship="Self.FK_PurchaseProductLine_PurchaseOrderHeader" FromRole="PurchaseProductLine" ToRole="PurchaseOrderHeader" />
         </EntityType>
         <EntityType Name="Schedule">
@@ -602,6 +624,18 @@
             </Principal>
             <Dependent Role="PhysicianPrescription">
               <PropertyRef Name="DrugID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseProductLine_Drug">
+          <End Role="Drug" Type="Self.Drug" Multiplicity="1" />
+          <End Role="PurchaseProductLine" Type="Self.PurchaseProductLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drug">
+              <PropertyRef Name="DrugID" />
+            </Principal>
+            <Dependent Role="PurchaseProductLine">
+              <PropertyRef Name="DrugId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -747,6 +781,10 @@
             <End Role="Drug" EntitySet="Drugs" />
             <End Role="PhysicianPrescription" EntitySet="PhysicianPrescriptions" />
           </AssociationSet>
+          <AssociationSet Name="FK_PurchaseProductLine_Drug" Association="Self.FK_PurchaseProductLine_Drug">
+            <End Role="Drug" EntitySet="Drugs" />
+            <End Role="PurchaseProductLine" EntitySet="PurchaseProductLines" />
+          </AssociationSet>
           <AssociationSet Name="FK_DrugRequest_Physician" Association="Self.FK_DrugRequest_Physician">
             <End Role="Physician" EntitySet="Physicians" />
             <End Role="DrugRequest" EntitySet="DrugRequests" />
@@ -789,9 +827,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClinicAutomationModelStoreContainer" CdmEntityContainer="ClinicAutomationEntities">
+        <EntityContainerMapping StorageEntityContainer="ibm_project_grp3ModelStoreContainer" CdmEntityContainer="ClinicAutomationEntities">
           <EntitySetMapping Name="Appointments">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.Appointment">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.Appointment">
               <MappingFragment StoreEntitySet="Appointment">
                 <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
                 <ScalarProperty Name="PatientID" ColumnName="PatientID" />
@@ -805,7 +843,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Chemists">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.Chemist">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.Chemist">
               <MappingFragment StoreEntitySet="Chemist">
                 <ScalarProperty Name="ChemistID" ColumnName="ChemistID" />
                 <ScalarProperty Name="ChemistName" ColumnName="ChemistName" />
@@ -817,7 +855,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Drugs">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.Drug">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.Drug">
               <MappingFragment StoreEntitySet="Drug">
                 <ScalarProperty Name="DrugID" ColumnName="DrugID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -828,7 +866,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DrugRequests">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.DrugRequest">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.DrugRequest">
               <MappingFragment StoreEntitySet="DrugRequest">
                 <ScalarProperty Name="DrugRequestID" ColumnName="DrugRequestID" />
                 <ScalarProperty Name="PhysicianID" ColumnName="PhysicianID" />
@@ -839,7 +877,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Patients">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.Patient">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.Patient">
               <MappingFragment StoreEntitySet="Patient">
                 <ScalarProperty Name="PatientID" ColumnName="PatientID" />
                 <ScalarProperty Name="PatientName" ColumnName="PatientName" />
@@ -853,7 +891,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Physicians">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.Physician">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.Physician">
               <MappingFragment StoreEntitySet="Physician">
                 <ScalarProperty Name="PhysicianID" ColumnName="PhysicianID" />
                 <ScalarProperty Name="PhysicianName" ColumnName="PhysicianName" />
@@ -866,7 +904,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PhysicianAdvices">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.PhysicianAdvice">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.PhysicianAdvice">
               <MappingFragment StoreEntitySet="PhysicianAdvice">
                 <ScalarProperty Name="PhysicianAdviceID" ColumnName="PhysicianAdviceID" />
                 <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
@@ -875,7 +913,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PhysicianPrescriptions">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.PhysicianPrescription">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.PhysicianPrescription">
               <MappingFragment StoreEntitySet="PhysicianPrescription">
                 <ScalarProperty Name="PhysicianPrescriptionID" ColumnName="PhysicianPrescriptionID" />
                 <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
@@ -886,16 +924,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PurchaseOrderHeaders">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.PurchaseOrderHeader">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.PurchaseOrderHeader">
               <MappingFragment StoreEntitySet="PurchaseOrderHeader">
                 <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
                 <ScalarProperty Name="PurchaseOrderDate" ColumnName="PurchaseOrderDate" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PurchaseOrderStatus" ColumnName="PurchaseOrderStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PurchaseProductLines">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.PurchaseProductLine">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.PurchaseProductLine">
               <MappingFragment StoreEntitySet="PurchaseProductLine">
                 <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
                 <ScalarProperty Name="DrugId" ColumnName="DrugId" />
@@ -906,7 +946,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Schedules">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.Schedule">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
                 <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
                 <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
@@ -916,7 +956,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.Supplier">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
@@ -927,7 +967,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="ClinicAutomationModel.User">
+            <EntityTypeMapping TypeName="ibm_project_grp3Model.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

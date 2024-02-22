@@ -1,0 +1,24 @@
+﻿..card-main{
+    margin-bottom: .75rem;
+    margin-right: .5rem;
+}
+
+.card {
+    height: 100%; /* Ensure cards take the full height of the container */
+}
+
+.card-body {
+    /*height: auto;*/ /* Set a fixed height for the card body */
+    padding-bottom: 25px;
+}
+
+.card-img-top {
+    object-fit: cover; /* Ensure the image covers the entire container */
+    height: 100%; /* Set a fixed height for the image */
+}
+.card-title {
+    color: black;
+    font-family: "Oswald", sans-serif;
+}
+
+

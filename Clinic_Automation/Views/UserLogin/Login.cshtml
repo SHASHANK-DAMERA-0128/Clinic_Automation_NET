@@ -2,41 +2,69 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/styles/CommonClasses.css")
 
+<head>
+    <link href="~/Content/styles/Home.css" rel="stylesheet" />
+</head>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-            </div>
+<main class="min-vh-100">
+
+    <div class="w-75 mx-auto">
+        <div class="d-flex justify-content-center align-items-center w-100">
+            <img src="~/Content/img/doctor.svg" class="doctor" alt="logo" />
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" ,type="Password"} })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="mb-3">
-                @Html.ActionLink("Forget Password?", "ForgotPassword")
+        <div class="d-flex justify-content-center align-items-center w-100">
+            <p class="mb-0">Hi, Welcome back to&nbsp;</p>
+            <img src="~/Content/img/logo.png" class="logo" alt="logo" />
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Log In" class="btn btn-default" />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="d-flex justify-content-center mt-2">
+
+                <div class="d-flex justify-content-center align-items-center flex-column w-full">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="d-flex flex-column">
+                        @*@Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "" })*@
+                        <div class="d-flex align-content-center flex-column">
+                            <label title="UserName" class="mb-1 fw-semibold">Username</label>
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control w-full" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column" style="margin-top: 1rem;">
+                        @*@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="d-flex align-content-center flex-column">
+                            <label title="Password" class="mb-1 fw-semibold">Password</label>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "Password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", placeholder = "Enter your password" })
+                        </div>
+                    </div>
+                    <div class="d-flex w-100" style="font-size: .75rem;">
+                        <a href="@Url.Action("ForgotPassword", "UserLogin")" class="text-primary text-decoration-none">Forget Password?</a>
+                    </div>
+
+                    <div class="mt-4">
+                        <input type="submit" value="Log In" class="btn btn-outline-success" />
+                    </div>
+                </div>
+
             </div>
+        }
+
+        <div class="d-flex justify-content-center align-items-center w-100 mt-3" style="font-size: .75rem;">
+            <p class="mb-0">Don't have an account?&nbsp;</p>
+            <a href="@Url.Action("SignUp", "UserLogin")" class="text-primary text-decoration-none">Register</a>
         </div>
     </div>
-}
+</main>
+
 
 

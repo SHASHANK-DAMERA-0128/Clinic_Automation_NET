@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Clinic_Automation.Models;
+using PagedList;
+using PagedList.Mvc;
+
 
 namespace Clinic_Automation.Controllers
 {
@@ -68,7 +71,8 @@ namespace Clinic_Automation.Controllers
                 User usr = new User();
                 usr.ReferenceToID = physician.PhysicianID;
                 usr.UserName = physician.PhysicianName + rnd.Next(1000, 10000);
-                usr.Password = physician.PhysicianName + rnd.Next(1000, 10000) + "@" + "A" + "1";
+                string[] pass = physician.PhysicianName.Split(' ');
+                usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "1");
                 usr.Role = "PHYSICIAN";
 
                 _db.Users.Add(usr);
@@ -196,7 +200,8 @@ namespace Clinic_Automation.Controllers
                 User usr = new User();
                 usr.ReferenceToID = patient.PatientID;
                 usr.UserName = patient.PatientName + rnd.Next(1000, 10000);
-                usr.Password = patient.PatientName + rnd.Next(1000, 10000) + "@" + "B" + "2";
+                string[] pass = patient.PatientName.Split(' ');
+                usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "2");
                 usr.Role = "PATIENT";
 
                 _db.Users.Add(usr);
@@ -323,7 +328,8 @@ namespace Clinic_Automation.Controllers
                 User usr = new User();
                 usr.ReferenceToID = chemist.ChemistID;
                 usr.UserName = chemist.ChemistName + rnd.Next(1000, 10000);
-                usr.Password = chemist.ChemistID + rnd.Next(1000, 10000) + "@" + "C" + "3";
+                string[] pass = chemist.ChemistName.Split(' ');
+                usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "3");
                 usr.Role = "CHEMIST";
 
                 _db.Users.Add(usr);
@@ -443,7 +449,8 @@ namespace Clinic_Automation.Controllers
                 User usr = new User();
                 usr.ReferenceToID = supplier.SupplierID;
                 usr.UserName = supplier.SupplierName + rnd.Next(1000, 10000);
-                usr.Password = supplier.SupplierName+ rnd.Next(1000, 10000) + "@" + "D" + "4";
+                string[] pass = supplier.SupplierName.Split(' ');
+                usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "4");
                 usr.Role = "SUPPLIER";
 
                 _db.Users.Add(usr);
@@ -518,51 +525,95 @@ namespace Clinic_Automation.Controllers
 
         //------------------------------Schedule Appointment-----------------------------------------
 
+        //public ActionResult DisplayAdminAppointment()
+        //{
+        //    var appointments = _db.Appointments.Include(a => a.Patient).Include(a => a.Physician);
+        //    return View(appointments.ToList());
+        //}
         public ActionResult DisplayAdminAppointment()
         {
-            var appointments = _db.Appointments.Include(a => a.Patient).Include(a => a.Physician);
-            return View(appointments.ToList());
+            
+            var appointments = _db.Appointments.Include(a => a.Patient).Include(a => a.Physician).ToList();
+            SelectList statusList = new SelectList(new[]
+                {
+                new SelectListItem { Text = "APPROVED", Value = "APPROVED" },
+                new SelectListItem { Text = "REJECTED", Value = "REJECTED" }
+            }, "Value", "Text");
+
+
+            ViewBag.statusList = statusList;
+            return View(appointments);
+
         }
-        public ActionResult EditAdminAppointment(int? id)
+        [HttpPost]
+        public ActionResult DisplayAdminAppointment(int? id, string selectedStatus)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Appointment appointment = _db.Appointments.Find(id);
+            var appointment = _db.Appointments.Find(id);
             if (appointment == null)
             {
-                return HttpNotFound();
+                return HttpNotFound(); 
+            }
+            appointment.ScheduleStatus = selectedStatus;
+            _db.SaveChanges();
+            if (appointment.ScheduleStatus == "APPROVED")
+            {
+                Schedule schedule = new Schedule();
+                schedule.AppointmentID = appointment.AppointmentID;
+                schedule.ScheduleDate = appointment.AppointmentDateTime;
+                schedule.ScheduleStatus = "APPROVED";
+                _db.Schedules.Add(schedule);
+                _db.SaveChanges();
             }
             ViewBag.PatientID = new SelectList(_db.Patients, "PatientID", "PatientName", appointment.PatientID);
             ViewBag.PhysicianID = new SelectList(_db.Physicians, "PhysicianID", "PhysicianName", appointment.PhysicianID);
-            return View(appointment);
+
+            return RedirectToAction("DisplayAdminAppointment"); 
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditAdminAppointment([Bind(Include = "AppointmentID,PatientID,PhysicianID,AppointmentDateTime,Criticality,Reason,Note,ScheduleStatus")] Appointment editedAppointment)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Entry(editedAppointment).State = EntityState.Modified;
-                _db.SaveChanges();
-                if (editedAppointment.ScheduleStatus == "APPROVED")
-                {
-                    Schedule schedule = new Schedule();
-                    schedule.AppointmentID = editedAppointment.AppointmentID;
-                    schedule.ScheduleDate = editedAppointment.AppointmentDateTime;
-                    schedule.ScheduleStatus = "APPROVED";
-                    _db.Schedules.Add(schedule);
-                    _db.SaveChanges();
-                }
-                return RedirectToAction("DisplayAdminAppointment");
+        //public ActionResult EditAdminAppointment(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Appointment appointment = _db.Appointments.Find(id);
+        //    if (appointment == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.PatientID = new SelectList(_db.Patients, "PatientID", "PatientName", appointment.PatientID);
+        //    ViewBag.PhysicianID = new SelectList(_db.Physicians, "PhysicianID", "PhysicianName", appointment.PhysicianID);
+        //    return View(appointment);
+        //}
 
-            }
-            ViewBag.PatientID = new SelectList(_db.Patients, "PatientID", "PatientName", editedAppointment.PatientID);
-            ViewBag.PhysicianID = new SelectList(_db.Physicians, "PhysicianID", "PhysicianName", editedAppointment.PhysicianID);
-            return View(editedAppointment);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult EditAdminAppointment([Bind(Include = "AppointmentID,PatientID,PhysicianID,AppointmentDateTime,Criticality,Reason,Note,ScheduleStatus")] Appointment editedAppointment)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _db.Entry(editedAppointment).State = EntityState.Modified;
+        //        _db.SaveChanges();
+        //        if (editedAppointment.ScheduleStatus == "APPROVED")
+        //        {
+        //            Schedule schedule = new Schedule();
+        //            schedule.AppointmentID = editedAppointment.AppointmentID;
+        //            schedule.ScheduleDate = editedAppointment.AppointmentDateTime;
+        //            schedule.ScheduleStatus = "APPROVED";
+        //            _db.Schedules.Add(schedule);
+        //            _db.SaveChanges();
+        //        }
+        //        return RedirectToAction("DisplayAdminAppointment");
+
+        //    }
+        //    ViewBag.PatientID = new SelectList(_db.Patients, "PatientID", "PatientName", editedAppointment.PatientID);
+        //    ViewBag.PhysicianID = new SelectList(_db.Physicians, "PhysicianID", "PhysicianName", editedAppointment.PhysicianID);
+        //    return View(editedAppointment);
+        //}
 
         protected override void Dispose(bool disposing)
         {

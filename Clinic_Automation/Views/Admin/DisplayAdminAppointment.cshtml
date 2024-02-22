@@ -1,62 +1,73 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Appointment>
-     @*@model Clinic_Automation.Models.Appointment*@
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AppointmentDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Criticality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Reason)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Patient.PatientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Physician.PhysicianName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduleStatus)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Criticality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Physician.PhysicianName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleStatus)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AppointmentDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Criticality)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reason)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Patient.PatientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduleStatus)
-        </td>
-        <td>
-            @Html.ActionLink("change Status", "EditAdminAppointment", new { id = item.AppointmentID }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Criticality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.ScheduleStatus)*@
 
-</table>
+                @if (item.ScheduleStatus == "PENDING")
+                {
+                    using (Html.BeginForm("DisplayAdminAppointment", "Admin", method: FormMethod.Post, routeValues: new { id = item.AppointmentID }))
+                    {
+                        @*@Html.LabelFor(modelItem => item.ScheduleStatus, htmlAttributes: new { @class = "control-label" })*@
+                        @Html.DropDownList("selectedStatus", ViewBag.statusList as SelectList, item.ScheduleStatus, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(modelItem => item.ScheduleStatus, "", new { @class = "text-danger" })
+                        <input type="submit" value="Update" class="btn btn-primary" />
+                    }
+
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.ScheduleStatus)
+                }
+            </td>
+        </tr>
+    }
+
+    </table>
+
+

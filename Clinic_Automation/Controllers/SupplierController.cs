@@ -37,31 +37,51 @@ namespace Clinic_Automation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var POL = _db.PurchaseProductLines.Where(a => a.PurchaseOrderID == id).ToList();
+            SelectList purchaseOrderStatusList = new SelectList(new[]
+    {
+        new SelectListItem { Text = "Pending", Value = "Pending" },
+        new SelectListItem { Text = "Approved", Value = "Approved" },
+        new SelectListItem { Text = "Rejected", Value = "Rejected" }
+    }, "Value", "Text");
 
-
+            
+           
 
             PurchaseProductLine ppl = _db.PurchaseProductLines.Find(id);
-            //ViewBag.DrugId = new SelectList(_db.Drugs, "DrugID", "Title", ppl.DrugId);
-            //if (POL == null)
-            //{
-            //    return View(POL);
-            //}
+            _db.SaveChanges();
+            ViewBag.PurchaseOrderStatusList = purchaseOrderStatusList;
             return View(POL);
            
         }
 
+        [HttpPost]
+        public ActionResult DisplayProductLine(int? id, string selectedStatus)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Retrieve the purchase product header associated with the given ID
+            var purchaseProductHeader = _db.PurchaseOrderHeaders.Find(id);
+
+            if (purchaseProductHeader == null)
+            {
+                return HttpNotFound(); // Or any other appropriate action if the purchase product header is not found
+            }
+
+            // Update the status column in the PurchaseProductHeader table
+            purchaseProductHeader.PurchaseOrderStatus = selectedStatus;
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            // Redirect to some action after saving changes
+            return RedirectToAction("Index"); // Replace "Index" with the appropriate action
+        }
+
         public ActionResult DisplayAdminSupplier(int? id)
         {
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //var POH = _db.PurchaseOrderHeaders.Where(a => a.SupplierID == id).ToList();
-            //if(POH.Count == 0)
-            //{
-            //    return View(POH);
-            //}
 
 
 

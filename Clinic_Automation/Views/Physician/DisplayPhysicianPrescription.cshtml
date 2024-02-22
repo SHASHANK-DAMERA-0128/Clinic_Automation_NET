@@ -1,10 +1,21 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.PhysicianPrescription>
 
-
+@{
+    ViewBag.Title = ViewBag.ScheduleID;
+}
 
 <p>
-        @Html.ActionLink("Create New", "CreatePhysicianPrescription")
+    @Html.ActionLink("Create New", "CreatePhysicianPrescription", new { id = ViewBag.ScheduleID }, null)
 </p>
+
+<p>
+    @if (!string.IsNullOrEmpty(ViewBag.AdviceData?.Advise))
+    {
+        <div>@ViewBag.AdviceData.Advise</div>
+        @Html.ActionLink("Edit Advice", "EditPhysicianAdvice", new {id = ViewBag.AdviceData.PhysicianAdviceID})
+    }
+</p>
+
 <table class="table">
     <tr>
         <th>
@@ -13,9 +24,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Drug.Title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhysicianAdvice.Advise)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.PhysicianAdvice.Advise)
+            </th>*@
         <th></th>
     </tr>
 
@@ -28,14 +39,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Drug.Title)
             </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
+                </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditPhysicianPrescription", new { id = item.PhysicianPrescriptionID }) |
+                @Html.ActionLink("Edit", "EditPhysicianPrescription", new { id = item.PhysicianPrescriptionID })
                 @*@Html.ActionLink("Details", "DetailsPhysicianPrescription", new { id = item.PhysicianPrescriptionID }) |
-                @Html.ActionLink("Delete", "DeletePhysicianPrescription", new { id = item.PhysicianPrescriptionID })
-            </td>*@
+                        @Html.ActionLink("Delete", "DeletePhysicianPrescription", new { id = item.PhysicianPrescriptionID })
+                    </td>*@
         </tr>
     }
 

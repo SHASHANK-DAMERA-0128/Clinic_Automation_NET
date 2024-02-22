@@ -1,54 +1,124 @@
-﻿@model Clinic_Automation.Models.PhysicianPrescription
+﻿@model Clinic_Automation.Models.AdvicePrescriptionModel
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryval")
 
+@{
+    ViewBag.Title = ViewBag.ScheduleID;
+}
 
-@using (Html.BeginForm()) 
+<h5>
+    Add advice and prescription
+</h5>
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PhysicianPrescription</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group visually-hidden">
-            @Html.LabelFor(model => model.ScheduleID, "ScheduleID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ScheduleID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ScheduleID, "", new { @class = "text-danger" })
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.Advice.Advise, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Advice.Advise, new { htmlAttributes = new { @class = "form-control", id = "txtAdvise" } })
+                    @Html.ValidationMessageFor(model => model.Advice.Advise, "", new { @class = "text-danger" })
+                </div>
+
+                <input style="display: none;" type="hidden" name="Advice.ScheduleID" value="@ViewBag.ScheduleID" />
             </div>
         </div>
+    </div>
 
-        <div class="form-group ">
-            @Html.LabelFor(model => model.DrugID, "DrugID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DrugID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DrugID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <table class="table">
 
-        <div class="form-group visually-hidden">
-            @Html.LabelFor(model => model.PhysicianAdviceID, "PhysicianAdviceID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PhysicianAdviceID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PhysicianAdviceID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <thead>
+            <tr>
+                <th>
+                    @Html.LabelFor(model => model.Prescription.DrugID, htmlAttributes: new { @class = "form-label" })
+                </th>
 
-        <div class="form-group ">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <th>
+                    @Html.LabelFor(model => model.Prescription.Description, htmlAttributes: new { @class = "form-label" })
+                </th>
 
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody id="tblAdvPres">
+            <tr>
+                <td>
+                    @Html.DropDownList("DrugID", null, htmlAttributes: new { @class = "form-control", id = "rowCmbDrugID" })
+                </td>
+
+                <td>
+                    @Html.EditorFor(model => model.Prescription.Description, new { htmlAttributes = new { @class = "form-control", id = "rowtxtDsc" } })
+                </td>
+
+                <td>
+                    <button id="btnSave" class="btn btn-primary">Save</button>
+                    <button id="btnCancel" class="btn btn-secondary">Cancel</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <div class="row">
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input id="btnSavePO" type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+
+    var ctr = 0;
+
+    $(function () {
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+
+            ctr++;
+            var row =
+                `<tr>
+
+                <td>
+                    ${$("#rowCmbDrugID :selected").text()}
+                    <input type="hidden" name="Prescriptions[${ctr - 1}].DrugID" value="${$("#rowCmbDrugID :selected").val()}" />
+                </td>
+                <td>
+                    ${$("#rowtxtDsc").val()}
+                    <input type="hidden" name="Prescriptions[${ctr - 1}].Description" value="${$("#rowtxtDsc").val()}" />
+                </td>
+
+                <td>
+                    <input type="hidden" name="Prescriptions[${ctr - 1}].ScheduleID" value="${@ViewBag.ScheduleID}" />
+                </td>
+
+                <td>
+                </td>
+
+            </tr>`;
+
+            $("#tblAdvPres").append(row);
+        });
+
+        $("#btnSavePO").click(function (e) {
+            e.preventDefault();
+            $("form").submit();
+        });
+    });
+
+</script>

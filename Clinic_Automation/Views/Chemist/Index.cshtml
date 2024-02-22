@@ -12,104 +12,119 @@
 </head>
 
 <div>
-    <div class="d-flex justify-content-between align-items-center">
-        <h5>Drugs Requests</h5>
+    <div class="d-flex flex-column">
 
-        <div class="d-flex">
-            <div style="margin-right: 10px;">
-                @if (ViewBag.Filter == "Not")
-                {
-                    <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View All</a>
-                }
-                else
-                {
-                    <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View Un-noted Drugs</a>
-                }
+        <div class="parent-div-chemist">
+            <div class="d-flex w-100" style="margin-bottom: 2rem">
+                <div class="card-child" style="margin-right: 10px;">
+                    <div class="card-details">
+                        <p class="text-title mb-1">Need to review availability of Drugs??</p>
+                        <a href="@Url.Action("Index", "Drugs")" class="text-decoration-none card-button">
+                            View Drugs 💊
+                        </a>
+                    </div>
+                </div>
+                <div class="card-child" style="margin-left: 10px;">
+                    <div class="card-details">
+                        <p class="text-title mb-1">Need to order new drugs??</p>
+                        <a href="@Url.Action("PlacePurchaseOrder", "Chemist")" class="text-decoration-none card-button">
+                            Place Drug Order 📦
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="ml-3">
-                <a href="@Url.Action("Index", "Drugs")" class="btn btn-outline-primary">
-                    View Drugs
-                </a>
+
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <h5>Drugs Requests</h5>
+                <div>
+                    @if (ViewBag.Filter == "Not")
+                    {
+                        <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View All</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View Un-noted Drugs</a>
+                    }
+                </div>
             </div>
+        </div>
+
+        <div style="min-height: 260px">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Request Note")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Request Date")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Physician")
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DrugInfoText)
+                        </td>
+                        <td>
+                            @item.RequestedDate.ToString("dd' 'MMM' 'yyyy")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+                        </td>
+                        <td>
+                            @if (item.RequestStatus == "Not")
+                            {
+                                <a href="@Url.Action("ToggleStatus", new { id = item.DrugRequestID })" class="btn btn-warning">
+                                    Mark as Noted
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("ToggleStatus", new { id = item.DrugRequestID })" class="btn btn-outline-warning text-black">
+                                    Mark as Un-noted
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
         </div>
     </div>
 
-    <div style="min-height: 260px">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayName("Request Note")
-                </th>
-                <th>
-                    @Html.DisplayName("Request Date")
-                </th>
-                <th>
-                    @Html.DisplayName("Physician")
-                </th>
-                <th>
-                </th>
-            </tr>
-            @foreach (var item in Model)
+    <div class="d-flex justify-content-center align-items-center">
+        <div style="margin-right: 1rem;">
+            @if (ViewBag.PageNumber > 1)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DrugInfoText)
-                    </td>
-                    <td>
-                        @item.RequestedDate.ToString("dd' 'MMM' 'yyyy")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
-                    </td>
-                    <td>
-                        @if (item.RequestStatus == "Not")
-                        {
-                            <a href="@Url.Action("ToggleStatus", new { id = item.DrugRequestID })" class="button-design-2">
-                                Mark as Noted
-                            </a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("ToggleStatus", new { id = item.DrugRequestID })" class="button-design-2">
-                                Un-Note Status
-                            </a>
-                        }
-                    </td>
-                </tr>
+                @Html.ActionLink("<<", "Index",
+                new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
+                new { @class = "next-button-valid" })
             }
-        </table>
-    </div>
-</div>
+            else
+            {
+                <button disabled type="button" class="next-button-invalid">&lt;&lt;</button>
+            }
+        </div>
 
-<div class="d-flex justify-content-center align-items-center">
-    <div style="margin-right: 1rem;">
-        @if (ViewBag.PageNumber > 1)
-        {
-            @Html.ActionLink("<<", "Index",
-            new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
-            new { @class = "next-button-valid" })
-        }
-        else
-        {
-            <button disabled type="button" class="next-button-invalid">&lt;&lt;</button>
-        }
-    </div>
+        Page @(ViewBag.PageNumber ?? 1) of @(ViewBag.TotalPages ?? 1)
 
-    Page @(ViewBag.PageNumber ?? 1) of @(ViewBag.TotalPages ?? 1)
-
-    <div style="margin-left: 1rem;">
-        @if (ViewBag.PageNumber < ViewBag.TotalPages)
-        {
-            @Html.ActionLink(
-            ">>", "Index",
-            new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
-            new { @class = "next-button-valid" }
-           )
-        }
-        else
-        {
-            <button disabled type="button" class="next-button-invalid">&gt;&gt;</button>
-        }
+        <div style="margin-left: 1rem;">
+            @if (ViewBag.PageNumber < ViewBag.TotalPages)
+            {
+                @Html.ActionLink(
+                ">>", "Index",
+                new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter },
+                new { @class = "next-button-valid" }
+               )
+            }
+            else
+            {
+                <button disabled type="button" class="next-button-invalid">&gt;&gt;</button>
+            }
+        </div>
     </div>
-</div>
 

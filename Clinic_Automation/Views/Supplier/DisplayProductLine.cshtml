@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.PurchaseProductLine>
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
+
+@{
+    ViewBag.Title = "Display Product Line";
+}
+
+
+
 <table class="table">
     <tr>
         <th>
@@ -17,9 +21,13 @@
         <th>
             @Html.DisplayNameFor(model => model.PurchaseOrderHeader.PurchaseOrderID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PurchaseOrderHeader.PurchaseOrderStatus)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.PurchaseOrderHeader.PurchaseOrderStatus)
+            </th>*@
+        @*<p>
+                @ViewBag.PurchaseOrderHeader.PurchaseOrderStatus
+            </p>*@
+
         <th></th>
     </tr>
 
@@ -28,7 +36,7 @@
         <tr>
             <td>
                 @item.Drug.Title
-                
+
             </td>
             <td>
                 @item.Quantity
@@ -39,9 +47,10 @@
             <td>
                 @item.PurchaseOrderHeader.PurchaseOrderID
             </td>
-            <td>
-                @item.PurchaseOrderHeader.PurchaseOrderStatus
-            </td>
+            @*<td>
+                    @Html.DropDownList("DrugStatus", (SelectList)ViewBag.DrugStatuses[item.DrugId], "-- Select Status --", new { @class = "form-control" })
+                </td>*@
+
             @*<td>
                     @Html.ActionLink("Edit", "Edit", new { id=item.SlNo }) |
                     @Html.ActionLink("Details", "Details", new { id=item.SlNo }) |
@@ -51,6 +60,25 @@
     }
 
 </table>
+@using (Html.BeginForm("DisplayProductLine", "Supplier", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.FirstOrDefault().PurchaseOrderID) <!-- Include hidden field for PurchaseOrderID -->
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstOrDefault().PurchaseOrderHeader.PurchaseOrderStatus, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownList("selectedStatus", ViewBag.PurchaseOrderStatusList as SelectList, "-- Select Status --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FirstOrDefault().PurchaseOrderHeader.PurchaseOrderStatus, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Update" class="btn btn-primary" />
+    </div>
+}
+@*@Html.DropDownListFor(model => model.FirstOrDefault().PurchaseOrderHeader, (SelectList)ViewBag.PurchaseOrderStatusList, "-- Select Purchase Order Status --", new { @class = "form-control" }) <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>*@
 
 @section Logout
     {

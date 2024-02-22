@@ -1,47 +1,177 @@
-﻿@model Clinic_Automation.Models.PurchaseOrderHeader
+﻿@model Clinic_Automation.Models.POViewModel
 
 @{
-    ViewBag.Title = "PlacePurchaseOrder";
+    ViewBag.Title = "Place Drug Order";
 }
 
-<h2>PlacePurchaseOrder</h2>
+<h4 class="text-center mb-4">Place your Order here 😊</h4>
+<main class="container text-center">
 
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>PurchaseOrderHeader</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.PurchaseOrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PurchaseOrderDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PurchaseOrderDate, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.POHeader.PurchaseOrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.POHeader.PurchaseOrderDate, new { htmlAttributes = new { @class = "form-control", id = "txtPODate" } })
+                        @Html.ValidationMessageFor(model => model.POHeader.PurchaseOrderDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.POHeader.SupplierID, "SupplierID", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    <div class="col-md-10">
+                        @Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.POHeader.SupplierID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SupplierID, "SupplierID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.POHeader.Note, htmlAttributes: new { @class = "form-label" })
+
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.POHeader.Note, new { htmlAttributes = new { @class = "form-control", id = "txtNote" } })
+                        @Html.ValidationMessageFor(model => model.POHeader.Note, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+
+
+        <table class="table">
+            <thead>
+
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.POProductLine.Drug, htmlAttributes: new { @class = "form-label" })
+                    </th>
+
+                    <th>
+                        @Html.LabelFor(model => model.POProductLine.Quantity, htmlAttributes: new { @class = "form-label" })
+                    </th>
+
+                    <th>
+                        @Html.LabelFor(model => model.POProductLine.Note, htmlAttributes: new { @class = "form-label" })
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="tblPrdLineCnt">
+                <tr>
+
+                    <td>
+                        @*@Html.DropDownList("DrugID", null, htmlAttributes: new { @class = "form-control", id = "rowCmbDrugID" })*@
+                        @Html.DropDownList("DrugId", null, htmlAttributes: new { @class = "form-control", id = "rowCmbDrugID" })
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model.POProductLine.Quantity, new { htmlAttributes = new { @class = "form-control", id = "rowtxtQty" } })
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model.POProductLine.Note, new { htmlAttributes = new { @class = "form-control", id = "rowtxtNote" } })
+                    </td>
+
+                    <td>
+                        <button id="btnSave" class="btn btn-primary">Save</button>
+                        <button id="btnCancel" class="btn btn-secondary">Cancel</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btnSavePO" type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
+
+</main>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+
+    var ctr = 0;
+
+    $(function () {
+        $("#btnSave").click(function (e) {
+            e.preventDefault();
+
+            ctr++;
+            var row =
+                `<tr>
+
+                <td>
+                    ${$("#rowCmbDrugID :selected").text()}
+
+                    <input type="hidden" name="POProductLines[${ctr - 1}].DrugId" value="${$("#rowCmbDrugID :selected").val()}" />
+
+                </td>
+                <td>
+                    ${$("#rowtxtQty").val()}
+                <input type="hidden" name="POProductLines[${ctr - 1}].Quantity" value="${$("#rowtxtQty").val()}" />
+
+                </td>
+                <td>
+
+                    ${$("#rowtxtNote").val()}
+                    <input type="hidden" name="POProductLines[${ctr - 1}].Note" value="${$("#rowtxtNote").val()}" />
+
+                </td>
+                <td>
+                </td>
+
+            </tr>`;
+
+            $("#tblPrdLineCnt").append(row);
+        });
+
+        $("#btnCancel").click(function () {
+            $("#rowCmbDrugID").val("");
+            $("#rowtxtQty").val("");
+            $("#rowtxtNote").val("");
+        });
+
+        //$("#btnSavePO").click(function (e) {
+        //    e.preventDefault();
+        //    console.log("Form is not submitted")
+
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/Chemist/PlacePurchaseOrder",
+        //        data: $("form").serialize(),
+        //        success: function (data) {
+        //            console.log("Form is submitted")
+        //        }
+        //    });
+        //});
+    });
+
+
+</script>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

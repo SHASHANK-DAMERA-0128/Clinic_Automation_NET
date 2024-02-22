@@ -13,7 +13,8 @@
             <div class="col-sm-6">
                 <div class="form-group">
 
-                    @Html.LabelFor(model => model.POHeader.PurchaseOrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @*@Html.LabelFor(model => model.POHeader.PurchaseOrderDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    @Html.LabelFor(model => model.POHeader.PurchaseOrderDate, "Enter Purchase Order Date", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.POHeader.PurchaseOrderDate, new { htmlAttributes = new { @class = "form-control", id = "txtPODate" } })
                         @Html.ValidationMessageFor(model => model.POHeader.PurchaseOrderDate, "", new { @class = "text-danger" })
@@ -36,7 +37,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.POHeader.Note, htmlAttributes: new { @class = "form-label" })
+                    @Html.LabelFor(model => model.POHeader.Note, "Add a note for the Purchase Orderx", htmlAttributes: new { @class = "form-label" })
 
                     <div class="col-md-12">
                         @Html.EditorFor(model => model.POHeader.Note, new { htmlAttributes = new { @class = "form-control", id = "txtNote" } })

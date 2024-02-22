@@ -215,6 +215,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\doctor.png" />
     <Content Include="Content\img\doctor.svg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\styles\Chemist.css" />
@@ -318,6 +319,8 @@
     <Content Include="Views\Drugs\Details.cshtml" />
     <Content Include="Views\Drugs\Edit.cshtml" />
     <Content Include="Views\Drugs\Index.cshtml" />
+    <Content Include="Views\Chemist\ViewOrders.cshtml" />
+    <Content Include="Views\Chemist\ViewOrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

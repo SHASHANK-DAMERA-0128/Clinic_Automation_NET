@@ -1,0 +1,49 @@
+﻿@model List<Clinic_Automation.Models.PurchaseOrderHeader>
+
+@{
+    ViewBag.Title = "ViewOrders";
+}
+
+<h2>ViewOrders</h2>
+
+<div>
+    <h4>PurchaseOrderHeader</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Request Note")
+            </th>
+            <th>
+                @Html.DisplayName("Order Date")
+            </th>
+            <th>
+                @Html.DisplayName("Physician")
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Note)
+                </td>
+                <td>
+                    @item.PurchaseOrderDate.ToString("dd' 'MMM' 'yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Supplier.SupplierName)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("ViewOrderDetails", new { id = item.PurchaseOrderID })" class="text-decoration-none btn btn-primary">
+                        View Order Details
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

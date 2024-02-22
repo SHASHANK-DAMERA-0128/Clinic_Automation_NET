@@ -15,8 +15,7 @@ namespace Clinic_Automation.Controllers
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
         // GET: Chemist
         [Authorize(Roles = "Chemist")]
-        // Index method begins here
-        // ----------------------------------------------
+
         public ActionResult Index(int? page, string filter = "Not", int pageSize = 5)
         {
             int pageNumber = (page ?? 1);
@@ -44,8 +43,8 @@ namespace Clinic_Automation.Controllers
             return View(drugRequests);
         }
 
-        [HttpPatch]
-        public ActionResult ToggleStatus(int id)
+        // [HttpPatch]
+        public ActionResult ToggleStatus(int? id)
         {
             var drugRequest = db.DrugRequests.Find(id);
             if (drugRequest != null)
@@ -79,34 +78,6 @@ namespace Clinic_Automation.Controllers
         [HttpPost]
         public ActionResult PlacePurchaseOrder(POViewModel vm)
         {
-            //int supplierID = int.Parse(Request.Form.Get("SupplierID"));
-            //Supplier supplier = db.Suppliers.Find(supplierID);
-
-            //vm.POHeader.Supplier = supplier;
-
-            //vm.POProductLines.ToList().ForEach(pl => { vm.POHeader.PurchaseProductLines.Add(pl); });
-
-            //db.PurchaseOrderHeaders.Add(vm.POHeader);
-            //try
-            //{
-            //    db.SaveChanges();
-            //}
-            //catch (DbEntityValidationException ex)
-            //{
-            //    foreach (var validationError in ex.EntityValidationErrors)
-            //    {
-            //        foreach (var error in validationError.ValidationErrors)
-            //        {
-            //            Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-            //                validationError.Entry.Entity.GetType().Name,
-            //                validationError.Entry.State);
-            //            Debug.WriteLine("- Property: {0}, Error: {1}",
-            //                error.PropertyName,
-            //                error.ErrorMessage);
-            //        }
-            //    }
-            //}
-
             vm.POHeader.Supplier = db.Suppliers.Find(int.Parse(Request.Form.Get("SupplierID")));
 
             vm.POProductLines.ToList().ForEach(pl => { vm.POHeader.PurchaseProductLines.Add(pl); });
@@ -116,6 +87,30 @@ namespace Clinic_Automation.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        // -----------------------------------------------------------------
+        public ActionResult ViewOrders()
+        {
+            var orders = db.PurchaseOrderHeaders.ToList();
+            return View(orders);
+        }
+
+        public ActionResult ViewOrderDetails(int? id)
+        {
+            try
+            {
+                var supplierDetails = db.PurchaseOrderHeaders.Find(id);
+                var order = db.PurchaseProductLines.Where(p => p.PurchaseOrderID == id).ToList();
+                ViewBag.Supplier = supplierDetails;
+
+                return View(order);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return RedirectToAction("ViewOrders");
+            }
         }
     }
 }

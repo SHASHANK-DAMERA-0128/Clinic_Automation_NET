@@ -49,12 +49,10 @@ namespace Clinic_Automation.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             List<PhysicianPrescription> physicianPrescription = db.PhysicianPrescriptions.Where(a => a.ScheduleID == id).ToList();
-            ViewBag.AdviceData = db.PhysicianAdvices.Where(a => a.ScheduleID == id).FirstOrDefault();
+            var AdviceData = db.PhysicianAdvices.Where(a => a.ScheduleID == id).FirstOrDefault();
 
-            if (physicianPrescription == null)
-            {
-                return HttpNotFound();
-            }
+            if (AdviceData == null)
+                return RedirectToAction("CreatePhysicianPrescription", new { id = id });
 
             ViewBag.ScheduleID = id;
 
@@ -94,7 +92,7 @@ namespace Clinic_Automation.Controllers
             // Save changes to the database
             db.SaveChanges();
 
-            return View("Index");
+            return RedirectToAction("Index", "Physician");
         }
 
 

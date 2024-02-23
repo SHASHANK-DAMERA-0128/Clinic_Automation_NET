@@ -18,7 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Appointment.Note)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.PhysicianPrescriptions)
+        </th>
 
         <th></th>
     </tr>
@@ -42,14 +44,18 @@
                 @Html.DisplayFor(modelItem => item.Appointment.Note)
             </td>
             <td>
-                @Html.ActionLink("PRESCRIPTION", "DisplayPhysicianPrescription", new { id = item.ScheduleID })
+                @if (item.PhysicianAdvices.Count == 0)
+                {
+                    <a href="@Url.Action("DisplayPhysicianPrescription","Physician" ,new { @id = item.ScheduleID })" class="btn btn-secondary">Create</a>
+                }
+                else 
+                {
+                    <a href="@Url.Action("DisplayPhysicianPrescription","Physician" ,new { @id = item.ScheduleID })" class="btn btn-outline-primary">View</a>   
+                }
+                
+                @*@Html.ActionLink("View", "DisplayPhysicianPrescription", new { @class = "btn btn-outline-primary", id = item.ScheduleID })*@
             </td>
         </tr>
     }
 
 </table>
-
-@section Logout
-    {
-    @Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link" })
-}

@@ -4,9 +4,9 @@
     ViewBag.Title = ViewBag.ScheduleID;
 }
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "CreatePhysicianPrescription", new { id = ViewBag.ScheduleID }, null)
-</p>
+</p>*@
 
 <p>
     @if (!string.IsNullOrEmpty(ViewBag.AdviceData?.Advise))
@@ -40,13 +40,10 @@
                 @Html.DisplayFor(modelItem => item.Drug.Title)
             </td>
             @*<td>
-                    @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
-                </td>*@
+                <a href="@Url.Action("DeletePhysicianPrescription","Physician",routeValues: new { id = item.DrugID })" class="btn btn-danger">Delete</a>
+            </td>*@
             <td>
                 @Html.ActionLink("Edit", "EditPhysicianPrescription", new { id = item.PhysicianPrescriptionID })
-                @*@Html.ActionLink("Details", "DetailsPhysicianPrescription", new { id = item.PhysicianPrescriptionID }) |
-                        @Html.ActionLink("Delete", "DeletePhysicianPrescription", new { id = item.PhysicianPrescriptionID })
-                    </td>*@
         </tr>
     }
 

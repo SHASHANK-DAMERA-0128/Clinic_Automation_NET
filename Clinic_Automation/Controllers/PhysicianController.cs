@@ -128,6 +128,7 @@ namespace Clinic_Automation.Controllers
             return View(physicianPrescription);
         }
 
+       
         public ActionResult EditPhysicianAdvice(int? id)
         {
             if (id == null)

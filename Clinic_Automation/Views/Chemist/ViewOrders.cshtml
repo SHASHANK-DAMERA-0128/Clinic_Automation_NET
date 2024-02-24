@@ -1,0 +1,77 @@
+﻿@model List<Clinic_Automation.Models.PurchaseOrderHeader>
+
+@{
+    ViewBag.Title = "ViewOrders";
+}
+
+
+<div>
+    <div class="d-flex justify-content-between align-content-center">
+        <h5>Purchase Order Status</h5>
+        <div>
+            <a href="@Url.Action("Index", "Chemist")" class="btn btn-light">Go Back</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Request Note")
+            </th>
+            <th>
+                @Html.DisplayName("Order Date")
+            </th>
+            <th>
+                @Html.DisplayName("Supplier")
+            </th>
+
+            <th>
+                @Html.DisplayName("Status")
+            </th>
+
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Note)
+                </td>
+                <td>
+                    @item.PurchaseOrderDate.ToString("dd' 'MMM' 'yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Supplier.SupplierName)
+                </td>
+
+                @{
+                    string statusColor = string.Empty;
+
+                    switch (item.PurchaseOrderStatus)
+                    {
+                        case "Pending":
+                            statusColor = "text-warning"; 
+                            break;
+                        case "Approved":
+                            statusColor = "text-success"; 
+                            break;
+                        default:
+                            statusColor = "text-danger"; 
+                            break;
+                    }
+                }
+
+                <td class="@statusColor fw-semibold">@Html.DisplayFor(model => item.PurchaseOrderStatus)</td>
+
+                <td>
+                    <a href="@Url.Action("ViewOrderDetails", new { id = item.PurchaseOrderID })" class="text-decoration-none btn btn-primary">
+                        View Order Details
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

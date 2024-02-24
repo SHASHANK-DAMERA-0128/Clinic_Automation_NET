@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Drug>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Drugs Available";
 }
 
 <head>
@@ -9,18 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="~/Content/styles/Drug.css" rel="stylesheet" />
     <link href="~/Content/styles/Chemist.css" rel="stylesheet" />
+    <link href="~/Content/styles/CommonClasses.css" rel="stylesheet" />
 </head>
 
 
 <div class="d-flex justify-content-between align-items-center">
     <h4 style="">Available Drugs in Inventory</h4>
 
-    <a href="@Url.Action("Create", "Drugs")" class="btn btn-outline-primary">
-        Add Drug
-    </a>
+    <div>
+        <a href="@Url.Action("Create", "Drugs")" class="btn btn-outline-primary">
+            Add Drug
+        </a>
+
+        <a href="@Url.Action("Index", "Chemist")" class="btn btn-light" style="margin-left: 12px;">
+            Go Back
+        </a>
+    </div>
 </div>
 
-@* Search functionality *@
 <div class="d-flex justify-content-between align-items-center" style="margin: 10px 0;">
     <form class="d-flex w-100" action="/Drugs/Index">
         <input type="text"

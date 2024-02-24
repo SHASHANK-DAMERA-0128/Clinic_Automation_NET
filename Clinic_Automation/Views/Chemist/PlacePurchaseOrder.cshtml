@@ -4,26 +4,37 @@
     ViewBag.Title = "Place Drug Order";
 }
 
-<h4 class="text-center mb-4">Place your Order here 😊</h4>
+<head>
+    <link href="~/Content/styles/Form.css" rel="stylesheet" />
+</head>
+
+<div class="d-flex w-100 justify-content-between">
+    <h4 class="text-center mb-4">Place your Purchase Order</h4>
+    <div class="text-decoration-none text-white">
+        <a href="@Url.Action("Index", "Chemist")" class="btn btn-warning">
+            Back to List
+        </a>
+    </div>
+</div>
 <main class="container text-center">
 
     @using (Html.BeginForm())
     {
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group">
-
-                    @Html.LabelFor(model => model.POHeader.PurchaseOrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.POHeader.PurchaseOrderDate, new { htmlAttributes = new { @class = "form-control", id = "txtPODate" } })
+                <div class="form-group form-group-styling">
+                    @*@Html.LabelFor(model => model.POHeader.PurchaseOrderDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    @Html.LabelFor(model => model.POHeader.PurchaseOrderDate, "Enter Purchase Order Date", htmlAttributes: new { @class = "control-label" })
+                    <div class="w-100">
+                        @Html.TextBoxFor(model => model.POHeader.PurchaseOrderDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", id = "txtPODate" })
                         @Html.ValidationMessageFor(model => model.POHeader.PurchaseOrderDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
 
             <div class="col-sm-6">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.POHeader.SupplierID, "SupplierID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group form-group-styling">
+                    @Html.LabelFor(model => model.POHeader.SupplierID, "Supplier Name", htmlAttributes: new { @class = "control-label col-md-2" })
 
                     <div class="col-md-10">
                         @Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control" })
@@ -35,8 +46,8 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.POHeader.Note, htmlAttributes: new { @class = "form-label" })
+                <div class="form-group form-group-styling">
+                    @Html.LabelFor(model => model.POHeader.Note, "Add a note for the Purchase Order", htmlAttributes: new { @class = "form-label" })
 
                     <div class="col-md-12">
                         @Html.EditorFor(model => model.POHeader.Note, new { htmlAttributes = new { @class = "form-control", id = "txtNote" } })
@@ -86,7 +97,6 @@
 
                     <td>
                         <button id="btnSave" class="btn btn-primary">Save</button>
-                        <button id="btnCancel" class="btn btn-secondary">Cancel</button>
                     </td>
                 </tr>
             </tbody>
@@ -95,17 +105,13 @@
         <div class="row">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input id="btnSavePO" type="submit" value="Create" class="btn btn-default" />
+                    <input id="btnSavePO" type="submit" value="Create" class="btn btn-success" />
                 </div>
             </div>
         </div>
     }
 
 </main>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -148,11 +154,11 @@
             $("#tblPrdLineCnt").append(row);
         });
 
-        $("#btnCancel").click(function () {
-            $("#rowCmbDrugID").val("");
-            $("#rowtxtQty").val("");
-            $("#rowtxtNote").val("");
-        });
+        //$("#btnCancel").click(function () {
+        //    $("#rowCmbDrugID").val("");
+        //    $("#rowtxtQty").val("");
+        //    $("#rowtxtNote").val("");
+        //});
 
         //$("#btnSavePO").click(function (e) {
         //    e.preventDefault();

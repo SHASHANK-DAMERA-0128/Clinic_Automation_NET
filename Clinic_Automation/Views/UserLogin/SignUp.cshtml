@@ -1,89 +1,115 @@
 ﻿@model Clinic_Automation.Models.Patient
 
 @{
-    ViewBag.Title = "SignUp";
+    ViewBag.Title = "Create Your Account";
 }
 
-<h2>SignUp</h2>
+<head>
+    <link href="~/Content/styles/Home.css" rel="stylesheet" />
+</head>
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Patient</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PatientNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PatientNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PatientNumber, "", new { @class = "text-danger" })
-                @Html.ValidationMessage("PhoneNumberExists", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PatientEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PatientEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PatientEmail, "", new { @class = "text-danger" })
-                @Html.ValidationMessage("EmailExists", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PatientAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PatientAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PatientAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PatientSummary, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PatientSummary, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PatientSummary, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+<main class="min-vh-100">
+    <div class="d-flex justify-content-start w-100">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-dark text-decoration-none mt-3">← Return to Home</a>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div class="w-75 mx-auto">
+        <div class="d-flex justify-content-center align-items-center w-100">
+            <img src="~/Content/img/medicalcare.svg" class="doctor" alt="Medical Care" />
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center w-100 flex-column" style="align-items: baseline;">
+            <div class="text-center d-flex align-items-baseline mb-1">
+                <p class="mb-0">Hi👋🏼, Welcome to&nbsp;</p>
+                <span class="brand-logo">
+                    Desi Care
+                </span>
+            </div>
+            <span class="brand-tagline">
+                Where even our <span class="chai-text">chai</span> is <span class="prescribed-text">prescribed</span> with <span class="text-danger">love!💖🥰</span>
+            </span>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="d-flex flex-wrap align-content-center flex-column mt-2">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="signup-form-box">
+                    @Html.Label("What is your Name??", htmlAttributes: new { @class = "control-label signup-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="signup-form-box">
+                    @Html.Label("What date were you born?", htmlAttributes: new { @class = "control-label signup-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="signup-form-box">
+                    @Html.Label("Your mobile number?", htmlAttributes: new { @class = "control-label signup-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.PatientNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientNumber, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("PhoneNumberExists", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="signup-form-box">
+                    @Html.Label("Your email?", htmlAttributes: new { @class = "control-label signup-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.PatientEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientEmail, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("EmailExists", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="signup-form-box">
+                    @Html.Label("Where do you live? What's your address?", htmlAttributes: new { @class = "control-label signup-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.PatientAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="signup-form-box">
+                    @Html.Label("Male or Female?", htmlAttributes: new { @class = "control-label signup-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="signup-form-box">
+                    @Html.Label("Can you share a bit about your medical history?", htmlAttributes: new { @class = "control-label signup-label" })
+                    <div class="">
+                        @Html.EditorFor(model => model.PatientSummary, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PatientSummary, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="signup-form-box">
+                    <div class="col-md-offset-2 ">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="d-flex justify-content-center align-items-center w-100 mt-3" style="font-size: .75rem;">
+            <p class="mb-0">Not a new User?&nbsp;</p>
+            <a href="@Url.Action("Login", "UserLogin")" class="text-primary text-decoration-none">Login</a>
+        </div>
+
+    </div>
+</main>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

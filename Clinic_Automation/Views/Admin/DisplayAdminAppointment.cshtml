@@ -1,4 +1,9 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Appointment>
+
+<div>
+    <a></a>
+</div>
+
 <div>
     <div class="text-right">
         <a href="@Url.Action("DisplayAdminAppointment", "Admin", new { statusFilter = "Pending" })" class="btn btn-warning mb-3" style="margin-right: 1rem">Pending</a>
@@ -38,7 +43,8 @@
             <th></th>
         </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.AppointmentDateTime)
@@ -65,10 +71,12 @@
                 {
                     using (Html.BeginForm("DisplayAdminAppointment", "Admin", method: FormMethod.Post, routeValues: new { id = item.AppointmentID }))
                     {
-                        @*@Html.LabelFor(modelItem => item.ScheduleStatus, htmlAttributes: new { @class = "control-label" })*@
-                        @Html.DropDownList("selectedStatus", ViewBag.statusList as SelectList, item.ScheduleStatus, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(modelItem => item.ScheduleStatus, "", new { @class = "text-danger" })
-                        <input type="submit" value="Update" class="btn btn-primary" />
+                        <div class="d-flex">
+                            @*@Html.LabelFor(modelItem => item.ScheduleStatus, htmlAttributes: new { @class = "control-label" })*@
+                            @Html.DropDownList("selectedStatus", ViewBag.statusList as SelectList, item.ScheduleStatus, new { @class = "form-control p-0 text-center" })
+                            @Html.ValidationMessageFor(modelItem => item.ScheduleStatus, "", new { @class = "text-danger" })
+                            <input type="submit" value="Update" class="btn btn-primary mx-1" />
+                        </div>
                     }
 
                 }

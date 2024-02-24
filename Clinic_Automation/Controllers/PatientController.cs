@@ -173,6 +173,7 @@ namespace Clinic_Automation.Controllers
             }
 
             List<PhysicianPrescription> physicianPrescription = db.PhysicianPrescriptions.Where(a => a.ScheduleID == id).ToList();
+
             if (physicianPrescription == null)
             {
                 return View(physicianPrescription);

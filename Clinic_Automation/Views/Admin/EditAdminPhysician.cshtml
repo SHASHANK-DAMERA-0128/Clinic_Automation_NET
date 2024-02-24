@@ -1,7 +1,7 @@
 ﻿@model Clinic_Automation.Models.Physician
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -76,17 +76,18 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-primary mt-3" />
                 </div>
             </div>
         </div>
     }
 
     <div>
-        @Html.ActionLink("Back to List", "DisplayAdminPhysician")
+        <a href="@Url.Action("DisplayAdminPhysician", "Admin")" class="btn btn-secondary text-decoration-none text-white mt-3">Back to List</a>
     </div>
 </body>
 </html>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+@section Logout{
+    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
 }

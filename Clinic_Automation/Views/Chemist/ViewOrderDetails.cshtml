@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Clinic_Automation.Models.PurchaseProductLine>
+
+@{
+    ViewBag.Title = "ViewOrderDetails";
+}
+
+<p>
+    Showing Order Details for Order ID: @ViewBag.OrderID
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Drug Name")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayName("Note Added")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Drug.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+    </tr>
+}
+
+</table>

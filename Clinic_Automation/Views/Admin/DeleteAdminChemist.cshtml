@@ -47,7 +47,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -56,3 +57,7 @@
         </div>
     }
 </div>
+
+@section Logout{
+    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
+}

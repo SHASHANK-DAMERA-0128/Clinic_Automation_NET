@@ -15,15 +15,17 @@ namespace Clinic_Automation.Controllers
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
         // GET: Chemist
         [Authorize(Roles = "Chemist")]
-        // Index method begins here
-        // ----------------------------------------------
-        public ActionResult Index(int? page, string filter = "Not", int pageSize = 5)
+
+        public ActionResult Index(int? page, string search = "", string filter = "Not", int pageSize = 5)
         {
             int pageNumber = (page ?? 1);
 
             IQueryable<DrugRequest> query;
             if (filter == "All") query = db.DrugRequests;
             else query = db.DrugRequests.Where(d => d.RequestStatus == filter);
+
+            query = query.Where(d => d.DrugInfoText.Contains(search)
+            || d.RequestedDate.ToString().Contains(search));
 
             int totalItems = query.Count();
 
@@ -40,12 +42,13 @@ namespace Clinic_Automation.Controllers
             ViewBag.PageSize = pageSize;
             ViewBag.TotalItems = totalItems;
             ViewBag.Filter = filter;
+            ViewBag.search = search;
 
             return View(drugRequests);
         }
 
-     //    [HttpPatch]
-        public ActionResult ToggleStatus(int id)
+        // [HttpPatch]
+        public ActionResult ToggleStatus(int? id, string search = "", string filter = "Not", int page = 1, int pageSize = 5)
         {
             var drugRequest = db.DrugRequests.Find(id);
             if (drugRequest != null)
@@ -53,7 +56,8 @@ namespace Clinic_Automation.Controllers
                 drugRequest.RequestStatus = (drugRequest.RequestStatus == "Not") ? "Noted" : "Not";
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            // redirect to Action Index with the same page number, filter and page size
+            return RedirectToAction("Index", new { page, filter, pageSize });
         }
 
         public ActionResult ToggleFilter(string currentFilter)
@@ -79,43 +83,39 @@ namespace Clinic_Automation.Controllers
         [HttpPost]
         public ActionResult PlacePurchaseOrder(POViewModel vm)
         {
-            //int supplierID = int.Parse(Request.Form.Get("SupplierID"));
-            //Supplier supplier = db.Suppliers.Find(supplierID);
-
-            //vm.POHeader.Supplier = supplier;
-
-            //vm.POProductLines.ToList().ForEach(pl => { vm.POHeader.PurchaseProductLines.Add(pl); });
-
-            //db.PurchaseOrderHeaders.Add(vm.POHeader);
-            //try
-            //{
-            //    db.SaveChanges();
-            //}
-            //catch (DbEntityValidationException ex)
-            //{
-            //    foreach (var validationError in ex.EntityValidationErrors)
-            //    {
-            //        foreach (var error in validationError.ValidationErrors)
-            //        {
-            //            Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-            //                validationError.Entry.Entity.GetType().Name,
-            //                validationError.Entry.State);
-            //            Debug.WriteLine("- Property: {0}, Error: {1}",
-            //                error.PropertyName,
-            //                error.ErrorMessage);
-            //        }
-            //    }
-            //}
-
             vm.POHeader.Supplier = db.Suppliers.Find(int.Parse(Request.Form.Get("SupplierID")));
 
             vm.POProductLines.ToList().ForEach(pl => { vm.POHeader.PurchaseProductLines.Add(pl); });
-
+            vm.POHeader.PurchaseOrderStatus = "Pending";
             db.PurchaseOrderHeaders.Add(vm.POHeader);
 
             db.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        // -----------------------------------------------------------------
+        public ActionResult ViewOrders()
+        {
+            var orders = db.PurchaseOrderHeaders.ToList();
+            return View(orders);
+        }
+
+        public ActionResult ViewOrderDetails(int? id)
+        {
+            try
+            {
+                var supplierDetails = db.PurchaseOrderHeaders.Find(id);
+                var order = db.PurchaseProductLines.Where(p => p.PurchaseOrderID == id).ToList();
+                ViewBag.Supplier = supplierDetails;
+
+                return View(order);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return RedirectToAction("ViewOrders");
+            }
         }
     }
 }

@@ -230,12 +230,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\doctor.png" />
     <Content Include="Content\img\appointment.jpg" />
     <Content Include="Content\img\appointment.png" />
     <Content Include="Content\img\chemist.jpg" />
     <Content Include="Content\img\doc.jpg" />
     <Content Include="Content\img\doctor.svg" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\medicalcare.svg" />
     <Content Include="Content\img\patient.jpeg" />
     <Content Include="Content\img\patient.jpg" />
     <Content Include="Content\img\suppiler.jpg" />
@@ -244,6 +246,7 @@
     <Content Include="Content\styles\Chemist.css" />
     <Content Include="Content\styles\CommonClasses.css" />
     <Content Include="Content\styles\Drug.css" />
+    <Content Include="Content\styles\Form.css" />
     <Content Include="Content\styles\Home.css" />
     <Content Include="Content\styles\Patient.css" />
     <Content Include="favicon.ico" />
@@ -343,6 +346,8 @@
     <Content Include="Views\Drugs\Details.cshtml" />
     <Content Include="Views\Drugs\Edit.cshtml" />
     <Content Include="Views\Drugs\Index.cshtml" />
+    <Content Include="Views\Chemist\ViewOrders.cshtml" />
+    <Content Include="Views\Chemist\ViewOrderDetails.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Supplier\DisplayProductLine.cshtml" />
     <Content Include="Views\UserLogin\SignUp.cshtml" />

@@ -57,6 +57,8 @@ namespace Clinic_Automation.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.PhysicianID = new SelectList(db.Physicians, "PhysicianID", "PhysicianName");
+
             return View(appointment);
         }
         public ActionResult ViewProfile()

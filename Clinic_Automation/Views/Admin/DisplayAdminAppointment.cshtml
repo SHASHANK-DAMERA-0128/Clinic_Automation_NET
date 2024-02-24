@@ -1,5 +1,17 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Appointment>
-
+<div>
+    <div class="text-right">
+        <a href="@Url.Action("DisplayAdminAppointment", "Admin", new { statusFilter = "Pending" })" class="btn btn-warning mb-3" style="margin-right: 1rem">Pending</a>
+        <a href="@Url.Action("DisplayAdminAppointment", "Admin", new { statusFilter = "Approved" })" class="btn btn-success mb-3" style="margin-right: 1rem">Approved</a>
+        <a href="@Url.Action("DisplayAdminAppointment", "Admin", new { statusFilter = "Rejected" })" class="btn btn-danger mb-3" style="margin-right: 1rem">Rejected</a>
+        @*<input type="date" id="calendarFilter" name="calendarFilter" class="form-control" style="margin-right: 1rem">
+        <button type="button" class="btn btn-primary" onclick="applyCalendarFilter()">Apply</button>*@
+        @*<input type="date" id="calendarFilter" name="calendarFilter" class="form-control mb-3" style="margin-right: 1rem" value="@ViewBag.DateFilter" placeholder="Enter the Date">*@
+        <input type="text" id="calendarFilter" name="calendarFilter" class="form-control mb-3" style="margin-right: 1rem" value="@ViewBag.DateFilter" placeholder="Enter a date" onfocus="(this.type='date')" onblur="(this.type='text')">
+        <button type="button" class="btn btn-primary" style="margin-right: 1rem" onclick="applyCalendarFilter()">Apply</button>
+        <a href="@Url.Action("DisplayAdminAppointment", "Admin",new { statusFilter = "Pending" })" class="btn btn-outline-danger">Reset</a>
+    </div>
+</div>
     <table class="table">
         <tr>
             <th>
@@ -69,5 +81,13 @@
     }
 
     </table>
+</div>
 
+<script>
+    function applyCalendarFilter() {
+        var selectedDate = document.getElementById("calendarFilter").value;
 
+        // Redirect to the DisplayAdminAppointment action with the selected date as a parameter
+        window.location.href = '@Url.Action("DisplayAdminAppointment", "Admin")?dateFilter=' + selectedDate;
+    }
+</script>

@@ -147,12 +147,15 @@
     </Compile>
     <Compile Include="infra\roleProvider.cs" />
     <Compile Include="Models\AdvicePrescriptionModel.cs" />
+    <Compile Include="Models\adviseExtend.cs" />
     <Compile Include="Models\Appointment.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\appointmentExtend.cs" />
     <Compile Include="Models\Chemist.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\chemistExtend.cs" />
     <Compile Include="Models\ClinicAutomationModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,6 +171,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\customValidation\appdatetimevalidation.cs" />
     <Compile Include="Models\Drug.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
@@ -184,10 +188,12 @@
     <Compile Include="Models\PhysicianAdvice.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\physicianExtend.cs" />
     <Compile Include="Models\PhysicianPrescription.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\POViewModel.cs" />
+    <Compile Include="Models\prescriptionExtend.cs" />
     <Compile Include="Models\PurchaseOrderHeader.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
@@ -201,10 +207,10 @@
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\supplierExtend.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\userExtend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

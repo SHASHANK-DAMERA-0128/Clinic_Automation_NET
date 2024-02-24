@@ -337,7 +337,6 @@
     <Content Include="Views\Drugs\Edit.cshtml" />
     <Content Include="Views\Drugs\Index.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
-    <Content Include="Views\Supplier\DisplayAdminSupplier.cshtml" />
     <Content Include="Views\Supplier\DisplayProductLine.cshtml" />
     <Content Include="Views\UserLogin\SignUp.cshtml" />
     <Content Include="Views\Physician\EditPhysicianAdvice.cshtml" />

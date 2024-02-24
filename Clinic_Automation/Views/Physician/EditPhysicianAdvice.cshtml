@@ -26,12 +26,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Save" class="btn btn-primary" />
         </div>
     </div>
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="d-flex justify-content-start w-100">
+    <a href="@Url.Action("Index", "Physician")" class="btn btn-outline-dark text-decoration-none mt-3">← Back to List</a>
 </div>
+

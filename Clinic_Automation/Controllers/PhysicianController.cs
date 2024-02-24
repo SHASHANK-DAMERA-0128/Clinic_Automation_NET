@@ -16,6 +16,7 @@ namespace Clinic_Automation.Controllers
         // GET: Physician
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
 
+       
         public ActionResult Index()
         {
             try
@@ -29,6 +30,7 @@ namespace Clinic_Automation.Controllers
                 var appointmentid = db.Appointments.Where(a => a.PhysicianID == curr_usr.ReferenceToID && a.ScheduleStatus == "APPROVED").Select(a => a.AppointmentID).ToList();
                 List<Schedule> schedules = db.Schedules
                                 .Where(a => appointmentid.Contains(a.AppointmentID) && a.ScheduleStatus == "APPROVED")
+                                .OrderByDescending(a => a.ScheduleDate)
                                 .ToList();
                 if (schedules.Count == 0)
                 {

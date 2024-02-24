@@ -29,6 +29,8 @@ namespace Clinic_Automation.Controllers
             return View(POH);
         }
 
+
+
         public ActionResult DisplayProductLine(int? id)
         {
 
@@ -80,45 +82,9 @@ namespace Clinic_Automation.Controllers
             return RedirectToAction("Index"); // Replace "Index" with the appropriate action
         }
 
-        public ActionResult DisplayAdminSupplier(int? id)
-        {
 
 
 
-
-            return View(_db.PurchaseProductLines.ToList());
-        }
-
-
-
-
-        //public ActionResult EditAdminSupplier(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Supplier supplier = _db.Suppliers.Find(id);
-        //    if (supplier == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(supplier);
-        //}
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult EditAdminSupplier([Bind(Include = "SupplierID,SupplierName,SupplierAddress,SupplierNumber,SupplierEmailID")] Supplier supplier)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _db.Entry(supplier).State = EntityState.Modified;
-        //        _db.SaveChanges();
-        //        return RedirectToAction("DisplayAdminSupplier");
-        //    }
-        //    return View(supplier);
-        //}
 
 
 

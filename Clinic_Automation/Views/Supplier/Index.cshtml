@@ -27,8 +27,10 @@
             @Html.DisplayFor(modelItem => item.PurchaseOrderStatus)
         </td>
         <td>
-            @Html.ActionLink("Details", "DisplayProductLine", new { id = item.PurchaseOrderID })
+            @*@Html.ActionLink("Details", "DisplayProductLine", new { id = item.PurchaseOrderID })*@
+            <a href="@Url.Action("Supplier", "Supplier",new { id = item.PurchaseOrderID })" class="btn btn-primary mb-3 " style="margin-right: 1rem">Details</a>
         </td>
+       
     </tr>
 }
 

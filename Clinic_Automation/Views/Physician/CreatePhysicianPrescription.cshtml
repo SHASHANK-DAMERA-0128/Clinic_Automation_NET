@@ -58,7 +58,7 @@
 
                 <td>
                     <button id="btnSave" class="btn btn-primary">Save</button>
-                    <button id="btnCancel" class="btn btn-secondary">Cancel</button>
+                    @*<button id="btnCancel" class="btn btn-secondary">Cancel</button>*@
                 </td>
             </tr>
         </tbody>
@@ -68,15 +68,17 @@
     <div class="row">
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input id="btnSavePO" type="submit" value="Create" class="btn btn-default" />
+                <input id="btnSavePO" type="submit" value="Create" class="btn btn-dark" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="d-flex justify-content-start w-100">
+    <a href="@Url.Action("Index", "Physician")" class="btn btn-outline-dark text-decoration-none mt-3">← Back to List</a>
 </div>
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
 
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
@@ -122,6 +124,3 @@
     });
 
 </script>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

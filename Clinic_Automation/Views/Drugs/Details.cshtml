@@ -51,6 +51,20 @@
                     | Expiring in @(((Model.ExpiryDate.Value - DateTime.Now).Days).ToString()) days
                 </span>
             </p>
+
+        @*<p style="color: green; margin: 0;">
+            @if (Model.ExpiryDate != null)
+            {
+                <text>@Model.ExpiryDate.Value.ToString("dd MMM yyyy")</text>
+                <span style="margin-left: 2px">
+                    | Expiring in @((Model.ExpiryDate.Value - DateTime.Now).Days) days
+                </span>
+            }
+            else
+            {
+                <text>N/A</text>
+            }*@
+        @*</p>*@
         }
         else if (Model.ExpiryDate == null)
         {

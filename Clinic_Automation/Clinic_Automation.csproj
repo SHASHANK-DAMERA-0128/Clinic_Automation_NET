@@ -245,6 +245,7 @@
     <Content Include="Content\styles\CommonClasses.css" />
     <Content Include="Content\styles\Drug.css" />
     <Content Include="Content\styles\Home.css" />
+    <Content Include="Content\styles\Patient.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -265,6 +266,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="libman.json" />
+    <Content Include="Content\img\patient.webp" />
     <EntityDeploy Include="Models\ClinicAutomationModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClinicAutomationModel.Designer.cs</LastGenOutput>
@@ -272,7 +274,6 @@
     <Content Include="Models\ClinicAutomationModel.edmx.diagram">
       <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\img\patient.webp" />
     <None Include="Properties\PublishProfiles\ClinicAutomation20240219161031 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -300,7 +301,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\UserLogin\Login.cshtml" />
     <Content Include="Views\Physician\Index.cshtml" />
     <Content Include="Views\Admin\CreateAdminPhysician.cshtml" />
@@ -343,6 +343,10 @@
     <Content Include="Views\Drugs\Details.cshtml" />
     <Content Include="Views\Drugs\Edit.cshtml" />
     <Content Include="Views\Drugs\Index.cshtml" />
+    <Content Include="Views\Patient\Index.cshtml" />
+    <Content Include="Views\Supplier\DisplayProductLine.cshtml" />
+    <Content Include="Views\UserLogin\SignUp.cshtml" />
+    <Content Include="Views\Physician\EditPhysicianAdvice.cshtml" />
     <Content Include="Views\UserLogin\SignUp.cshtml" />
     <Content Include="Views\UserLogin\PatientLoginSetup.cshtml" />
     <Content Include="Views\UserLogin\ForgotPassword.cshtml" />

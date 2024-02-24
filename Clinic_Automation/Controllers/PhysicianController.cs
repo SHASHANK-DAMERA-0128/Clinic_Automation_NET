@@ -1,5 +1,5 @@
-﻿using Clinic_Automation.Models;
-using System;
+﻿using System;
+using Clinic_Automation.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,8 +13,10 @@ namespace Clinic_Automation.Controllers
     [Authorize(Roles = "PHYSICIAN")]
     public class PhysicianController : Controller
     {
+        // GET: Physician
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
 
+       
         public ActionResult Index()
         {
             try
@@ -28,6 +30,7 @@ namespace Clinic_Automation.Controllers
                 var appointmentid = db.Appointments.Where(a => a.PhysicianID == curr_usr.ReferenceToID && a.ScheduleStatus == "APPROVED").Select(a => a.AppointmentID).ToList();
                 List<Schedule> schedules = db.Schedules
                                 .Where(a => appointmentid.Contains(a.AppointmentID) && a.ScheduleStatus == "APPROVED")
+                                .OrderByDescending(a => a.ScheduleDate)
                                 .ToList();
                 if (schedules.Count == 0)
                 {
@@ -45,18 +48,16 @@ namespace Clinic_Automation.Controllers
         public ActionResult DisplayPhysicianPrescription(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             List<PhysicianPrescription> physicianPrescription = db.PhysicianPrescriptions.Where(a => a.ScheduleID == id).ToList();
-            ViewBag.AdviceData = db.PhysicianAdvices.Where(a => a.ScheduleID == id).FirstOrDefault();
-
-            if (physicianPrescription == null)
-            {
-                return HttpNotFound();
-            }
-
+            var AdviceData = db.PhysicianAdvices.Where(a => a.ScheduleID == id).FirstOrDefault();
             ViewBag.ScheduleID = id;
+
+            if (AdviceData == null)
+                return RedirectToAction("CreatePhysicianPrescription", new { id = id });
+
+            ViewBag.AdviceData = AdviceData;
 
             return View(physicianPrescription);
         }
@@ -94,7 +95,7 @@ namespace Clinic_Automation.Controllers
             // Save changes to the database
             db.SaveChanges();
 
-            return View("Index");
+            return RedirectToAction("Index", "Physician");
         }
 
 
@@ -128,6 +129,35 @@ namespace Clinic_Automation.Controllers
             }
             return View(physicianPrescription);
         }
+
+       
+        public ActionResult EditPhysicianAdvice(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PhysicianAdvice physicianadvice = db.PhysicianAdvices.Find(id);
+            if (physicianadvice == null)
+            {
+                return HttpNotFound();
+            }
+            return View(physicianadvice);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPhysicianAdvice([Bind(Include = "PhysicianAdviceID,ScheduleID,Advise")] PhysicianAdvice physicianadvice)
+            {
+            if (ModelState.IsValid)
+            {
+                db.Entry(physicianadvice).State = EntityState.Modified;
+                physicianadvice.Schedule = db.Schedules.Find(physicianadvice.ScheduleID);
+                db.SaveChanges();
+                return RedirectToAction("DisplayPhysicianPrescription", new { id = physicianadvice.ScheduleID });
+            }
+            return RedirectToAction("DisplayPhysicianPrescription");
+        }
+
 
     }
 

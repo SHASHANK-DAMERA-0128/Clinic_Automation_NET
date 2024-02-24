@@ -9,7 +9,7 @@ namespace Clinic_Automation.Models
     public class prescriptionExtend
     {
         [Display(Name = "Description")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Description")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Description")]
         public string Description { get; set; }
     }
     [MetadataType(typeof(prescriptionExtend))]

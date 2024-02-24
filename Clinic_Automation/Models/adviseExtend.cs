@@ -9,7 +9,7 @@ namespace Clinic_Automation.Models
     public class adviseExtend
     {
         [Display(Name = "Advice")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Advice")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a Advice")]
         public string Advise { get; set; }
     }
     [MetadataType(typeof(adviseExtend))]

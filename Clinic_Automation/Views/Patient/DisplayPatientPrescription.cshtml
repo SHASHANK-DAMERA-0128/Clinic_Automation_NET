@@ -1,34 +1,51 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.PhysicianPrescription>
 
-<table class="table">
-
-    <tr>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Drug Name")
-        </th>
-        <th>
-            @Html.DisplayName("Physician Advice")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Drug.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
-            </td>
-        </tr>
-    }
-
-</table>
-<p>@Html.ActionLink("Back to List", "Index")</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center mb-4">
+            <h2>⚕️Physician Prescription</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Physician Advice 🩺</h5>
+                    <hr />
+                    @foreach (var item in Model)
+                    {
+                        <div>
+                            @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Drug</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Drug.Title)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12 text-center">
+            <a href="@Url.Action("Index","Patient")" class="btn btn-outline-primary">Back</a>
+        </div>
+    </div>
+</div>

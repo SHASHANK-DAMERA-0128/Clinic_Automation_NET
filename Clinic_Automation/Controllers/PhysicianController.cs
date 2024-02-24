@@ -37,7 +37,7 @@ namespace Clinic_Automation.Controllers
                 return View(schedules);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("Error");
             }

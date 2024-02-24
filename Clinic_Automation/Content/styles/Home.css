@@ -26,6 +26,38 @@
     margin: 0 auto;
 }
 
+.signup-form-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .75rem;
+    align-items: center;
+}
+
+.signup-label {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.brand-logo {
+    color: #00c6cd;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.brand-tagline {
+    font-size: .85rem;
+}
+
+.chai-text {
+    color: #b1832f;
+    font-weight: 600;
+}
+
+.prescribed-text{
+    color: #00c6cd;
+}
+
 /* -------------------------------------------------------- */
 /* Landing Page */
 
@@ -80,10 +112,10 @@ header {
         margin-bottom: .4rem;
     }
 
-    .heading p:last-child{
-        font-size: 2.25rem;
-        font-weight: 600;
-    }
+        .heading p:last-child {
+            font-size: 2.25rem;
+            font-weight: 600;
+        }
 
 .text_right {
     width: 200px;

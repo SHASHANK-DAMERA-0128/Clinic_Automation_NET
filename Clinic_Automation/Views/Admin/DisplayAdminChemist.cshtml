@@ -1,20 +1,22 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Chemist>
-<p>
-    ~~@Html.ActionLink("Home", "Index", "Admin", new { area = "" })~~
+
+
+<p class="btn btn-primary">
+    <a href="@Url.Action("CreateAdminChemist", "Admin")" class="text-decoration-none text-white">
+        Create New Chemist
+    </a>
 </p>
-<p>
-    @Html.ActionLink("Create New", "CreateAdminChemist")
-</p>
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ChemistName)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.ChemistNumber)
         </th>
-       
+
         <th></th>
     </tr>
 
@@ -24,21 +26,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ChemistName)
             </td>
-          
+
             <td>
                 @Html.DisplayFor(modelItem => item.ChemistNumber)
             </td>
-            
+
             <td>
-                @Html.ActionLink("Edit", "EditAdminChemist", new { id = item.ChemistID }) | |
-                @Html.ActionLink("Details", "DetailsAdminChemist", new { id = item.ChemistID }) | |
-                @Html.ActionLink("Delete", "DeleteAdminChemist", new { id = item.ChemistID })
+                @Html.ActionLink("Edit", "EditAdminChemist", new { id = item.ChemistID }, new { @class = "btn btn-outline-primary" })
+                @Html.ActionLink("Details", "DetailsAdminChemist", new { id = item.ChemistID }, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Delete", "DeleteAdminChemist", new { id = item.ChemistID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
 
 </table>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+
+<div class="btn btn-secondary">
+    <a class="text-decoration-none text-white" href="@Url.Action("Index", "Admin")">Back to List</a>
 </div>
+
+@section Logout{
+    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
+}
+

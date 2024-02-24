@@ -4,11 +4,15 @@
     ViewBag.Title = "ViewOrders";
 }
 
-<h2>ViewOrders</h2>
 
 <div>
-    <h4>PurchaseOrderHeader</h4>
-    <hr />
+    <div class="d-flex justify-content-between align-content-center">
+        <h5>Purchase Order Status</h5>
+        <div>
+            <a href="@Url.Action("Index", "Chemist")" class="btn btn-light">Go Back</a>
+        </div>
+    </div>
+
     <table class="table">
         <tr>
             <th>
@@ -18,8 +22,13 @@
                 @Html.DisplayName("Order Date")
             </th>
             <th>
-                @Html.DisplayName("Physician")
+                @Html.DisplayName("Supplier")
             </th>
+
+            <th>
+                @Html.DisplayName("Status")
+            </th>
+
             <th>
             </th>
         </tr>
@@ -36,6 +45,25 @@
                 <td>
                     @Html.DisplayFor(model => item.Supplier.SupplierName)
                 </td>
+
+                @{
+                    string statusColor = string.Empty;
+
+                    switch (item.PurchaseOrderStatus)
+                    {
+                        case "Pending":
+                            statusColor = "text-warning"; 
+                            break;
+                        case "Approved":
+                            statusColor = "text-success"; 
+                            break;
+                        default:
+                            statusColor = "text-danger"; 
+                            break;
+                    }
+                }
+
+                <td class="@statusColor fw-semibold">@Html.DisplayFor(model => item.PurchaseOrderStatus)</td>
 
                 <td>
                     <a href="@Url.Action("ViewOrderDetails", new { id = item.PurchaseOrderID })" class="text-decoration-none btn btn-primary">

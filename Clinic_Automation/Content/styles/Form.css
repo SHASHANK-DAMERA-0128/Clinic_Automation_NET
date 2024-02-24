@@ -1,0 +1,14 @@
+﻿.form-group-styling {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+    .form-group-styling label {
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .form-group-styling input {
+        width: 300px;
+    }

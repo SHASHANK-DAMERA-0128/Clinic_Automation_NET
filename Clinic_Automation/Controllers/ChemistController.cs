@@ -16,13 +16,16 @@ namespace Clinic_Automation.Controllers
         // GET: Chemist
         [Authorize(Roles = "Chemist")]
 
-        public ActionResult Index(int? page, string filter = "Not", int pageSize = 5)
+        public ActionResult Index(int? page, string search = "", string filter = "Not", int pageSize = 5)
         {
             int pageNumber = (page ?? 1);
 
             IQueryable<DrugRequest> query;
             if (filter == "All") query = db.DrugRequests;
             else query = db.DrugRequests.Where(d => d.RequestStatus == filter);
+
+            query = query.Where(d => d.DrugInfoText.Contains(search)
+            || d.RequestedDate.ToString().Contains(search));
 
             int totalItems = query.Count();
 
@@ -39,12 +42,13 @@ namespace Clinic_Automation.Controllers
             ViewBag.PageSize = pageSize;
             ViewBag.TotalItems = totalItems;
             ViewBag.Filter = filter;
+            ViewBag.search = search;
 
             return View(drugRequests);
         }
 
         // [HttpPatch]
-        public ActionResult ToggleStatus(int? id)
+        public ActionResult ToggleStatus(int? id, string search = "", string filter = "Not", int page = 1, int pageSize = 5)
         {
             var drugRequest = db.DrugRequests.Find(id);
             if (drugRequest != null)
@@ -52,7 +56,8 @@ namespace Clinic_Automation.Controllers
                 drugRequest.RequestStatus = (drugRequest.RequestStatus == "Not") ? "Noted" : "Not";
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            // redirect to Action Index with the same page number, filter and page size
+            return RedirectToAction("Index", new { page, filter, pageSize });
         }
 
         public ActionResult ToggleFilter(string currentFilter)
@@ -81,7 +86,7 @@ namespace Clinic_Automation.Controllers
             vm.POHeader.Supplier = db.Suppliers.Find(int.Parse(Request.Form.Get("SupplierID")));
 
             vm.POProductLines.ToList().ForEach(pl => { vm.POHeader.PurchaseProductLines.Add(pl); });
-
+            vm.POHeader.PurchaseOrderStatus = "Pending";
             db.PurchaseOrderHeaders.Add(vm.POHeader);
 
             db.SaveChanges();

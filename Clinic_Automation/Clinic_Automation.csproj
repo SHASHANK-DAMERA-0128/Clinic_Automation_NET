@@ -56,6 +56,12 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -135,6 +141,7 @@
     <Compile Include="Controllers\PhysicianController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
+    <Compile Include="crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,12 +197,14 @@
     <Compile Include="Models\Schedule.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\signinExtent.cs" />
     <Compile Include="Models\Supplier.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>ClinicAutomationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\userExtend.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,11 +225,22 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\img\doctor.png" />
+    <Content Include="Content\img\appointment.jpg" />
+    <Content Include="Content\img\appointment.png" />
+    <Content Include="Content\img\chemist.jpg" />
+    <Content Include="Content\img\doc.jpg" />
     <Content Include="Content\img\doctor.svg" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\medicalcare.svg" />
+    <Content Include="Content\img\patient.jpeg" />
+    <Content Include="Content\img\patient.jpg" />
+    <Content Include="Content\img\suppiler.jpg" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\styles\Admin.css" />
     <Content Include="Content\styles\Chemist.css" />
     <Content Include="Content\styles\CommonClasses.css" />
     <Content Include="Content\styles\Drug.css" />
+    <Content Include="Content\styles\Form.css" />
     <Content Include="Content\styles\Home.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -249,6 +269,7 @@
     <Content Include="Models\ClinicAutomationModel.edmx.diagram">
       <DependentUpon>ClinicAutomationModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\img\patient.webp" />
     <None Include="Properties\PublishProfiles\ClinicAutomation20240219161031 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -321,6 +342,10 @@
     <Content Include="Views\Drugs\Index.cshtml" />
     <Content Include="Views\Chemist\ViewOrders.cshtml" />
     <Content Include="Views\Chemist\ViewOrderDetails.cshtml" />
+    <Content Include="Views\UserLogin\SignUp.cshtml" />
+    <Content Include="Views\UserLogin\PatientLoginSetup.cshtml" />
+    <Content Include="Views\UserLogin\ForgotPassword.cshtml" />
+    <Content Include="Views\UserLogin\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

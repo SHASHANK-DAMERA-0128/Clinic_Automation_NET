@@ -1,15 +1,124 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Physician>
 
-<li>@Html.ActionLink("Physican", "DisplayAdminPhysician", "Admin", new { area = "" })</li>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="~/Content/styles/Admin.css" rel="stylesheet" type="text/css" />
+</head>
 
-<li>@Html.ActionLink("Patient", "DisplayAdminPatient", "Admin", new { area = "" })</li>
+@*<li>@Html.ActionLink("Physican", "DisplayAdminPhysician", "Admin", new { area = "" })</li>
 
-<li>@Html.ActionLink("Chemist", "DisplayAdminChemist", "Admin", new { area = "" })</li>
+    <li>@Html.ActionLink("Patient", "DisplayAdminPatient", "Admin", new { area = "" })</li>
 
-<li>@Html.ActionLink("Supplier", "DisplayAdminSupplier", "Admin", new { area = "" })</li>
+    <li>@Html.ActionLink("Chemist", "DisplayAdminChemist", "Admin", new { area = "" })</li>
 
-<li>@Html.ActionLink("Appointment", "DisplayAdminAppointment", "Admin", new { area = "" })</li>
+    <li>@Html.ActionLink("Supplier", "DisplayAdminSupplier", "Admin", new { area = "" })</li>
+
+    <li>@Html.ActionLink("Appointment", "DisplayAdminAppointment", "Admin", new { area = "" })</li>*@
+
+
+
+@*<div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card doctor">
+                <img src="~/Content/img/doc.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card suppiler">
+                <img src="~/Content/img/suppiler.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-2">
+    <!-- First Column -->
+    <div class="card-main col">
+        <a href="@Url.Action("DisplayAdminAppointment","Admin")" class="text-decoration-none" style="color:black">
+            <div class="card appointment">
+                <div class="card-img-box">
+                    <img src="~/Content/img/appointment.png" class="card-img-top" alt="..." style="height: 217px;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title ">APPOINTMENTS</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Second Column -->
+    <a href="@Url.Action("DisplayAdminSupplier","Admin")" class="text-decoration-none" style="color:black">
+        <div class="col">
+            <div class="card suppiler">
+                <div>
+                    <img src="~/Content/img/suppiler.jpg" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title ">SUPPLIERS</h5>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+    <!-- First Column -->
+    <a href="@Url.Action("DisplayAdminPhysician","Admin")" class="text-decoration-none" style="color:black">
+        <div class="col">
+            <div class="card doctor">
+                <div class="card-img-box">
+                    <img src="~/Content/img/doc.jpg" class="card-img-top" alt="..." style="height: 266px;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title ">DOCTORS</h5>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Second Column -->
+    <a href="@Url.Action("DisplayAdminPatient","Admin")" class="text-decoration-none" style="color:black">
+        <div class="col">
+            <div class="card patient">
+                <div>
+                    <img src="~/Content/img/patient.jpeg" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title ">PATIENTS</h5>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
+    <!-- First Column -->
+    <a href="@Url.Action("DisplayAdminChemist","Admin")" class="text-decoration-none" style="color:black">
+        <div class="col">
+            <div class="card chemist">
+                <div class="card-img-box">
+                    <img src="~/Content/img/chemist.jpg" class="card-img-top" alt="..." style="height: 217px;">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title ">CHEMISTS</h5>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+
+
+
 
 @section Logout{
-    @Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link" })
+    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
 }

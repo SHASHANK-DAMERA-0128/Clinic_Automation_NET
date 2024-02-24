@@ -1,49 +1,56 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Patient>
-<p>
-    ~~@Html.ActionLink("Home", "Index", "Admin", new { area = "" })~~
-</p>
-<p>
-    @Html.ActionLink("Create New", "CreateAdminPatient")
+
+
+<p class="btn btn-primary">
+    <a href="@Url.Action("CreateAdminPatient", "Admin")" class="text-decoration-none text-white">
+        Create New Patient
+    </a>
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PatientName)
         </th>
-       
+
         <th>
             @Html.DisplayNameFor(model => model.PatientNumber)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.Gender)
         </th>
-       
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PatientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PatientNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Edit", "EditAdminPatient", new { id = item.PatientID }) | |
-            @Html.ActionLink("Details", "DetailsAdminPatient", new { id = item.PatientID }) | |
-            @Html.ActionLink("Delete", "DeleteAdminPatient", new { id = item.PatientID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "EditAdminPatient", new { id = item.PatientID }, new { @class = "btn btn-outline-primary" })
+                @Html.ActionLink("Details", "DetailsAdminPatient", new { id = item.PatientID }, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Delete", "DeleteAdminPatient", new { id = item.PatientID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="btn btn-secondary">
+    <a href="@Url.Action("Index", "Admin")" class="text-decoration-none text-white">Back to List</a>
 </div>
+
+
+@section Logout{
+    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
+}

@@ -1,11 +1,9 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Supplier>
 
-<p>
-    ~~@Html.ActionLink("Home", "Index", "Admin", new { area = "" })~~
-</p>
-
-<p>
-    @Html.ActionLink("Create New", "CreateAdminSupplier")
+<p class="btn btn-primary">
+    <a href="@Url.Action("CreateAdminSupplier")" class="text-decoration-none text-white">
+        Create New Supplier
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -37,9 +35,9 @@
                 @Html.DisplayFor(modelItem => item.SupplierEmailID)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditAdminSupplier", new { id = item.SupplierID }) | |
-                @Html.ActionLink("Details", "DetailsAdminSupplier", new { id = item.SupplierID }) | |
-                @Html.ActionLink("Delete", "DeleteAdminSupplier", new { id = item.SupplierID })
+                @Html.ActionLink("Edit", "EditAdminSupplier", new { id = item.SupplierID }, new { @class = "btn btn-outline-primary" })
+                @Html.ActionLink("Details", "DetailsAdminSupplier", new { id = item.SupplierID }, new { @class = "btn btn-outline-info" })
+                @Html.ActionLink("Delete", "DeleteAdminSupplier", new { id = item.SupplierID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
@@ -47,6 +45,10 @@
 </table>
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="btn btn-secondary">
+    <a class="text-decoration-none text-white" href="@Url.Action("Index", "Admin")">Back to List</a>
 </div>
+
+@section Logout{
+    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
+}

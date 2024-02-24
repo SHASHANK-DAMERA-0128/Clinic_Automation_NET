@@ -50,3 +50,7 @@
     @Html.ActionLink("Edit", "EditAdminChemist", new { id = Model.ChemistID }) |
     @Html.ActionLink("Back to List", "DisplayAdminChemist")
 </p>
+
+@section Logout{
+    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
+}

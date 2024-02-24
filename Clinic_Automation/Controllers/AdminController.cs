@@ -25,13 +25,6 @@ namespace Clinic_Automation.Controllers
 
 
 
-
-
-
-
-
-
-
         //--------------------------PHYSICIAN CRUD OPERATIONS---------
 
         public ActionResult DisplayAdminPhysician()
@@ -70,8 +63,8 @@ namespace Clinic_Automation.Controllers
                 _db.SaveChanges();
                 User usr = new User();
                 usr.ReferenceToID = physician.PhysicianID;
-                usr.UserName = physician.PhysicianName + rnd.Next(1000, 10000);
                 string[] pass = physician.PhysicianName.Split(' ');
+                usr.UserName = string.Join("", pass) + rnd.Next(1000, 10000);
                 usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "1");
                 usr.Role = "PHYSICIAN";
 
@@ -199,8 +192,8 @@ namespace Clinic_Automation.Controllers
                 _db.SaveChanges();
                 User usr = new User();
                 usr.ReferenceToID = patient.PatientID;
-                usr.UserName = patient.PatientName + rnd.Next(1000, 10000);
                 string[] pass = patient.PatientName.Split(' ');
+                usr.UserName = string.Join("", pass) + rnd.Next(1000, 10000);
                 usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "2");
                 usr.Role = "PATIENT";
 
@@ -327,8 +320,8 @@ namespace Clinic_Automation.Controllers
 
                 User usr = new User();
                 usr.ReferenceToID = chemist.ChemistID;
-                usr.UserName = chemist.ChemistName + rnd.Next(1000, 10000);
                 string[] pass = chemist.ChemistName.Split(' ');
+                usr.UserName = string.Join("", pass) + rnd.Next(1000, 10000);
                 usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "3");
                 usr.Role = "CHEMIST";
 
@@ -448,8 +441,8 @@ namespace Clinic_Automation.Controllers
                 _db.SaveChanges();
                 User usr = new User();
                 usr.ReferenceToID = supplier.SupplierID;
-                usr.UserName = supplier.SupplierName + rnd.Next(1000, 10000);
                 string[] pass = supplier.SupplierName.Split(' ');
+                usr.UserName = string.Join("", pass) + rnd.Next(1000, 10000);
                 usr.Password = crypto.Encrypt(string.Join("", pass) + "@" + "4");
                 usr.Role = "SUPPLIER";
 
@@ -530,15 +523,21 @@ namespace Clinic_Automation.Controllers
         //    var appointments = _db.Appointments.Include(a => a.Patient).Include(a => a.Physician);
         //    return View(appointments.ToList());
         //}
-        public ActionResult DisplayAdminAppointment()
+        public ActionResult DisplayAdminAppointment(string statusFilter = "Pending", string dateFilter = null)
         {
-            
-            var appointments = _db.Appointments
-                .OrderByDescending(d => d.AppointmentDateTime)
-                .Include(a => a.Patient)
-                .Include(a => a.Physician)
-                .ToList();
 
+            //var appointments = _db.Appointments.Include(a => a.Patient).Include(a => a.Physician).ToList();
+            IQueryable<Appointment> appointmentsQuery = _db.Appointments.Include(a => a.Patient).Include(a => a.Physician);
+
+            if (!string.IsNullOrEmpty(statusFilter))
+            {
+                appointmentsQuery = appointmentsQuery.Where(a => a.ScheduleStatus == statusFilter);
+            }
+            if (!string.IsNullOrEmpty(dateFilter) && DateTime.TryParse(dateFilter, out var selectedDate))
+            {
+                var endDate = selectedDate.AddDays(1);
+                appointmentsQuery = appointmentsQuery.Where(a => a.AppointmentDateTime >= selectedDate && a.AppointmentDateTime < endDate);
+            }
             SelectList statusList = new SelectList(new[]
                 {
                 new SelectListItem { Text = "APPROVED", Value = "APPROVED" },
@@ -547,11 +546,13 @@ namespace Clinic_Automation.Controllers
 
 
             ViewBag.statusList = statusList;
-            return View(appointments);
+            ViewBag.StatusFilter = statusFilter; // to maintain the selected filter in the view
+            ViewBag.DateFilter = dateFilter;
+            return View(appointmentsQuery.ToList());
 
         }
         [HttpPost]
-        public ActionResult DisplayAdminAppointment(int? id, string selectedStatus)
+        public ActionResult DisplayAdminAppointment(int? id, string selectedStatus, string statusFilter)
         {
             if (id == null)
             {
@@ -576,7 +577,8 @@ namespace Clinic_Automation.Controllers
             ViewBag.PatientID = new SelectList(_db.Patients, "PatientID", "PatientName", appointment.PatientID);
             ViewBag.PhysicianID = new SelectList(_db.Physicians, "PhysicianID", "PhysicianName", appointment.PhysicianID);
 
-            return RedirectToAction("DisplayAdminAppointment"); 
+            //return RedirectToAction("DisplayAdminAppointment"); 
+            return RedirectToAction("DisplayAdminAppointment", new { statusFilter });
         }
 
         //public ActionResult EditAdminAppointment(int? id)

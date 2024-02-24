@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Clinic_Automation.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,11 +11,84 @@ namespace Clinic_Automation.Controllers
 {
     public class SupplierController : Controller
     {
+        private ClinicAutomationEntities _db = new ClinicAutomationEntities();
         // GET: Supplier
-        [Authorize(Roles = "SUPPLIER")]
+
         public ActionResult Index()
         {
-            return View();
+            var curr_usr = Session["CurrentUser"] as CurrentUser;
+            if (curr_usr.ReferenceToID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            List<PurchaseOrderHeader> POH = _db.PurchaseOrderHeaders.Where(a => a.SupplierID == curr_usr.ReferenceToID).ToList();
+            if (POH.Count == 0)
+            {
+                return View(POH);
+            }
+            return View(POH);
         }
+
+
+
+        public ActionResult DisplayProductLine(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var POL = _db.PurchaseProductLines.Where(a => a.PurchaseOrderID == id).ToList();
+            SelectList purchaseOrderStatusList = new SelectList(new[]
+    {
+        new SelectListItem { Text = "Pending", Value = "Pending" },
+        new SelectListItem { Text = "Approved", Value = "Approved" },
+        new SelectListItem { Text = "Rejected", Value = "Rejected" }
+    }, "Value", "Text");
+
+            
+           
+
+            PurchaseProductLine ppl = _db.PurchaseProductLines.Find(id);
+            _db.SaveChanges();
+            ViewBag.PurchaseOrderStatusList = purchaseOrderStatusList;
+            return View(POL);
+           
+        }
+
+        [HttpPost]
+        public ActionResult DisplayProductLine(int? id, string selectedStatus)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Retrieve the purchase product header associated with the given ID
+            var purchaseProductHeader = _db.PurchaseOrderHeaders.Find(id);
+
+            if (purchaseProductHeader == null)
+            {
+                return HttpNotFound(); // Or any other appropriate action if the purchase product header is not found
+            }
+
+            // Update the status column in the PurchaseProductHeader table
+            purchaseProductHeader.PurchaseOrderStatus = selectedStatus;
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            // Redirect to some action after saving changes
+            return RedirectToAction("Index"); // Replace "Index" with the appropriate action
+        }
+
+
+
+
+
+
+
+
     }
 }
+

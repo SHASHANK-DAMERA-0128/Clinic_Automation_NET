@@ -4,12 +4,17 @@
     ViewBag.Title = ViewBag.ScheduleID;
 }
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "CreatePhysicianPrescription", new { id = ViewBag.ScheduleID }, null)
-</p>
+</p>*@
 
 <p>
-    @*@ViewBag.AdviceData.Advise*@
+    @if (!string.IsNullOrEmpty(ViewBag.AdviceData?.Advise))
+    {
+        <div>@ViewBag.AdviceData.Advise</div>
+       
+        <a href="@Url.Action("EditPhysicianAdvice", "Physician", new { id = ViewBag.AdviceData.PhysicianAdviceID })" class="btn btn-warning mb-3 mt-3" style="margin-right: 1rem">Edit Advise</a>
+    }
 </p>
 
 <table class="table">
@@ -20,9 +25,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Drug.Title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhysicianAdvice.Advise)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.PhysicianAdvice.Advise)
+            </th>*@
         <th></th>
     </tr>
 
@@ -35,16 +40,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Drug.Title)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditPhysicianPrescription", new { id = item.PhysicianPrescriptionID }) |
-                @*@Html.ActionLink("Details", "DetailsPhysicianPrescription", new { id = item.PhysicianPrescriptionID }) |
-                        @Html.ActionLink("Delete", "DeletePhysicianPrescription", new { id = item.PhysicianPrescriptionID })
-                    </td>*@
-        </tr>
+            @*<td>
+                <a href="@Url.Action("DeletePhysicianPrescription","Physician",routeValues: new { id = item.DrugID })" class="btn btn-danger">Delete</a>
+            </td>*@
+        <td>
+            
+            <a href="@Url.Action("EditPhysicianPrescription", "Physician",new { id = item.PhysicianPrescriptionID })" class="btn btn-warning mb-3 mt-3" style="margin-right: 1rem">Edit</a>
+</tr>
     }
 
 </table>
-<p>@Html.ActionLink("Back to List", "Index")</p>
+@*<p><a href="@Url.Action("Index", "Physician") class="btn btn-dark mb-3 mt-3" style="margin-right: 1rem">Back to List</a></p>*@
+<div class="d-flex justify-content-start w-100">
+    <a href="@Url.Action("Index", "Physician")" class="btn btn-outline-dark text-decoration-none mt-3">← Back to List</a>
+</div>
+

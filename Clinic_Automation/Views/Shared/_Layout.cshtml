@@ -15,36 +15,37 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-                <ul class="navbar-nav">
-                    @RenderSection("Update", required: false)
-
-
-                    @if (IsSectionDefined("Logout"))
+                <ul class="navbar-nav ms-auto">
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        @RenderSection("Logout")
+                        <li style="color:#FFFFFF8C ; padding:8px 0 0;">Welcome!</li>
+                        if (User.IsInRole("PATIENT"))
+                        {
+                            <li  data-bs-toggle = "tooltip" data-bs-placement = "bottom" title = "View Profile"> @Html.ActionLink(@User.Identity.Name, "ViewProfile", "Patient", new { area = "" }, new { @class = "nav-link" }) </li>
+                        }
+                        else
+                        {
+                            <li class="nav-link">@User.Identity.Name</li>
+                        }
+                        <li> @Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link" }) </li>
                     }
                     else
                     {
                         <li>@Html.ActionLink("Register", "SignUp", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Login", "Login", "UserLogin", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li> @Html.ActionLink("Login", "Login", "UserLogin", new { area = "" }, new { @class = "nav-link" }) </li>
                     }
+
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container body-content min-vh-100">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Desi Care</p>
-        </footer>
-    </div>
-
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Desi Care</p>
+            </footer>
+        </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

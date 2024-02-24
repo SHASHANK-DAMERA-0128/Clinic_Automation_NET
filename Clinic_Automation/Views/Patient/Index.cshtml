@@ -1,63 +1,138 @@
 ﻿@model IEnumerable<Clinic_Automation.Models.Appointment>
 
-<p>
-    @Html.ActionLink("Create New", "CreateAppointment")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AppointmentDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Criticality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Reason)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduleStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Patient.PatientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Physician.PhysicianName)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AppointmentDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Criticality)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Reason)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduleStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Patient.PatientName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AppointmentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AppointmentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AppointmentID })
-        </td>
-    </tr>
+@{
+    ViewBag.Title = "Appointment Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link href="~/Content/styles/Drug.css" rel="stylesheet" />
+    <link href="~/Content/styles/Chemist.css" rel="stylesheet" />
+    <link href="~/Content/styles/Patient.css" rel="stylesheet" />
+</head>
 
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2><b>Appointment Dashboard🗒️</b></h2>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3 w-100">
+        <div class="w-100">
+            @using (Html.BeginForm("Index", "Patient", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="input-group">
+                    @Html.TextBox("physicianFilter", ViewBag.PhysicianFilter as string, new { @class = "form-control", placeholder = "Search by Physician Name", list = "physicians", autocomplete = "off" })
+                    <datalist id="physicians">
+                        @foreach (var physician in ViewBag.Physicians)
+                        {
+                            <option value="@physician.PhysicianName" />
+                        }
+                    </datalist>
+                    <div class="input-group-append">
+                        <input type="submit" value="Search" class="btn btn-primary bn-margin" />
+                        <a href="@Url.Action("Index", "Patient")" class="btn btn-outline-danger">Reset</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-content-center w-100 mt-3">
+        <div class="text-left">
+            <a href="@Url.Action("CreateAppointment", "Patient")" class="btn btn-outline-secondary" type="button">Create Appointment</a>
+        </div>
+        <div class="text-right">
+            <a href="@Url.Action("Index", "Patient", new { statusFilter = "Pending" })" class="btn btn-outline-warning" style="margin-right: 1rem">Pending</a>
+            <a href="@Url.Action("Index", "Patient", new { statusFilter = "Approved" })" class="btn btn-success">Approved</a>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Appointment Date</th>
+                        <th>Criticality</th>
+                        <th>Reason</th>
+                        <th>Note</th>
+                        <th>Schedule Status</th>
+                        <th>Physician Name</th>
+                        <th>Prescription</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.AppointmentDateTime)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Criticality)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Reason)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ScheduleStatus)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Physician.PhysicianName)</td>
+                            <td>
+                                @if (@item.Schedules?.FirstOrDefault() != null)
+                                {
+                                    if (@item.Schedules?.FirstOrDefault()?.PhysicianAdvices.Count() > 0)
+                                    {
+                                        <a href="@Url.Action("DisplayPatientPrescription", "Patient", new { id =  item.Schedules?.FirstOrDefault()?.ScheduleID})" class="btn btn-outline-primary bn-margin">View</a>
+                                    }
+                                    else
+                                    {
+                                        <div class="tb-margin">
+                                            <span class="hovertext" data-hover="Visit Physician">N/A</span>
+                                        </div>
+                                    }
+
+
+                                }
+                                else if (item.ScheduleStatus == "REJECTED")
+                                {
+                                    <div class="tb-margin">
+                                        <span class="hovertext" data-hover="Appointment Rejected">N/A</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="tb-margin">
+                                        <span class="hovertext" data-hover="Wait for Approval">N/A</span>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center align-items-center">
+                <div style="margin-right: 1rem;">
+                    @if (ViewBag.PageNumber > 1)
+                    {
+                        @Html.ActionLink("<<", "Index", new { page = ViewBag.PageNumber - 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter, search = ViewBag.search }, new { @class = "next-button-valid" })
+                    }
+                    else
+                    {
+                        <button disabled type="button" class="next-button-invalid">&lt;&lt;</button>
+                    }
+                </div>
+                <div style="margin-left: 1rem;">
+                    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+                    {
+                        @Html.ActionLink(">>", "Index", new { page = ViewBag.PageNumber + 1, pageSize = ViewBag.PageSize, filter = ViewBag.Filter, search = ViewBag.search }, new { @class = "next-button-valid" })
+                    }
+                    else
+                    {
+                        <button disabled type="button" class="next-button-invalid">&gt;&gt;</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,77 +4,45 @@
     ViewBag.Title = "ViewProfile";
 }
 
-<h2>ViewProfile</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center">
+                <h2>👤Profile Section</h2>
+            </div>
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h4 class="card-title">Patient</h4>
+                    <hr />
+                    <dl class="row">
 
-<div>
-    <h4>Patient</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Patient ID")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PatientID)
-        </dd>
-        <dt>
-            @Html.DisplayName("PatientName")
-        </dt>
+                        <dt class="col-sm-4">Patient Name</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PatientName)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PatientName)
-        </dd>
+                        <dt class="col-sm-4">Date of Birth</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.DOB)</dd>
 
-        <dt>
-            @Html.DisplayName("Date of Birth")
-        </dt>
+                        <dt class="col-sm-4">Patient Phone Number</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PatientNumber)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
+                        <dt class="col-sm-4">Email Address</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PatientEmail)</dd>
 
-        <dt>
-            @Html.DisplayName("Patient Phone Number")
-        </dt>
+                        <dt class="col-sm-4">Patient Address</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PatientAddress)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PatientNumber)
-        </dd>
+                        <dt class="col-sm-4">Gender</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Gender)</dd>
 
-        <dt>
-            @Html.DisplayName("Email Address")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PatientEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Patient Address")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PatientAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Gender")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Patient Summary")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PatientSummary)
-        </dd>
-
-    </dl>
+                        <dt class="col-sm-4">Patient Summary</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.PatientSummary)</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                @Html.ActionLink("Edit", "EditProfile", new { id = Model.PatientID }, new { @class = "btn btn-primary" })
+                <a href="@Url.Action("Index","Patient")" class="btn btn-outline-secondary">Back</a>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "EditProfile", new { id = Model.PatientID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

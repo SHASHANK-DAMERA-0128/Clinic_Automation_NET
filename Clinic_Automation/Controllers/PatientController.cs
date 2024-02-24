@@ -16,8 +16,8 @@ namespace Clinic_Automation.Controllers
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
         [Authorize(Roles = "PATIENT")]
         // GET: Patient
-        
-        public ActionResult Index()
+
+        public ActionResult Index(int? page, string statusFilter = null, string physicianFilter = null, int pageSize = 5)
         {
             var curr_usr = Session["CurrentUser"] as CurrentUser;
 
@@ -25,23 +25,62 @@ namespace Clinic_Automation.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<Appointment> appointment = db.Appointments.Where(a => a.PatientID == curr_usr.ReferenceToID).ToList();
-            //List<Schedule> schedules = db.Schedules
-            //                .Where(a => appointmentid.Contains(a.AppointmentID))
-            //                .ToList();
-            //if (schedules.Count == 0)
-            //{
-            //    return View(schedules);
-            //}
-            //ViewBag.CurrentUserName = curr_usr.UserName;
-            return View(appointment);
 
+            var query = db.Appointments.Where(a => a.PatientID == curr_usr.ReferenceToID);
 
+            var patientPhysicianIds = query.Select(a => a.PhysicianID).Distinct().ToList();
+            var physicians = db.Physicians.Where(p => patientPhysicianIds.Contains(p.PhysicianID)).ToList();
+            ViewBag.Physicians = physicians;
+
+            // Apply search filter by physician name if provided
+            if (!string.IsNullOrEmpty(physicianFilter))
+            {
+                query = query.Where(a => a.Physician.PhysicianName.Contains(physicianFilter));
+            }
+
+            // Apply status filter if provided
+            if (!string.IsNullOrEmpty(statusFilter))
+            {
+                query = query.Where(a => a.ScheduleStatus == statusFilter);
+            }
+
+            int pageNumber = (page ?? 1);
+            int totalItems = query.Count();
+
+            var appointments = query.OrderByDescending(a => a.AppointmentDateTime)
+                                    .Skip((pageNumber - 1) * pageSize)
+                                    .Take(pageSize)
+                                    .ToList();
+
+            int totalPages = (int)Math.Ceiling((decimal)totalItems / pageSize);
+
+            ViewBag.PageNumber = pageNumber;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalItems = totalItems;
+            ViewBag.StatusFilter = statusFilter;
+            ViewBag.PhysicianFilter = physicianFilter;
+
+            return View(appointments);
         }
 
         public ActionResult CreateAppointment()
         {
-            ViewBag.PhysicianID = new SelectList(db.Physicians, "PhysicianID", "PhysicianName");
+
+            var physicianList = db.Physicians.Select(p => new
+            {
+                p.PhysicianID,
+                FullName = p.PhysicianName + " (" + p.Specialization + ")"
+            }).ToList();
+            ViewBag.PhysicianID = new SelectList(physicianList, "PhysicianID", "Fullname");
+            SelectList CriticalityList = new SelectList(new[]
+                {
+                new SelectListItem { Text = "Normal", Value = "Normal" },
+                new SelectListItem { Text = "Critical", Value = "Critical" }
+            }, "Value", "Text");
+
+
+            ViewBag.CriticalityList = CriticalityList;
             return View();
         }
         [HttpPost]
@@ -51,12 +90,37 @@ namespace Clinic_Automation.Controllers
             if (ModelState.IsValid)
             {
                 var curr_usr = Session["CurrentUser"] as CurrentUser;
+
+                //int isExist = IsPatientAppointmentLimit(appointment.AppointmentDateTime, appointment.PhysicianID, (int)curr_usr.ReferenceToID);
+                //int  isExist = IsPhysicianAppointmentClear(appointment.AppointmentDateTime, appointment.PhysicianID);
+
+
+                //                Dictionary<int, string> errorMessages = new Dictionary<int, string>
+                //{               { 0, "Physician is not Available! Please choose a time that is 20 minutes later." },
+                //                { 1, "Appointment Limit Reached! Please choose appointment for the next day." }
+                // Add more mappings if needed
+                //};
                 appointment.PatientID = (int)curr_usr.ReferenceToID;
                 appointment.ScheduleStatus = "PENDING";
                 db.Appointments.Add(appointment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            var physicianList = db.Physicians.Select(p => new
+            {
+                p.PhysicianID,
+                FullName = p.PhysicianName + " (" + p.Specialization + ")"
+            }).ToList();
+            ViewBag.PhysicianID = new SelectList(physicianList, "PhysicianID", "Fullname");
+            SelectList CriticalityList = new SelectList(new[]
+                {
+                new SelectListItem { Text = "Normal", Value = "Normal" },
+                new SelectListItem { Text = "Critical", Value = "Critical" }
+            }, "Value", "Text");
+
+
+            ViewBag.CriticalityList = CriticalityList;
+
             return View(appointment);
         }
         public ActionResult ViewProfile()
@@ -109,12 +173,38 @@ namespace Clinic_Automation.Controllers
             }
 
             List<PhysicianPrescription> physicianPrescription = db.PhysicianPrescriptions.Where(a => a.ScheduleID == id).ToList();
+
             if (physicianPrescription == null)
             {
                 return View(physicianPrescription);
             }
             return View(physicianPrescription);
         }
+
+        //[NonAction]
+        //public int IsPhysicianAppointmentClear(DateTime appointmentDatetime , int physicianID)
+        //{
+        //    DateTime rangeStart = appointmentDatetime.AddMinutes(-5);
+        //    DateTime rangeEnd = appointmentDatetime.AddMinutes(5);
+        //    using (ClinicAutomationEntities _db = new ClinicAutomationEntities())
+        //    {
+
+        //        var appointmentAfter = db.Appointments
+        //    .Where(a => a.PhysicianID == physicianID)
+        //    .Where(record =>record.AppointmentDateTime > rangeStart && record.AppointmentDateTime <rangeEnd).ToList();
+        //    //    var appointmentAfter = _db.Appointments
+        //    //.Where(a => a.PhysicianID == physicianID
+        //    //         && (a.AppointmentDateTime >= rangeStart
+        //    //         && a.AppointmentDateTime < appointmentDatetime));
+
+        //        if (appointmentAfter.Count != 0)
+        //            return 0;
+
+        //        return -1;
+        //    }
+        //}
+
+
 
         protected override void Dispose(bool disposing)
         {

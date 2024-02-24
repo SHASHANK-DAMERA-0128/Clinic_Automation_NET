@@ -1,0 +1,40 @@
+﻿.butn-style {
+    padding: 6px 10px;
+    font-size: 12px;
+    margin-right: 6px;
+}
+
+.bn-margin {
+    margin-left: 15px;
+}
+
+.tb-margin {
+    margin-left: 25px;
+}
+
+.hovertext {
+    position: relative;
+    border-bottom: 1px dotted black;
+}
+
+    .hovertext:before {
+        content: attr(data-hover);
+        visibility: hidden;
+        opacity: 0;
+        width: 140px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 0;
+        transition: opacity 1s ease-in-out;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 110%;
+    }
+
+    .hovertext:hover:before {
+        opacity: 0.5;
+        visibility: visible;
+    }

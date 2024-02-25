@@ -143,11 +143,12 @@ namespace Clinic_Automation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePhysicianDrugRequest([Bind(Include = "DrugRequestID,PhysicianID,DrugInfoText,RequestedDate,RequestStatus")] DrugRequest drugRequest)
+        public ActionResult CreatePhysicianDrugRequest([Bind(Include = "DrugRequestID,PhysicianID,DrugInfoText,RequestStatus")] DrugRequest drugRequest)
         {
             if (ModelState.IsValid)
             {
-                drugRequest.RequestStatus = "PENDING";
+                drugRequest.RequestStatus = "Not";
+                drugRequest.RequestedDate = DateTime.Now;
                 db.DrugRequests.Add(drugRequest);
                 db.SaveChanges();
                 return RedirectToAction("Index");

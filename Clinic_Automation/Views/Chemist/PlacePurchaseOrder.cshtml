@@ -34,7 +34,7 @@
 
             <div class="col-sm-6">
                 <div class="form-group form-group-styling">
-                    @Html.LabelFor(model => model.POHeader.SupplierID, "Supplier Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.POHeader.SupplierID, "Supplier Name", htmlAttributes: new { @class = "control-label" })
 
                     <div class="col-md-10">
                         @Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control" })
@@ -83,7 +83,6 @@
                 <tr>
 
                     <td>
-                        @*@Html.DropDownList("DrugID", null, htmlAttributes: new { @class = "form-control", id = "rowCmbDrugID" })*@
                         @Html.DropDownList("DrugId", null, htmlAttributes: new { @class = "form-control", id = "rowCmbDrugID" })
                     </td>
 
@@ -125,19 +124,23 @@
         $("#btnSave").click(function (e) {
             e.preventDefault();
 
+            if ($("#rowCmbDrugID :selected").val() === "" || $("#rowtxtQty").val() === "" || $("#rowtxtNote").val() === "") {
+                alert("Please fill in all fields for the Purchase Order.");
+                return;
+            }
+
             ctr++;
             var row =
                 `<tr>
 
                 <td>
                     ${$("#rowCmbDrugID :selected").text()}
-
                     <input type="hidden" name="POProductLines[${ctr - 1}].DrugId" value="${$("#rowCmbDrugID :selected").val()}" />
 
                 </td>
                 <td>
                     ${$("#rowtxtQty").val()}
-                <input type="hidden" name="POProductLines[${ctr - 1}].Quantity" value="${$("#rowtxtQty").val()}" />
+                    <input type="hidden" name="POProductLines[${ctr - 1}].Quantity" value="${$("#rowtxtQty").val()}" />
 
                 </td>
                 <td>
@@ -153,27 +156,35 @@
 
             $("#tblPrdLineCnt").append(row);
         });
-
-        //$("#btnCancel").click(function () {
-        //    $("#rowCmbDrugID").val("");
-        //    $("#rowtxtQty").val("");
-        //    $("#rowtxtNote").val("");
-        //});
-
-        //$("#btnSavePO").click(function (e) {
-        //    e.preventDefault();
-        //    console.log("Form is not submitted")
-
-        //    $.ajax({
-        //        type: "POST",
-        //        url: "/Chemist/PlacePurchaseOrder",
-        //        data: $("form").serialize(),
-        //        success: function (data) {
-        //            console.log("Form is submitted")
-        //        }
-        //    });
-        //});
     });
+
+    $(function () {
+        $("form").submit(function (e) {
+            // Check if POHeader.Note is empty
+            if ($("#txtNote").val().trim() === "") {
+                alert("Please add a note for the Purchase Order.");
+                e.preventDefault(); // Prevent form submission
+                return;
+            }
+
+            // Check if any POProductLine entry is empty
+            var isValid = true;
+            $(".rowDrugEntry").each(function () {
+                var $quantity = $(this).find(".txtQty");
+                var $note = $(this).find(".txtNote");
+                if ($quantity.val().trim() === "" || $note.val().trim() === "") {
+                    alert("Please fill in all fields for the Purchase Order.");
+                    isValid = false;
+                    return false; // Exit each loop
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault(); // Prevent form submission
+            }
+        });
+    });
+
 
 
 </script>

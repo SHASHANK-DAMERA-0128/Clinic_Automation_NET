@@ -31,8 +31,8 @@
                         <div class="form-group row mb-2">
                             @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "col-md-4 col-form-label" })
                             <div class="col-md-8">
-                                @*@Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })*@
-                                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", @type = "text", placeholder = "YYYY-MM-DD", @Value = (Model.DOB != DateTime.MinValue) ? Model.DOB.ToString("yyyy-MM-dd") : "" })
+                                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD", @Value = (Model.DOB != DateTime.MinValue) ? Model.DOB.ToString("yyyy-MM-dd") : "" } })
+                                @* @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", @type = "text", placeholder = "YYYY-MM-DD", @Value = (Model.DOB != DateTime.MinValue) ? Model.DOB.ToString("yyyy-MM-dd") : "" })*@
                                 @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -90,15 +90,6 @@
     </div>
 </div>
 
-<script>
-    // Convert text input to date input
-    document.addEventListener('DOMContentLoaded', function () {
-        var dateInputs = document.querySelectorAll('input[type="text"][placeholder="YYYY-MM-DD"]');
-        dateInputs.forEach(function (input) {
-            input.type = 'date';
-        });
-    });
-</script>
 
 
 @section Scripts {

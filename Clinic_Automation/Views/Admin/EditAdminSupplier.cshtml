@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Supplier</h4>
+        <h4>Edit Supplier</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.SupplierID)
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-2">
             @Html.LabelFor(model => model.SupplierAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SupplierAddress, new { htmlAttributes = new { @class = "form-control" } })
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-2">
             @Html.LabelFor(model => model.SupplierNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SupplierNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-2">
             @Html.LabelFor(model => model.SupplierEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SupplierEmailID, new { htmlAttributes = new { @class = "form-control" } })
@@ -46,16 +46,18 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="row mt-4">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btnSavePO" type="submit" value="Save" class="btn btn-success" />
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "DisplayAdminSupplier")
+<div class="d-flex justify-content-start w-100">
+    <a href="@Url.Action("DisplayAdminSupplier", "Admin")" class="btn btn-outline-dark text-decoration-none mt-3">← Back to List</a>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

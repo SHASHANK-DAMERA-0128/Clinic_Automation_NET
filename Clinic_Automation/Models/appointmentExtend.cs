@@ -24,14 +24,15 @@ namespace Clinic_Automation.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm tt}")]
         [appdatetimevalidation(ErrorMessage = "You have chosen a date in the past. Please select a future date to proceed.")]
         public System.DateTime AppointmentDateTime { get; set; }
+
         [Display(Name = "Criticality")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Criticality")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Criticality")]
         public string Criticality { get; set; }
         [Display(Name = "Reason")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Reason")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Reason")]
         public string Reason { get; set; }
         [Display(Name = "Note")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Note")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Note")]
         public string Note { get; set; }
 
     }

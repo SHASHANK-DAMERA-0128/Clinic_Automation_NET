@@ -9,22 +9,22 @@ namespace Clinic_Automation.Models
     public class chemistExtend
     {
         [Display(Name = "Chemist Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Chemist Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Chemist Name")]
         public string ChemistName { get; set; }
         [Display(Name = "Address")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Address")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Address")]
         public string ChemistAddress { get; set; }
         [Display(Name = "Phone Number")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Phone Number")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Phone Number")]
         [MaxLength(10, ErrorMessage = "Please Enter 10 Digit Phone Number")]
         [MinLength(10, ErrorMessage = "Please Enter 10 Digit Phone Number")]
         public string ChemistNumber { get; set; }
         [Display(Name = "Email Address")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Email Address")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Email Address")]
         [DataType(DataType.EmailAddress)]
         public string ChemistEmailID { get; set; }
         [Display(Name = "Summary")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Summary")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Summary")]
         public string ChemistSummary { get; set; }
     }
 

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Clinic_Automation.Models.DrugRequest>
+
+<div class="d-flex justify-content-start w-100">
+    <a href="@Url.Action("CreatePhysicianDrugRequest", "Physician")" class="btn btn-success text-decoration-none mt-3"> Create New</a>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DrugInfoText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Physician.PhysicianName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugInfoText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RequestStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+            </td>
+
+        </tr>
+    }
+
+</table>

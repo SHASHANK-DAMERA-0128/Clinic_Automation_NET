@@ -16,7 +16,7 @@ namespace Clinic_Automation.Controllers
         // GET: Physician
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
 
-       
+
         public ActionResult Index()
         {
             try
@@ -99,38 +99,8 @@ namespace Clinic_Automation.Controllers
         }
 
 
-        public ActionResult EditPhysicianPrescription(int? id)
-        {
-            ViewBag.ScheduleID = new SelectList(db.Schedules, "ScheduleID", "ScheduleID");
-            ViewBag.DrugID = new SelectList(db.Drugs, "DrugID", "DrugID");
-            ViewBag.PhysicianAdviceID = new SelectList(db.PhysicianAdvices, "PhysicianAdviceID", "PhysicianAdviceID");
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            PhysicianPrescription physicianPrescription = db.PhysicianPrescriptions.Find(id);
-            if (physicianPrescription == null)
-            {
-                return HttpNotFound();
-            }
-            return View(physicianPrescription);
-        }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditPhysicianPrescription([Bind(Include = "PhysicianPrescriptionID,ScheduleID,DrugID,PhysicianAdviceID,Description")] PhysicianPrescription physicianPrescription)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(physicianPrescription).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("DisplayPhysicianPrescription", new { id = physicianPrescription.ScheduleID });
-            }
-            return View(physicianPrescription);
-        }
-
-       
         public ActionResult EditPhysicianAdvice(int? id)
         {
             if (id == null)
@@ -147,7 +117,7 @@ namespace Clinic_Automation.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditPhysicianAdvice([Bind(Include = "PhysicianAdviceID,ScheduleID,Advise")] PhysicianAdvice physicianadvice)
-            {
+        {
             if (ModelState.IsValid)
             {
                 db.Entry(physicianadvice).State = EntityState.Modified;
@@ -159,6 +129,36 @@ namespace Clinic_Automation.Controllers
         }
 
 
+        public ActionResult PhysiciandrugRequest()
+        {
+            var drugRequests = db.DrugRequests.Include(d => d.Physician);
+            return View(drugRequests.ToList());
+        }
+        public ActionResult CreatePhysicianDrugRequest()
+        {
+            ViewBag.PhysicianID = new SelectList(db.Physicians, "PhysicianID", "PhysicianName");
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreatePhysicianDrugRequest([Bind(Include = "DrugRequestID,PhysicianID,DrugInfoText,RequestedDate,RequestStatus")] DrugRequest drugRequest)
+        {
+            if (ModelState.IsValid)
+            {
+                drugRequest.RequestStatus = "PENDING";
+                db.DrugRequests.Add(drugRequest);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.PhysicianID = new SelectList(db.Physicians, "PhysicianID", "PhysicianName", drugRequest.PhysicianID);
+            return View(drugRequest);
+        }
+
     }
+
+
 
 }

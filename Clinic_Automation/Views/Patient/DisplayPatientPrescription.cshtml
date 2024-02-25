@@ -1,21 +1,24 @@
-﻿﻿@model IEnumerable<Clinic_Automation.Models.PhysicianPrescription>
+﻿@model IEnumerable<Clinic_Automation.Models.PhysicianPrescription>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center mb-4">
-            <h2>⚕️Physician Prescription</h2>
+            <h2>⚕️<b>Physician Prescription</b></h2>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title">Physician Advice 🩺</h5>
+                    <h5 class="card-title"><b>Physician Advice</b> 🩺</h5>
                     <hr />
-                    @foreach (var item in Model)
+                    @{
+                        var uniqueAdvices = Model.Select(p => p.PhysicianAdvice.Advise).Distinct().ToList();
+                    }
+                    @foreach (var advice in uniqueAdvices)
                     {
                         <div>
-                            @Html.DisplayFor(modelItem => item.PhysicianAdvice.Advise)
+                            @advice
                         </div>
                     }
                 </div>

@@ -356,6 +356,8 @@
     <Content Include="Views\UserLogin\PatientLoginSetup.cshtml" />
     <Content Include="Views\UserLogin\ForgotPassword.cshtml" />
     <Content Include="Views\UserLogin\ResetPassword.cshtml" />
+    <Content Include="Views\Physician\CreatePhysicianDrugRequest.cshtml" />
+    <Content Include="Views\Physician\PhysiciandrugRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <title>Physician</title>
 </head>
 <body>
     @Scripts.Render("~/bundles/jquery")
@@ -21,7 +21,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Physician</h4>
+            <h4>Edit Physician</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.PhysicianID)
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
                 @Html.LabelFor(model => model.PhysicianAddress, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.PhysicianAddress, new { htmlAttributes = new { @class = "form-control" } })
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
                 @Html.LabelFor(model => model.PhysicianNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.PhysicianNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -50,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
                 @Html.LabelFor(model => model.PhysicianEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.PhysicianEmailID, new { htmlAttributes = new { @class = "form-control" } })
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
                 @Html.LabelFor(model => model.Specialization, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Specialization, new { htmlAttributes = new { @class = "form-control" } })
@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-2">
                 @Html.LabelFor(model => model.PhysicianSummary, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.PhysicianSummary, new { htmlAttributes = new { @class = "form-control" } })
@@ -74,9 +74,11 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-primary mt-3" />
+            <div class="row mt-4">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="btnSavePO" type="submit" value="Save" class="btn btn-success" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,6 +90,3 @@
 </body>
 </html>
 
-@section Logout{
-    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
-}

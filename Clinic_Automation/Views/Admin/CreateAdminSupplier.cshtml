@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Supplier</h4>
+        <h4>New Supplier</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-2">
             @Html.LabelFor(model => model.SupplierAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SupplierAddress, new { htmlAttributes = new { @class = "form-control" } })
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-2">
             @Html.LabelFor(model => model.SupplierNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SupplierNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-2">
             @Html.LabelFor(model => model.SupplierEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SupplierEmailID, new { htmlAttributes = new { @class = "form-control" } })
@@ -44,15 +44,15 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-4">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
-<div class="btn btn-secondary">
+<div class="btn btn-secondary mt-2">
     <a class="text-decoration-none text-white" href="@Url.Action("DisplayAdminSupplier", "Admin")">Back to List</a>
 </div>
 @section Scripts {

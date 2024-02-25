@@ -1,9 +1,5 @@
 ﻿@model Clinic_Automation.Models.Physician
 
-@{
-    Layout = null;
-}
-
 <!DOCTYPE html>
 
 <html>
@@ -12,9 +8,8 @@
     <title>Delete</title>
 </head>
 <body>
-    <h3>Are you sure you want to delete this?</h3>
+    <h3>Are you sure you want to delete this Physician?</h3>
     <div>
-        <h4>Physician</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -70,10 +65,11 @@
         @using (Html.BeginForm()) {
             @Html.AntiForgeryToken()
     
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
-                @Html.ActionLink("Back to List", "DisplayAdminPhysician")
-            </div>
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a href="@Url.Action("DisplayAdminPhysician", "Admin")" class="btn btn-outline-dark text-decoration-none ">← Back to List</a>
+
+    </div>
         }
     </div>
 </body>

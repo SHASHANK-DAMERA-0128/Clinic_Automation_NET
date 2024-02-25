@@ -1,7 +1,7 @@
 ﻿@model Clinic_Automation.Models.Chemist
 
 <div>
-    <h4>Chemist</h4>
+    <h4>Chemist Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -46,11 +46,8 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "EditAdminChemist", new { id = Model.ChemistID }) |
-    @Html.ActionLink("Back to List", "DisplayAdminChemist")
-</p>
 
-@section Logout{
-    <li>@Html.ActionLink("LogOut", "LogOut", "UserLogin", new { area = "" }, new { @class = "nav-link btn btn-danger text-white px-3 py-1" })</li>
-}
+
+
+@Html.ActionLink("Edit", "EditAdminChemist", new { id = Model.ChemistID }, new { @class = "btn btn-outline-primary" })
+<a href="@Url.Action("DisplayAdminChemist", "Admin")" class="btn btn-outline-dark text-decoration-none ">← Back to List</a>

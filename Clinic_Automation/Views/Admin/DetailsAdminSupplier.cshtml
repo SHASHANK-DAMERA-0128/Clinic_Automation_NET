@@ -1,7 +1,7 @@
 ﻿@model Clinic_Automation.Models.Supplier
 
 <div>
-    <h4>Supplier</h4>
+    <h4>Supplier Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,7 +38,7 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "EditAdminSupplier", new { id = Model.SupplierID }) |
-    @Html.ActionLink("Back to List", "DisplayAdminSupplier")
-</p>
+
+@Html.ActionLink("Edit", "EditAdminSupplier", new { id = Model.SupplierID }, new { @class = "btn btn-outline-primary" })
+<a href="@Url.Action("DisplayAdminSupplier", "Admin")" class="btn btn-outline-dark text-decoration-none ">← Back to List</a>
+

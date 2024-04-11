@@ -4,35 +4,35 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6396145943794e3d8dbb53c2dee3b579" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="ibm_project_grp3Model.Appointment" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.Chemist" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.Drug" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.DrugRequest" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.Patient" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.Physician" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.PhysicianAdvice" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.PhysicianPrescription" Width="1.5" PointX="9.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.PurchaseOrderHeader" Width="1.5" PointX="6" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.PurchaseProductLine" Width="1.5" PointX="9.75" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.Schedule" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.Supplier" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ibm_project_grp3Model.User" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_Appointment_Patient" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_Appointment_Physician" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_Schedule_Appointment" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_User_Chemist" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_PhysicianPrescription_Drug" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_PurchaseProductLine_Drug" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_DrugRequest_Physician" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_User_Patient" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_User_Physician" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_PhysicianAdvice_Schedule" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_PhysicianPrescription_PhysicianAdvice" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_PhysicianPrescription_Schedule" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_PurchaseOrderHeader_Supplier" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_PurchaseProductLine_PurchaseOrderHeader" ManuallyRouted="false" />
-        <AssociationConnector Association="ibm_project_grp3Model.FK_User_Supplier" ManuallyRouted="false" />
+      <Diagram DiagramId="44a9eb1f45eb4e0f8c4c8bb9c0130659" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="ClinicAutomationModel.Appointment" Width="2" PointX="3.375" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Chemist" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Drug" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.DrugRequest" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Patient" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Physician" Width="1.875" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PhysicianAdvice" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PhysicianPrescription" Width="1.5" PointX="9.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PurchaseOrderHeader" Width="2.375" PointX="6" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.PurchaseProductLine" Width="2.625" PointX="9.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Schedule" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.Supplier" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicAutomationModel.User" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_Appointment_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_Appointment_Physician" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_Schedule_Appointment" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Chemist" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianPrescription_Drug" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PurchaseProductLine_Drug" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_DrugRequest_Physician" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Physician" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianAdvice_Schedule" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianPrescription_PhysicianAdvice" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PhysicianPrescription_Schedule" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PurchaseOrderHeader_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_PurchaseProductLine_PurchaseOrderHeader" ManuallyRouted="false" />
+        <AssociationConnector Association="ClinicAutomationModel.FK_User_Supplier" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

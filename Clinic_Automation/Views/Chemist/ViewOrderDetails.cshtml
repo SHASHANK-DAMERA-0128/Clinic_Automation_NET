@@ -4,9 +4,31 @@
     ViewBag.Title = "ViewOrderDetails";
 }
 
-<p>
-    Showing Order Details for Order ID: @ViewBag.OrderID
+<a href="@Url.Action("Index", "Chemist")" class="btn btn-dark text-decoration-none text-white mb-2">
+    Back to List
+</a>
+
+<div>
+    <div>
+        <p>Supplier Details</p>
+        <p>
+            <strong>Supplier Name</strong>:  @ViewBag.Supplier.Supplier.SupplierName
 </p>
+<p>
+    <strong>Supplier Address</strong>: @ViewBag.Supplier.Supplier.SupplierAddress
+</p>
+<p>
+    <strong>Supplier Contact</strong>: @ViewBag.Supplier.Supplier.SupplierNumber
+</p>
+<p>
+    <strong>Supplier Email</strong>: @ViewBag.Supplier.Supplier.SupplierEmailID
+</p>
+</div>
+
+    <p>
+        <strong>Note to the Supplier</strong>: @ViewBag.Supplier.Note
+    </p>
+</div>
 
 <table class="table">
     <tr>
@@ -21,18 +43,19 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Drug.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drug.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+        </tr>
+    }
 
 </table>

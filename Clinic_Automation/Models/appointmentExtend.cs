@@ -10,19 +10,18 @@ namespace Clinic_Automation.Models
 {
     public class appointmentExtend
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please select a physician.")]
-        public int PhysicianID { get; set; }
-        //[Display(Name = "Appointment Date & Time")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Date and Time")]
-        //[DataType(DataType.DateTime)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-mm-ddTHH:mm:ss}")]
-        //[appdatetimevalidation(ErrorMessage = "You have chosen a date in the past. Please select a future date to proceed.")]
-        //public System.DateTime AppointmentDateTime { get; set; }
 
+
+        //[Display(Name = "Appointment Date & Time")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter the valid Date and Time")]
+        //[DataType(DataType.DateTime)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
+        //[appdatetimevalidation(ErrorMessage = "Please Enter the valid Date and Time")]
+        //public System.DateTime AppointmentDateTime { get; set; }
         [Display(Name = "Appointment Date & Time")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter a valid Date and Time")]
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-ddTHH:mm:ss}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm tt}")]
         [appdatetimevalidation(ErrorMessage = "You have chosen a date in the past. Please select a future date to proceed.")]
         public System.DateTime AppointmentDateTime { get; set; }
 

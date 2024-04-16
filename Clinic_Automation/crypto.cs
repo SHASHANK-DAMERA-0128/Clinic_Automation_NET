@@ -10,7 +10,6 @@ namespace Clinic_Automation
 {
     public static class crypto
     {
-
         public static string Encrypt(string s)
         {
             return Convert.ToBase64String(

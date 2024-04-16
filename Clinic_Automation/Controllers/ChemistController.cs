@@ -14,7 +14,7 @@ namespace Clinic_Automation.Controllers
     {
         private ClinicAutomationEntities db = new ClinicAutomationEntities();
         // GET: Chemist
-        [Authorize(Roles = "Chemist")]
+        [Authorize(Roles = "Chemist, CHEMIST")]
 
         public ActionResult Index(int? page, string search = "", string filter = "Not", int pageSize = 5)
         {
@@ -27,13 +27,13 @@ namespace Clinic_Automation.Controllers
             query = query.Where(d => d.DrugInfoText.Contains(search)
             || d.RequestedDate.ToString().Contains(search));
 
-            int totalItems = query.Count();
-
             var drugRequests = query
                 .OrderByDescending(d => d.RequestedDate)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
+
+            int totalItems = query.Count();
 
             int totalPages = (int)Math.Ceiling((decimal)totalItems / pageSize);
 
@@ -83,6 +83,7 @@ namespace Clinic_Automation.Controllers
         [HttpPost]
         public ActionResult PlacePurchaseOrder(POViewModel vm)
         {
+
             vm.POHeader.Supplier = db.Suppliers.Find(int.Parse(Request.Form.Get("SupplierID")));
 
             vm.POProductLines.ToList().ForEach(pl => { vm.POHeader.PurchaseProductLines.Add(pl); });

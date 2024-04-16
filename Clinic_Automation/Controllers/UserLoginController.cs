@@ -116,63 +116,7 @@ namespace Clinic_Automation.Controllers
                 return v != null;
             }
         }
-        //[NonAction]
-        //public void SendVerificationLinkEmail(string emailid, Guid ac)
-        //{
-        //var verifyURL = "/users/verifyaccount/" + ac;
-        //var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
 
-        //var fromEmail = new MailAddress("damerashashank@gmail.com", "hiiiiiii");
-        //var toEmail = new MailAddress(emailid);
-        //var fromEmailPassword = "";
-
-
-        //string subject = "Your account is successfully created!";
-
-        //string body = "<br/><br/>We are excited to tell you that your Dotnet Awesome account is" +
-        //"successfully created.Please click on the below link to verify your account" +
-        //"<br/><br/><a href = '" + link + "'> " + link + " </ a > ";
-
-
-        //var smtp = new SmtpClient
-        //{
-        //    Host = "smtp.gmail.com",
-        //    Port = 587,
-        //    EnableSsl = true,
-        //    DeliveryMethod = SmtpDeliveryMethod.Network,
-        //    UseDefaultCredentials = false,
-        //    Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-        //};
-
-        //using (var message = new MailMessage(fromEmail, toEmail)
-        //{
-        //    Subject = subject,
-        //    Body = body,
-        //    IsBodyHtml = true
-        //})
-
-        //smtp.Send(message);
-
-        //using (MailMessage mail = new MailMessage())
-        //{
-        //    mail.From = new MailAddress("damerashashank@gmail.com");
-        //    mail.To.Add(emailid);
-        //    mail.Subject = "Hello World";
-        //    mail.Body = "<h1>Hello</h1>";
-        //    mail.IsBodyHtml = true;
-        //    //mail.Attachments.Add(new Attachment("C:\\file.zip"));
-
-        //    using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
-        //    {
-        //        smtp.Credentials = new NetworkCredential("ibmtraininggrp@gmail.com", "Test@1234");
-        //        smtp.EnableSsl = true;
-        //        smtp.Send(mail);
-        //    }
-        //}
-
-        //        }
-
-        // User: Logout
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();

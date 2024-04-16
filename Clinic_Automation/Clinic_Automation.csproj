@@ -328,14 +328,12 @@
     <Content Include="Views\Admin\DetailsAdminSupplier.cshtml" />
     <Content Include="Views\Admin\DetailsAdminChemist.cshtml" />
     <Content Include="Views\Admin\DetailsAdminPatient.cshtml" />
-    <Content Include="Views\Admin\EditAdminAppointment.cshtml" />
     <Content Include="Views\Admin\DisplayAdminAppointment.cshtml" />
     <Content Include="Views\Patient\CreateAppointment.cshtml" />
     <Content Include="Views\Patient\EditProfile.cshtml" />
     <Content Include="Views\Patient\ViewProfile.cshtml" />
     <Content Include="Views\Chemist\ViewMedicine.cshtml" />
     <Content Include="Views\Physician\DisplayPhysicianPrescription.cshtml" />
-    <Content Include="Views\Physician\EditPhysicianPrescription.cshtml" />
     <Content Include="Views\Physician\CreatePhysicianPrescription.cshtml" />
     <Content Include="Views\Patient\DisplayPatientPrescription.cshtml" />
     <Content Include="Views\Chemist\Index.cshtml" />
@@ -356,6 +354,8 @@
     <Content Include="Views\UserLogin\PatientLoginSetup.cshtml" />
     <Content Include="Views\UserLogin\ForgotPassword.cshtml" />
     <Content Include="Views\UserLogin\ResetPassword.cshtml" />
+    <Content Include="Views\Physician\CreatePhysicianDrugRequest.cshtml" />
+    <Content Include="Views\Physician\PhysiciandrugRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -51,7 +51,7 @@
                     }
                     else
                     {
-                        <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View Un-noted Drugs</a>
+                        <a href="@Url.Action("ToggleFilter", new { currentFilter = ViewBag.Filter })" class="btn btn-primary">View Unchecked Requests</a>
                     }
                 </div>
             </div>
@@ -96,45 +96,56 @@
                     <th>
                     </th>
                 </tr>
-                @foreach (var item in Model)
+                @if (Model.Count() == 0)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DrugInfoText)
-                        </td>
-                        <td>
-                            @item.RequestedDate.ToString("dd' 'MMM' 'yyyy")
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
-                        </td>
-                        <td>
-                            @if (item.RequestStatus == "Not")
-                            {
-                                <a href="@Url.Action("ToggleStatus",
-                                    new { id = item.DrugRequestID,
-                                        filter = ViewBag.Filter,
-                                        page = ViewBag.PageNumber,
-                                        search = ViewBag.search
-                                    })"
-                                   class="btn btn-warning">
-                                    Mark as Noted
-                                </a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("ToggleStatus",
-                                    new { id = item.DrugRequestID,
-                                        filter = ViewBag.Filter,
-                                        page = ViewBag.PageNumber,
-                                        search = ViewBag.search
-                                    })"
-                                   class="btn btn-outline-warning text-black">
-                                    Mark as Un-noted
-                                </a>
-                            }
+                        <td colspan="4" class="text-center text-warning my-4 fw-bold">
+                            No Drug Requests Found
                         </td>
                     </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DrugInfoText)
+                            </td>
+                            <td>
+                                @item.RequestedDate.ToString("dd' 'MMM' 'yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Physician.PhysicianName)
+                            </td>
+                            <td>
+                                @if (item.RequestStatus == "Not")
+                                {
+                                    <a href="@Url.Action("ToggleStatus",
+                                        new { id = item.DrugRequestID,
+                                            filter = ViewBag.Filter,
+                                            page = ViewBag.PageNumber,
+                                            search = ViewBag.search
+                                        })"
+                                       class="btn btn-warning">
+                                            Mark as Checked
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ToggleStatus",
+                                        new { id = item.DrugRequestID,
+                                            filter = ViewBag.Filter,
+                                            page = ViewBag.PageNumber,
+                                            search = ViewBag.search
+                                        })"
+                                       class="btn btn-outline-warning text-black">
+                                        Uncheck Request
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
                 }
             </table>
         </div>

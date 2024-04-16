@@ -5,14 +5,14 @@
 }
 
 @*<p>
-    @Html.ActionLink("Create New", "CreatePhysicianPrescription", new { id = ViewBag.ScheduleID }, null)
-</p>*@
+        @Html.ActionLink("Create New", "CreatePhysicianPrescription", new { id = ViewBag.ScheduleID }, null)
+    </p>*@
 
 <p>
     @if (!string.IsNullOrEmpty(ViewBag.AdviceData?.Advise))
     {
         <div>@ViewBag.AdviceData.Advise</div>
-       
+
         <a href="@Url.Action("EditPhysicianAdvice", "Physician", new { id = ViewBag.AdviceData.PhysicianAdviceID })" class="btn btn-warning mb-3 mt-3" style="margin-right: 1rem">Edit Advise</a>
     }
 </p>
@@ -41,12 +41,10 @@
                 @Html.DisplayFor(modelItem => item.Drug.Title)
             </td>
             @*<td>
-                <a href="@Url.Action("DeletePhysicianPrescription","Physician",routeValues: new { id = item.DrugID })" class="btn btn-danger">Delete</a>
-            </td>*@
-        <td>
-            
-            <a href="@Url.Action("EditPhysicianPrescription", "Physician",new { id = item.PhysicianPrescriptionID })" class="btn btn-warning mb-3 mt-3" style="margin-right: 1rem">Edit</a>
-</tr>
+                    <a href="@Url.Action("DeletePhysicianPrescription","Physician",routeValues: new { id = item.DrugID })" class="btn btn-danger">Delete</a>
+                </td>*@
+            <td>
+        </tr>
     }
 
 </table>

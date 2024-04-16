@@ -24,7 +24,6 @@ namespace Clinic_Automation.Controllers
         public ActionResult Login(User user)
         {
             
-            
             if (ModelState.IsValid)
             {
                 var usr = _db.Users.Where(a => a.UserName == user.UserName).FirstOrDefault();

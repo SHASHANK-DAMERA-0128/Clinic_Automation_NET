@@ -18,7 +18,5 @@ namespace Clinic_Automation
                 .ComputeHash(Encoding.UTF8.GetBytes(s))
                 );
         }
-
-
     }
 }
